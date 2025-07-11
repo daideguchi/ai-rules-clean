@@ -1,0 +1,28 @@
+{
+    "timestamp": "2025-07-08 12:24:59 JST",
+    "message": "Claude Code integration verification",
+    "git_status": "main (157 changes, 0 ahead)",
+    "paths": {
+    "root": "/Users/dd/Desktop/1_dev/coding-rule2",
+    "scripts": "/Users/dd/Desktop/1_dev/coding-rule2/scripts",
+    "docs": "/Users/dd/Desktop/1_dev/coding-rule2/docs",
+    "src": "/Users/dd/Desktop/1_dev/coding-rule2/src",
+    "cursor_rules": "/Users/dd/Desktop/1_dev/coding-rule2/.cursor/rules",
+    "runtime": "/Users/dd/Desktop/1_dev/coding-rule2/runtime",
+    "ai_memory": "/Users/dd/Desktop/1_dev/coding-rule2/src/ai/memory",
+    "claude_md": "/Users/dd/Desktop/1_dev/coding-rule2/docs/instructions/CLAUDE.md"
+},
+    "file_counts": {
+        "total_files": 18072,
+        "scripts": 33,
+        "docs": 152,
+        "src_files": 1378
+    },
+    "recent_changes": [
+        "5b56a7b: 🎯 根本的改革完遂 - プロジェクト構造の完全再構築",
+        "079dd44: 🔧 PRESIDENT起動コマンド修正 - claude --dangerously-skip-permissions",
+        "eaf749a: 🎯 PRESIDENT AI組織システム完全実装完了",
+        "5ee8b59: 🔧 PRESIDENT宣言強制システム実装完了",
+        "44ade28: 🔧 Hook修正: 全Pythonフック絶対パス指定"
+    ]
+}

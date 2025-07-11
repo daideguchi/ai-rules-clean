@@ -1,0 +1,230 @@
+# project-config.template.mdc - プロジェクト設定テンプレート
+
+## 📋 プロジェクト基本情報
+
+### プロジェクト名
+```
+プロジェクト名: [YOUR_PROJECT_NAME]
+バージョン: [VERSION]
+開発期間: [START_DATE] - [END_DATE]
+```
+
+### 技術スタック
+```
+メイン言語: [MAIN_LANGUAGE]
+フレームワーク: [FRAMEWORK]
+データベース: [DATABASE]
+インフラ: [INFRASTRUCTURE]
+デプロイ環境: [DEPLOYMENT_ENV]
+```
+
+## 🎯 要件定義
+
+### 機能要件
+```
+# 必須機能
+- [FEATURE_1]: [DESCRIPTION]
+- [FEATURE_2]: [DESCRIPTION]
+- [FEATURE_3]: [DESCRIPTION]
+
+# 任意機能
+- [OPTIONAL_FEATURE_1]: [DESCRIPTION]
+- [OPTIONAL_FEATURE_2]: [DESCRIPTION]
+```
+
+### 非機能要件
+```
+# パフォーマンス要件
+- ページ読み込み時間: [TARGET_TIME]秒以内
+- 同時接続数: [CONCURRENT_USERS]人以上
+- 可用性: [AVAILABILITY]%以上
+
+# セキュリティ要件
+- 認証方式: [AUTH_METHOD]
+- データ暗号化: [ENCRYPTION_LEVEL]
+- 脆弱性対応: [SECURITY_STANDARDS]
+
+# UI/UX要件
+- 対応デバイス: [SUPPORTED_DEVICES]
+- ブラウザ対応: [SUPPORTED_BROWSERS]
+- アクセシビリティ: [ACCESSIBILITY_LEVEL]
+```
+
+## 📖 仕様書・設計書
+
+### API仕様
+```
+# RESTful API
+- ベースURL: [BASE_URL]
+- 認証方式: [API_AUTH]
+- レスポンス形式: [RESPONSE_FORMAT]
+
+# GraphQL（使用する場合）
+- エンドポイント: [GRAPHQL_ENDPOINT]
+- スキーマ管理: [SCHEMA_MANAGEMENT]
+```
+
+### データベース設計
+```
+# テーブル設計
+- ユーザー管理: [USER_SCHEMA]
+- 権限管理: [PERMISSION_SCHEMA]
+- 業務データ: [BUSINESS_DATA_SCHEMA]
+
+# インデックス戦略
+- 検索用インデックス: [SEARCH_INDEXES]
+- パフォーマンス用: [PERFORMANCE_INDEXES]
+```
+
+### アーキテクチャ
+```
+# システム構成
+- フロントエンド: [FRONTEND_ARCHITECTURE]
+- バックエンド: [BACKEND_ARCHITECTURE]
+- データベース: [DATABASE_ARCHITECTURE]
+- キャッシュ: [CACHE_STRATEGY]
+```
+
+## 🎨 ユーザー希望ルール
+
+### コーディング規約
+```
+# 命名規約
+- 変数名: [VARIABLE_NAMING]
+- 関数名: [FUNCTION_NAMING]
+- クラス名: [CLASS_NAMING]
+- ファイル名: [FILE_NAMING]
+
+# コメント規約
+- 日本語コメント: [YES/NO]
+- ドキュメント生成: [DOCUMENTATION_TOOL]
+- TODO管理: [TODO_MANAGEMENT]
+```
+
+### テスト戦略
+```
+# テストレベル
+- 単体テスト: [UNIT_TEST_TOOL]
+- 統合テスト: [INTEGRATION_TEST_TOOL]
+- E2Eテスト: [E2E_TEST_TOOL]
+
+# カバレッジ目標
+- 最低カバレッジ: [MIN_COVERAGE]%
+- 目標カバレッジ: [TARGET_COVERAGE]%
+```
+
+### チーム運用ルール
+```
+# Git運用
+- ブランチ戦略: [BRANCH_STRATEGY]
+- コミットメッセージ: [COMMIT_MESSAGE_FORMAT]
+- プルリクエスト: [PR_RULES]
+
+# レビュー規約
+- レビュー必須: [REVIEW_REQUIRED]
+- 承認者数: [APPROVER_COUNT]
+- レビュー項目: [REVIEW_ITEMS]
+```
+
+## 🔧 開発環境設定
+
+### 必須ツール
+```
+# 開発ツール
+- エディタ: [EDITOR]
+- パッケージマネージャー: [PACKAGE_MANAGER]
+- ビルドツール: [BUILD_TOOL]
+- 仮想化: [VIRTUALIZATION]
+
+# 品質保証ツール
+- リンター: [LINTER]
+- フォーマッター: [FORMATTER]
+- 型チェッカー: [TYPE_CHECKER]
+```
+
+### CI/CD設定
+```
+# 自動化項目
+- ビルド自動化: [BUILD_AUTOMATION]
+- テスト自動化: [TEST_AUTOMATION]
+- デプロイ自動化: [DEPLOY_AUTOMATION]
+- 品質チェック: [QUALITY_CHECKS]
+```
+
+## 🚨 プロジェクト固有の制約
+
+### 技術的制約
+```
+# 制約事項
+- 使用禁止技術: [FORBIDDEN_TECH]
+- 推奨技術: [RECOMMENDED_TECH]
+- ライセンス制約: [LICENSE_CONSTRAINTS]
+- パフォーマンス制約: [PERFORMANCE_CONSTRAINTS]
+```
+
+### 業務制約
+```
+# 業務ルール
+- 営業時間: [BUSINESS_HOURS]
+- メンテナンス時間: [MAINTENANCE_WINDOW]
+- データ保持期間: [DATA_RETENTION]
+- 法的要件: [LEGAL_REQUIREMENTS]
+```
+
+## 📊 成功指標・KPI
+
+### 技術指標
+```
+# 品質指標
+- バグ発生率: [BUG_RATE]以下
+- 障害復旧時間: [RECOVERY_TIME]以内
+- セキュリティ指標: [SECURITY_METRICS]
+
+# パフォーマンス指標
+- 応答時間: [RESPONSE_TIME]以内
+- スループット: [THROUGHPUT]以上
+- 稼働率: [UPTIME]%以上
+```
+
+### ビジネス指標
+```
+# 利用指標
+- アクティブユーザー: [ACTIVE_USERS]人以上
+- 継続利用率: [RETENTION_RATE]%以上
+- 満足度: [SATISFACTION_SCORE]以上
+```
+
+## 🎯 カスタマイズ手順
+
+### 1. 基本情報設定
+```
+1. プロジェクト名・技術スタックを記入
+2. 要件定義を具体的に記述
+3. 仕様書・設計書を添付・参照
+```
+
+### 2. ルール設定
+```
+1. コーディング規約を決定
+2. テスト戦略を計画
+3. チーム運用ルールを合意
+```
+
+### 3. 環境設定
+```
+1. 開発環境を構築
+2. CI/CDパイプラインを設定
+3. 品質保証ツールを導入
+```
+
+### 4. 検証・調整
+```
+1. 設定内容の妥当性確認
+2. チーム内での合意形成
+3. 継続的な改善・調整
+```
+
+---
+
+**このテンプレートをコピーして、プロジェクト固有の設定ファイルとして使用してください。**
+**ファイル名を `project-config.mdc` に変更し、各項目を実際の値に置き換えてください。**

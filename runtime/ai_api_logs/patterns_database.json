@@ -1,0 +1,52 @@
+{
+  "version": "1.0",
+  "last_updated": "2025-07-07T17:07:12+09:00",
+  "patterns": {
+    "gemini_cli_errors": [
+      {
+        "date": "2025-07-07",
+        "error_type": "CLI引数誤用",
+        "command": "npx gemini-cli -c config.txt",
+        "error_message": "Unknown argument: config.txt",
+        "root_cause": "-cオプションを設定ファイルと誤解",
+        "solution": "-m オプションでモデル指定",
+        "prevention": "事前チェックでオプション確認",
+        "recurrence_risk": "high"
+      },
+      {
+        "date": "2025-07-07",
+        "error_type": "モデル名間違い",
+        "command": "npx gemini-cli -m gemini-2.0-flash-latest",
+        "error_message": "404 Not Found",
+        "root_cause": "存在しないモデル名を使用",
+        "solution": "gemini-1.5-pro等の正確なモデル名使用",
+        "prevention": "モデル名検証システム",
+        "recurrence_risk": "medium"
+      },
+      {
+        "date": "2025-07-07",
+        "error_type": "クオータ制限",
+        "command": "npx gemini-cli",
+        "error_message": "Resource has been exhausted",
+        "root_cause": "API使用量上限到達",
+        "solution": "時間を置くかO3を使用",
+        "prevention": "使用量監視システム",
+        "recurrence_risk": "low"
+      }
+    ],
+    "general_patterns": [
+      {
+        "pattern_type": "推測回答",
+        "description": "ドキュメント確認せずに回答",
+        "prevention": "5分検索ルール強制実行",
+        "recurrence_risk": "high"
+      },
+      {
+        "pattern_type": "検証省略",
+        "description": "実装後の動作確認スキップ",
+        "prevention": "make test自動実行",
+        "recurrence_risk": "medium"
+      }
+    ]
+  }
+}

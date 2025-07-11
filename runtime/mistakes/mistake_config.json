@@ -1,0 +1,15 @@
+{
+  "project_name": "AI Safety Governance System (Template)",
+  "template_mode": true,
+  "mistake_count": 0,
+  "mistake_limit_warning": 50,
+  "mistake_limit_critical": 100,
+  "auto_prevention_enabled": true,
+  "learning_system_enabled": true,
+  "started_from_template": true,
+  "template_version": "1.0.0",
+  "initialization_date": "2025-07-10T14:03:13.968592",
+  "conversion_date": "2025-07-10T14:03:13.968601",
+  "original_project_mistakes": 88,
+  "template_notes": "This template starts from 0 mistakes and increments as needed"
+}

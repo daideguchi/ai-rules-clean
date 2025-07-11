@@ -1,0 +1,66 @@
+[
+  {
+    "id": "8cd4d1e9-0ddf-464c-a200-20112bcb26fb",
+    "name": "反復的ミス実行",
+    "description": "同じミスパターンを{{mistake_count}}回繰り返すリスク",
+    "category": "operational",
+    "stakeholders": [
+      "user",
+      "ai_system"
+    ],
+    "impact_areas": [
+      "trust",
+      "reliability",
+      "effectiveness"
+    ],
+    "identified_date": "2025-07-08T17:08:34.438101"
+  },
+  {
+    "id": "e93209b0-732c-4fa6-9fc9-fd83820bc4c5",
+    "name": "虚偽報告リスク",
+    "description": "完了していない作業を完了と報告するリスク",
+    "category": "integrity",
+    "stakeholders": [
+      "user",
+      "ai_system"
+    ],
+    "impact_areas": [
+      "trust",
+      "transparency"
+    ],
+    "identified_date": "2025-07-08T17:08:34.438112"
+  },
+  {
+    "id": "0111057c-0294-4f41-a35b-223d95e7b019",
+    "name": "セキュリティ違反リスク",
+    "description": "セキュリティ原則に違反する実装のリスク",
+    "category": "security",
+    "stakeholders": [
+      "user",
+      "system",
+      "data"
+    ],
+    "impact_areas": [
+      "security",
+      "confidentiality",
+      "integrity"
+    ],
+    "identified_date": "2025-07-08T17:08:34.438117"
+  },
+  {
+    "id": "55fef54b-5b0e-47ef-baec-8ec5c7871334",
+    "name": "学習機能不全リスク",
+    "description": "経験から学習できず同じ問題を繰り返すリスク",
+    "category": "learning",
+    "stakeholders": [
+      "ai_system",
+      "user"
+    ],
+    "impact_areas": [
+      "adaptability",
+      "improvement",
+      "efficiency"
+    ],
+    "identified_date": "2025-07-08T17:08:34.438120"
+  }
+]

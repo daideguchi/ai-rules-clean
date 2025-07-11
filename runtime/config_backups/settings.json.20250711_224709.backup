@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "o3-search": {
+      "command": "python3",
+      "args": ["/Users/dd/Desktop/1_dev/coding-rule2/scripts/mcp/o3_mcp_server.py"],
+      "env": {}
+    },
+    "gemini": {
+      "command": "python3", 
+      "args": ["/Users/dd/Desktop/1_dev/coding-rule2/scripts/mcp/gemini_mcp_server.py"],
+      "env": {}
+    }
+  }
+}

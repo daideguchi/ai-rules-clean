@@ -1,0 +1,29 @@
+# Real-time Monitoring System Dependencies
+# =======================================
+
+# Core monitoring dependencies
+watchdog>=3.0.0          # File system monitoring
+psutil>=5.9.0            # System resource monitoring
+psycopg2-binary>=2.9.0   # PostgreSQL integration
+
+# Async processing
+asyncio-mqtt>=0.13.0     # MQTT for distributed monitoring (optional)
+
+# Machine learning for pattern detection
+numpy>=1.24.0            # Numerical computing
+scikit-learn>=1.3.0      # Machine learning utilities
+sentence-transformers>=2.2.0  # Text embeddings
+
+# Configuration and utilities
+python-dotenv>=1.0.0     # Environment variable management
+pydantic>=2.0.0          # Data validation
+tenacity>=8.2.0          # Retry mechanisms
+
+# Development and testing
+pytest>=7.4.0            # Testing framework
+pytest-asyncio>=0.21.0   # Async testing
+coverage>=7.3.0          # Code coverage
+
+# Optional: Advanced monitoring
+prometheus-client>=0.17.0  # Metrics collection
+structlog>=23.1.0         # Structured logging

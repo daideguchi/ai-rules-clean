@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "o3": {
+      "command": "npx",
+      "args": ["o3-search-mcp"],
+      "env": {
+        "OPENAI_API_KEY": "${OPENAI_API_KEY}",
+        "SEARCH_CONTEXT_SIZE": "medium",
+        "REASONING_EFFORT": "medium"
+      }
+    },
+    "gemini-custom": {
+      "command": "python3",
+      "args": ["/Users/dd/Desktop/1_dev/coding-rule2/scripts/mcp/gemini_mcp_server.py"],
+      "env": {
+        "GEMINI_API_KEY": "${GEMINI_API_KEY}"
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "id": "b1907fb1-7dd3-4e69-871e-9f9b29af821b",
+  "timestamp": "2025-07-09T01:45:56.435535+00:00",
+  "content": "継続改善フィードバック: 憲法違反パターン検出: 1件",
+  "event_type": "system_feedback",
+  "source": "continuous_improvement",
+  "importance": "high",
+  "session_id": "session-20250708-130000",
+  "embedding": null
+}

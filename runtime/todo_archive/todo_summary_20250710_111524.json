@@ -1,0 +1,95 @@
+{
+  "conversation_id": "demo_conversation_001",
+  "generated_at": "2025-07-10T11:15:24.574465",
+  "total_todos_extracted": 2,
+  "prioritized_todos": {
+    "urgent": [],
+    "high": [
+      {
+        "id": "todo_20250710_111524_6317",
+        "content": "フロントエンドのUI改修も必要です",
+        "priority": "high",
+        "status": "pending",
+        "context": "次にフロントエンドのUI改修も必要です",
+        "source": "conversation",
+        "estimated_effort": "hours",
+        "dependencies": [],
+        "technical_requirements": [
+          "frontend"
+        ],
+        "extracted_at": "2025-07-10T11:15:24.574363",
+        "confidence_score": 0.7
+      },
+      {
+        "id": "todo_20250710_111524_5607",
+        "content": "セキュリティ監査を実施する必要があります",
+        "priority": "high",
+        "status": "pending",
+        "context": "後でセキュリティ監査を実施する必要があります",
+        "source": "conversation",
+        "estimated_effort": "hours",
+        "dependencies": [],
+        "technical_requirements": [],
+        "extracted_at": "2025-07-10T11:15:24.574393",
+        "confidence_score": 0.5
+      }
+    ],
+    "medium": [],
+    "low": []
+  },
+  "domain_todos": {
+    "frontend": [
+      {
+        "id": "todo_20250710_111524_6317",
+        "content": "フロントエンドのUI改修も必要です",
+        "priority": "high",
+        "status": "pending",
+        "context": "次にフロントエンドのUI改修も必要です",
+        "source": "conversation",
+        "estimated_effort": "hours",
+        "dependencies": [],
+        "technical_requirements": [
+          "frontend"
+        ],
+        "extracted_at": "2025-07-10T11:15:24.574363",
+        "confidence_score": 0.7
+      }
+    ]
+  },
+  "next_session_recommendations": [
+    "高優先度タスク 2 件の早期着手",
+    "frontend 分野のタスクが多数(1件)"
+  ],
+  "continuity_score": 0.54,
+  "completion_status": "適切な進捗・継続準備完了",
+  "extracted_todos": [
+    {
+      "id": "todo_20250710_111524_6317",
+      "content": "フロントエンドのUI改修も必要です",
+      "priority": "high",
+      "status": "pending",
+      "context": "次にフロントエンドのUI改修も必要です",
+      "source": "conversation",
+      "estimated_effort": "hours",
+      "dependencies": [],
+      "technical_requirements": [
+        "frontend"
+      ],
+      "extracted_at": "2025-07-10T11:15:24.574363",
+      "confidence_score": 0.7
+    },
+    {
+      "id": "todo_20250710_111524_5607",
+      "content": "セキュリティ監査を実施する必要があります",
+      "priority": "high",
+      "status": "pending",
+      "context": "後でセキュリティ監査を実施する必要があります",
+      "source": "conversation",
+      "estimated_effort": "hours",
+      "dependencies": [],
+      "technical_requirements": [],
+      "extracted_at": "2025-07-10T11:15:24.574393",
+      "confidence_score": 0.5
+    }
+  ]
+}

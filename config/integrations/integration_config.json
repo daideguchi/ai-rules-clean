@@ -1,0 +1,56 @@
+{
+  "environment_isolation": {
+    "strategy": "docker_compose",
+    "fallback": "venv_namespace", 
+    "database_isolation": "separate_instance"
+  },
+  "conflict_prevention": {
+    "python_env": {
+      "use_docker": true,
+      "venv_prefix": "misaip_",
+      "requirements_namespace": "88mistake_prevention"
+    },
+    "database": {
+      "isolation_method": "separate_database",
+      "db_name_pattern": "{project_name}_misaip_ai",
+      "port_offset": 1000,
+      "data_volume": "misaip_data"
+    },
+    "file_system": {
+      "base_path": "./misaip",
+      "runtime_path": "./misaip/runtime",
+      "logs_path": "./misaip/logs",
+      "exclude_patterns": ["node_modules", "venv", "__pycache__"]
+    }
+  },
+  "integration_modes": {
+    "production": {
+      "isolation": "container",
+      "network": "internal",
+      "volumes": ["misaip_data", "misaip_logs"],
+      "environment": "MISAIP_MODE=production"
+    },
+    "development": {
+      "isolation": "venv",
+      "shared_db": false,
+      "debug_logging": true
+    },
+    "testing": {
+      "isolation": "memory",
+      "ephemeral_db": true,
+      "mock_external": true
+    }
+  },
+  "safety_checks": {
+    "pre_install": [
+      "check_existing_python_env",
+      "check_db_conflicts", 
+      "check_port_availability"
+    ],
+    "post_install": [
+      "verify_isolation",
+      "test_basic_functions",
+      "check_resource_usage"
+    ]
+  }
+}

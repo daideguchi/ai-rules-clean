@@ -1,0 +1,131 @@
+{
+  "plan": {
+    "created": "2025-07-05T15:24:54.628980",
+    "total_duplicate_groups": 10,
+    "total_files_to_quarantine": 14,
+    "total_size_mb": 2.7999229431152344,
+    "cleanup_plan": {
+      "e943a8ae439462575e84721256a7ac13aa4bb493c0d4c803d5064c4d522195f1": {
+        "canonical": ".specstory/history/2025-06-26_10-23Z-terminal-startup-issue.md",
+        "duplicates": [
+          ".specstory/history/2025-06-26_10-23Z-ターミナルの立ち上げ問題.md",
+          ".specstory/history/2025-06-26_10-23Z-terminal-startup-issues.md"
+        ],
+        "file_count": 3,
+        "size_bytes": 440141
+      },
+      "e2b07d1af90219aa61e1f0f62c91ad94d5569b092fccf858e0ef2157ddc803df": {
+        "canonical": ".specstory/history/2025-06-27_09-17Z-worker-and-president-execution-issues.md",
+        "duplicates": [
+          ".specstory/history/2025-06-27_09-17Z-worker-and-president-execution-issue.md",
+          ".specstory/history/2025-06-27_09-17Z-ワーカーとプレジデントの実行問題.md"
+        ],
+        "file_count": 3,
+        "size_bytes": 555847
+      },
+      "08ac76c29b6e589919bf502baf3c05192174ef5935e0e8d5627bd7fd2455ba22": {
+        "canonical": ".specstory/history/2025-06-24_06-01Z-background-terminal-setup-issue.md",
+        "duplicates": [
+          ".specstory/history/2025-06-24_06-01Z-background-terminal-preparation-issues.md",
+          ".specstory/history/2025-06-24_06-01Z-バックグラウンドターミナルの準備問題.md"
+        ],
+        "file_count": 3,
+        "size_bytes": 57898
+      },
+      "a1b8e566820fdd779cd0750e486fa3cc6526ecbc898145b8edf9cb99fe3dfd4d": {
+        "canonical": ".specstory/history/2025-06-26_17-01Z-ai-organization-manual-theme-selection-issues.md",
+        "duplicates": [
+          ".specstory/history/2025-06-26_17-01Z-ai組織の手動テーマ選択問題.md"
+        ],
+        "file_count": 2,
+        "size_bytes": 41257
+      },
+      "1068ef64550bfcdf14d3c4b01b00954128039935a98a65c2c7174e206317edaa": {
+        "canonical": ".specstory/history/2025-06-26_13-15Z-ログアウトとデフォルトメッセージ設定.md",
+        "duplicates": [
+          ".specstory/history/2025-06-26_13-15Z-logout-and-default-message-settings.md",
+          ".specstory/history/2025-06-26_13-15Z-logout-and-default-message-setup.md"
+        ],
+        "file_count": 3,
+        "size_bytes": 216170
+      },
+      "02028f7b52dbca789f2c3e4e4cd2f7286b9919c96dbdd2b06325e4e6dd175ddb": {
+        "canonical": ".specstory/history/2025-06-26_06-52Z-directory-organization-and-explanation.md",
+        "duplicates": [
+          ".specstory/history/2025-06-26_06-52Z-ディレクトリの整理と解説.md"
+        ],
+        "file_count": 2,
+        "size_bytes": 519305
+      },
+      "dc7ea5d1dc7e794d7c3a5117cac700ce1de93bd06fa9c6ed9be9648d00818427": {
+        "canonical": ".specstory/history/2025-06-25_03-22Z-ai-tools-settings-and-integration.md",
+        "duplicates": [
+          ".specstory/history/2025-06-25_03-22Z-aiツールの設定と連携について.md"
+        ],
+        "file_count": 2,
+        "size_bytes": 103474
+      },
+      "a5a29b8f0fe0d6be10bb7afaf21cf964801922bbc5a8bb420bf025fbdb167188": {
+        "canonical": ".specstory/history/2025-06-24_06-39Z-画面分割の問題について.md",
+        "duplicates": [
+          ".specstory/history/2025-06-24_06-39Z-screen-split-issues.md"
+        ],
+        "file_count": 2,
+        "size_bytes": 285488
+      },
+      "9e9b1ff0a500f88a341178e3d66f2b0ea8a1fce58cf0b4697bc9d01568769c2f": {
+        "canonical": ".specstory/history/2025-06-26_15-03Z-ai組織立ち上げの設定について.md",
+        "duplicates": [
+          ".specstory/history/2025-06-26_15-03Z-ai-organization-startup-settings.md"
+        ],
+        "file_count": 2,
+        "size_bytes": 313064
+      },
+      "d3d7a0a070ac2871c334ae29ba77af22a5c7e4fdc51fbfff1bbf90dffe63d67a": {
+        "canonical": ".specstory/history/2025-06-26_08-11Z-directory-settings-and-script-configuration.md",
+        "duplicates": [
+          ".specstory/history/2025-06-26_08-11Z-ディレクトリの設定とスクリプト構成.md"
+        ],
+        "file_count": 2,
+        "size_bytes": 403288
+      }
+    },
+    "code_references": {},
+    "quarantine_directory": ".archive/duplicates/20250705",
+    "safety_status": {
+      "status": "SAFE",
+      "risk_level": "LOW",
+      "total_references": 0,
+      "referenced_files": 0,
+      "recommendation": "隔離実行可能。参照なしで安全です。"
+    }
+  },
+  "execution_results": {
+    "quarantined_files": [
+      ".specstory/history/2025-06-26_10-23Z-ターミナルの立ち上げ問題.md",
+      ".specstory/history/2025-06-26_10-23Z-terminal-startup-issues.md",
+      ".specstory/history/2025-06-27_09-17Z-worker-and-president-execution-issue.md",
+      ".specstory/history/2025-06-27_09-17Z-ワーカーとプレジデントの実行問題.md",
+      ".specstory/history/2025-06-24_06-01Z-background-terminal-preparation-issues.md",
+      ".specstory/history/2025-06-24_06-01Z-バックグラウンドターミナルの準備問題.md",
+      ".specstory/history/2025-06-26_17-01Z-ai組織の手動テーマ選択問題.md",
+      ".specstory/history/2025-06-26_13-15Z-logout-and-default-message-settings.md",
+      ".specstory/history/2025-06-26_13-15Z-logout-and-default-message-setup.md",
+      ".specstory/history/2025-06-26_06-52Z-ディレクトリの整理と解説.md",
+      ".specstory/history/2025-06-25_03-22Z-aiツールの設定と連携について.md",
+      ".specstory/history/2025-06-24_06-39Z-screen-split-issues.md",
+      ".specstory/history/2025-06-26_15-03Z-ai-organization-startup-settings.md",
+      ".specstory/history/2025-06-26_08-11Z-ディレクトリの設定とスクリプト構成.md"
+    ],
+    "errors": [],
+    "total_freed_mb": 4.011142730712891,
+    "dry_run": false
+  },
+  "o3_recommendations_implemented": [
+    "SHA-256 hash verification",
+    "Code reference scanning",
+    "Quarantine phase implementation",
+    "Protected directory exclusion",
+    "Safety assessment"
+  ]
+}

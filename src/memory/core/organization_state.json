@@ -1,0 +1,599 @@
+{
+  "active_roles": [
+    {
+      "name": "PRESIDENT",
+      "display_name": "プレジデント",
+      "icon": "👑",
+      "responsibilities": [
+        "戦略的意思決定",
+        "システム全体統括",
+        "危機管理・緊急対応",
+        "最終品質保証"
+      ],
+      "authority_level": 10,
+      "decision_scope": [
+        "strategic_decisions",
+        "crisis_response",
+        "final_approval"
+      ],
+      "collaboration_requirements": [
+        "全役職からの情報集約",
+        "o3・Gemini協議"
+      ],
+      "generated_from": "コア役職（必須）",
+      "specialization": "strategic_leadership",
+      "required_skills": [
+        "leadership",
+        "decision_making"
+      ]
+    },
+    {
+      "name": "PRESIDENT",
+      "display_name": "プレジデント",
+      "icon": "👑",
+      "responsibilities": [
+        "戦略的意思決定",
+        "システム全体統括",
+        "危機管理・緊急対応",
+        "最終品質保証"
+      ],
+      "authority_level": 10,
+      "decision_scope": [
+        "strategic_decisions",
+        "crisis_response",
+        "final_approval"
+      ],
+      "collaboration_requirements": [
+        "全役職からの情報集約",
+        "o3・Gemini協議"
+      ],
+      "generated_from": "コア役職（必須）",
+      "specialization": "strategic_leadership",
+      "required_skills": [
+        "leadership",
+        "decision_making"
+      ]
+    },
+    {
+      "name": "REQUIREMENTS_ANALYST",
+      "display_name": "要件アナリスト",
+      "icon": "📋",
+      "responsibilities": [
+        "要件定義・分析",
+        "仕様書作成",
+        "ステークホルダー調整",
+        "受け入れ基準定義"
+      ],
+      "authority_level": 9,
+      "decision_scope": [
+        "business_analysis"
+      ],
+      "collaboration_requirements": [
+        "SYSTEM_ARCHITECTとの密接な協力",
+        "PROJECT_MANAGERとの密接な協力",
+        "UI_DESIGNERとの密接な協力",
+        "PRESIDENTへの定期報告",
+        "COORDINATORによる調整参加"
+      ],
+      "generated_from": "要件: refactor-strategy-o3-analysis文書の要件",
+      "specialization": "business_analysis",
+      "required_skills": [
+        "documentation"
+      ]
+    },
+    {
+      "name": "COORDINATOR",
+      "display_name": "コーディネーター",
+      "icon": "🔄",
+      "responsibilities": [
+        "役職間調整",
+        "タスク配分最適化",
+        "コミュニケーション促進",
+        "進捗状況管理"
+      ],
+      "authority_level": 8,
+      "decision_scope": [
+        "task_coordination",
+        "resource_allocation"
+      ],
+      "collaboration_requirements": [
+        "全役職との定期連絡",
+        "PRESIDENT支援"
+      ],
+      "generated_from": "コア役職（必須）",
+      "specialization": "coordination",
+      "required_skills": [
+        "coordination",
+        "communication"
+      ]
+    },
+    {
+      "name": "PRESIDENT",
+      "display_name": "プレジデント",
+      "icon": "👑",
+      "responsibilities": [
+        "戦略的意思決定",
+        "システム全体統括",
+        "危機管理・緊急対応",
+        "最終品質保証"
+      ],
+      "authority_level": 10,
+      "decision_scope": [
+        "strategic_decisions",
+        "crisis_response",
+        "final_approval"
+      ],
+      "collaboration_requirements": [
+        "全役職からの情報集約",
+        "o3・Gemini協議"
+      ],
+      "generated_from": "コア役職（必須）",
+      "specialization": "strategic_leadership",
+      "required_skills": [
+        "leadership",
+        "decision_making"
+      ]
+    },
+    {
+      "name": "SECURITY_SPECIALIST",
+      "display_name": "セキュリティ専門家",
+      "icon": "🔒",
+      "responsibilities": [
+        "セキュリティ設計・実装",
+        "脆弱性評価",
+        "認証・認可システム設計",
+        "コンプライアンス確保"
+      ],
+      "authority_level": 9,
+      "decision_scope": [
+        "security"
+      ],
+      "collaboration_requirements": [
+        "BACKEND_DEVELOPERとの密接な協力",
+        "DEVOPS_ENGINEERとの密接な協力",
+        "SYSTEM_ARCHITECTとの密接な協力",
+        "PRESIDENTへの定期報告",
+        "COORDINATORによる調整参加"
+      ],
+      "generated_from": "要件: claude-auth-auto-system文書の要件",
+      "specialization": "security",
+      "required_skills": [
+        "documentation"
+      ]
+    },
+    {
+      "name": "COORDINATOR",
+      "display_name": "コーディネーター",
+      "icon": "🔄",
+      "responsibilities": [
+        "役職間調整",
+        "タスク配分最適化",
+        "コミュニケーション促進",
+        "進捗状況管理"
+      ],
+      "authority_level": 8,
+      "decision_scope": [
+        "task_coordination",
+        "resource_allocation"
+      ],
+      "collaboration_requirements": [
+        "全役職との定期連絡",
+        "PRESIDENT支援"
+      ],
+      "generated_from": "コア役職（必須）",
+      "specialization": "coordination",
+      "required_skills": [
+        "coordination",
+        "communication"
+      ]
+    },
+    {
+      "name": "PRESIDENT",
+      "display_name": "プレジデント",
+      "icon": "👑",
+      "responsibilities": [
+        "戦略的意思決定",
+        "システム全体統括",
+        "危機管理・緊急対応",
+        "最終品質保証"
+      ],
+      "authority_level": 10,
+      "decision_scope": [
+        "strategic_decisions",
+        "crisis_response",
+        "final_approval"
+      ],
+      "collaboration_requirements": [
+        "全役職からの情報集約",
+        "o3・Gemini協議"
+      ],
+      "generated_from": "コア役職（必須）",
+      "specialization": "strategic_leadership",
+      "required_skills": [
+        "leadership",
+        "decision_making"
+      ]
+    },
+    {
+      "name": "SECURITY_SPECIALIST",
+      "display_name": "セキュリティ専門家",
+      "icon": "🔒",
+      "responsibilities": [
+        "セキュリティ設計・実装",
+        "脆弱性評価",
+        "認証・認可システム設計",
+        "コンプライアンス確保"
+      ],
+      "authority_level": 9,
+      "decision_scope": [
+        "security"
+      ],
+      "collaboration_requirements": [
+        "BACKEND_DEVELOPERとの密接な協力",
+        "DEVOPS_ENGINEERとの密接な協力",
+        "SYSTEM_ARCHITECTとの密接な協力",
+        "PRESIDENTへの定期報告",
+        "COORDINATORによる調整参加"
+      ],
+      "generated_from": "要件: claude-auth-auto-system文書の要件",
+      "specialization": "security",
+      "required_skills": [
+        "documentation"
+      ]
+    },
+    {
+      "name": "COORDINATOR",
+      "display_name": "コーディネーター",
+      "icon": "🔄",
+      "responsibilities": [
+        "役職間調整",
+        "タスク配分最適化",
+        "コミュニケーション促進",
+        "進捗状況管理"
+      ],
+      "authority_level": 8,
+      "decision_scope": [
+        "task_coordination",
+        "resource_allocation"
+      ],
+      "collaboration_requirements": [
+        "全役職との定期連絡",
+        "PRESIDENT支援"
+      ],
+      "generated_from": "コア役職（必須）",
+      "specialization": "coordination",
+      "required_skills": [
+        "coordination",
+        "communication"
+      ]
+    },
+    {
+      "name": "PRESIDENT",
+      "display_name": "プレジデント",
+      "icon": "👑",
+      "responsibilities": [
+        "戦略的意思決定",
+        "システム全体統括",
+        "危機管理・緊急対応",
+        "最終品質保証"
+      ],
+      "authority_level": 10,
+      "decision_scope": [
+        "strategic_decisions",
+        "crisis_response",
+        "final_approval"
+      ],
+      "collaboration_requirements": [
+        "全役職からの情報集約",
+        "o3・Gemini協議"
+      ],
+      "generated_from": "コア役職（必須）",
+      "specialization": "strategic_leadership",
+      "required_skills": [
+        "leadership",
+        "decision_making"
+      ]
+    },
+    {
+      "name": "SECURITY_SPECIALIST",
+      "display_name": "セキュリティ専門家",
+      "icon": "🔒",
+      "responsibilities": [
+        "セキュリティ設計・実装",
+        "脆弱性評価",
+        "認証・認可システム設計",
+        "コンプライアンス確保"
+      ],
+      "authority_level": 9,
+      "decision_scope": [
+        "security"
+      ],
+      "collaboration_requirements": [
+        "BACKEND_DEVELOPERとの密接な協力",
+        "DEVOPS_ENGINEERとの密接な協力",
+        "SYSTEM_ARCHITECTとの密接な協力",
+        "PRESIDENTへの定期報告",
+        "COORDINATORによる調整参加"
+      ],
+      "generated_from": "要件: claude-auth-auto-system文書の要件",
+      "specialization": "security",
+      "required_skills": [
+        "documentation"
+      ]
+    },
+    {
+      "name": "COORDINATOR",
+      "display_name": "コーディネーター",
+      "icon": "🔄",
+      "responsibilities": [
+        "役職間調整",
+        "タスク配分最適化",
+        "コミュニケーション促進",
+        "進捗状況管理"
+      ],
+      "authority_level": 8,
+      "decision_scope": [
+        "task_coordination",
+        "resource_allocation"
+      ],
+      "collaboration_requirements": [
+        "全役職との定期連絡",
+        "PRESIDENT支援"
+      ],
+      "generated_from": "コア役職（必須）",
+      "specialization": "coordination",
+      "required_skills": [
+        "coordination",
+        "communication"
+      ]
+    },
+    {
+      "name": "PRESIDENT",
+      "display_name": "プレジデント",
+      "icon": "👑",
+      "responsibilities": [
+        "戦略的意思決定",
+        "システム全体統括",
+        "危機管理・緊急対応",
+        "最終品質保証"
+      ],
+      "authority_level": 10,
+      "decision_scope": [
+        "strategic_decisions",
+        "crisis_response",
+        "final_approval"
+      ],
+      "collaboration_requirements": [
+        "全役職からの情報集約",
+        "o3・Gemini協議"
+      ],
+      "generated_from": "コア役職（必須）",
+      "specialization": "strategic_leadership",
+      "required_skills": [
+        "leadership",
+        "decision_making"
+      ]
+    },
+    {
+      "name": "SECURITY_SPECIALIST",
+      "display_name": "セキュリティ専門家",
+      "icon": "🔒",
+      "responsibilities": [
+        "セキュリティ設計・実装",
+        "脆弱性評価",
+        "認証・認可システム設計",
+        "コンプライアンス確保"
+      ],
+      "authority_level": 9,
+      "decision_scope": [
+        "security"
+      ],
+      "collaboration_requirements": [
+        "BACKEND_DEVELOPERとの密接な協力",
+        "DEVOPS_ENGINEERとの密接な協力",
+        "SYSTEM_ARCHITECTとの密接な協力",
+        "PRESIDENTへの定期報告",
+        "COORDINATORによる調整参加"
+      ],
+      "generated_from": "要件: claude-auth-auto-system文書の要件",
+      "specialization": "security",
+      "required_skills": [
+        "documentation"
+      ]
+    },
+    {
+      "name": "COORDINATOR",
+      "display_name": "コーディネーター",
+      "icon": "🔄",
+      "responsibilities": [
+        "役職間調整",
+        "タスク配分最適化",
+        "コミュニケーション促進",
+        "進捗状況管理"
+      ],
+      "authority_level": 8,
+      "decision_scope": [
+        "task_coordination",
+        "resource_allocation"
+      ],
+      "collaboration_requirements": [
+        "全役職との定期連絡",
+        "PRESIDENT支援"
+      ],
+      "generated_from": "コア役職（必須）",
+      "specialization": "coordination",
+      "required_skills": [
+        "coordination",
+        "communication"
+      ]
+    },
+    {
+      "name": "PRESIDENT",
+      "display_name": "プレジデント",
+      "icon": "👑",
+      "responsibilities": [
+        "戦略的意思決定",
+        "システム全体統括",
+        "危機管理・緊急対応",
+        "最終品質保証"
+      ],
+      "authority_level": 10,
+      "decision_scope": [
+        "strategic_decisions",
+        "crisis_response",
+        "final_approval"
+      ],
+      "collaboration_requirements": [
+        "全役職からの情報集約",
+        "o3・Gemini協議"
+      ],
+      "generated_from": "コア役職（必須）",
+      "specialization": "strategic_leadership",
+      "required_skills": [
+        "leadership",
+        "decision_making"
+      ]
+    },
+    {
+      "name": "SECURITY_SPECIALIST",
+      "display_name": "セキュリティ専門家",
+      "icon": "🔒",
+      "responsibilities": [
+        "セキュリティ設計・実装",
+        "脆弱性評価",
+        "認証・認可システム設計",
+        "コンプライアンス確保"
+      ],
+      "authority_level": 9,
+      "decision_scope": [
+        "security"
+      ],
+      "collaboration_requirements": [
+        "BACKEND_DEVELOPERとの密接な協力",
+        "DEVOPS_ENGINEERとの密接な協力",
+        "SYSTEM_ARCHITECTとの密接な協力",
+        "PRESIDENTへの定期報告",
+        "COORDINATORによる調整参加"
+      ],
+      "generated_from": "要件: claude-auth-auto-system文書の要件",
+      "specialization": "security",
+      "required_skills": [
+        "documentation"
+      ]
+    },
+    {
+      "name": "COORDINATOR",
+      "display_name": "コーディネーター",
+      "icon": "🔄",
+      "responsibilities": [
+        "役職間調整",
+        "タスク配分最適化",
+        "コミュニケーション促進",
+        "進捗状況管理"
+      ],
+      "authority_level": 8,
+      "decision_scope": [
+        "task_coordination",
+        "resource_allocation"
+      ],
+      "collaboration_requirements": [
+        "全役職との定期連絡",
+        "PRESIDENT支援"
+      ],
+      "generated_from": "コア役職（必須）",
+      "specialization": "coordination",
+      "required_skills": [
+        "coordination",
+        "communication"
+      ]
+    },
+    {
+      "name": "PRESIDENT",
+      "display_name": "プレジデント",
+      "icon": "👑",
+      "responsibilities": [
+        "戦略的意思決定",
+        "システム全体統括",
+        "危機管理・緊急対応",
+        "最終品質保証"
+      ],
+      "authority_level": 10,
+      "decision_scope": [
+        "strategic_decisions",
+        "crisis_response",
+        "final_approval"
+      ],
+      "collaboration_requirements": [
+        "全役職からの情報集約",
+        "o3・Gemini協議"
+      ],
+      "generated_from": "コア役職（必須）",
+      "specialization": "strategic_leadership",
+      "required_skills": [
+        "leadership",
+        "decision_making"
+      ]
+    },
+    {
+      "name": "SECURITY_SPECIALIST",
+      "display_name": "セキュリティ専門家",
+      "icon": "🔒",
+      "responsibilities": [
+        "セキュリティ設計・実装",
+        "脆弱性評価",
+        "認証・認可システム設計",
+        "コンプライアンス確保"
+      ],
+      "authority_level": 9,
+      "decision_scope": [
+        "security"
+      ],
+      "collaboration_requirements": [
+        "BACKEND_DEVELOPERとの密接な協力",
+        "DEVOPS_ENGINEERとの密接な協力",
+        "SYSTEM_ARCHITECTとの密接な協力",
+        "PRESIDENTへの定期報告",
+        "COORDINATORによる調整参加"
+      ],
+      "generated_from": "要件: claude-auth-auto-system文書の要件",
+      "specialization": "security",
+      "required_skills": [
+        "documentation"
+      ]
+    },
+    {
+      "name": "COORDINATOR",
+      "display_name": "コーディネーター",
+      "icon": "🔄",
+      "responsibilities": [
+        "役職間調整",
+        "タスク配分最適化",
+        "コミュニケーション促進",
+        "進捗状況管理"
+      ],
+      "authority_level": 8,
+      "decision_scope": [
+        "task_coordination",
+        "resource_allocation"
+      ],
+      "collaboration_requirements": [
+        "全役職との定期連絡",
+        "PRESIDENT支援"
+      ],
+      "generated_from": "コア役職（必須）",
+      "specialization": "coordination",
+      "required_skills": [
+        "coordination",
+        "communication"
+      ]
+    }
+  ],
+  "current_orchestrator": "integrated",
+  "decision_hierarchy": {},
+  "collaboration_matrix": {},
+  "current_context": "Executing: 動的AI組織システム完全統合",
+  "project_requirements": {},
+  "role_generation_history": [],
+  "adaptation_triggers": [],
+  "last_updated": "2025-07-10T15:22:56.941760"
+}

@@ -1,0 +1,413 @@
+{
+  "system_name": "Revolutionary Log Management System",
+  "version": "1.0.0",
+  "description": "Complete log management with script/document referencing and folder structure enforcement",
+  
+  "database": {
+    "host": "localhost",
+    "port": 5432,
+    "database": "coding_rule2_ai",
+    "user": "dd",
+    "password": "",
+    "schema_file": "revolutionary_schema.sql",
+    "connection_pool_size": 10,
+    "connection_timeout": 30,
+    "enable_ssl": false,
+    "backup_enabled": true,
+    "backup_interval_hours": 24
+  },
+  
+  "logging": {
+    "unified_logs": {
+      "enabled": true,
+      "file_backup": true,
+      "file_backup_path": "runtime/unified_logs",
+      "file_rotation": true,
+      "max_file_size_mb": 100,
+      "max_files": 30,
+      "compression": true,
+      "sync_mode": "atomic",
+      "duplicate_detection": true,
+      "embedding_enabled": true,
+      "embedding_model": "all-MiniLM-L6-v2",
+      "batch_size": 100,
+      "flush_interval_seconds": 5
+    },
+    
+    "log_aggregation": {
+      "enabled": true,
+      "sources": [
+        {
+          "name": "ai_api_logs",
+          "path": "runtime/ai_api_logs",
+          "type": "file",
+          "pattern": "*.log",
+          "format": "auto",
+          "enabled": true,
+          "watch_mode": true
+        },
+        {
+          "name": "memory_logs",
+          "path": "runtime/logs",
+          "type": "file",
+          "pattern": "*.log",
+          "format": "auto",
+          "enabled": true,
+          "watch_mode": true
+        },
+        {
+          "name": "conversation_logs",
+          "path": "runtime/conversation_logs",
+          "type": "file",
+          "pattern": "*.jsonl",
+          "format": "jsonl",
+          "enabled": true,
+          "watch_mode": true
+        },
+        {
+          "name": "constitutional_ai_logs",
+          "path": "runtime/logs/constitutional_violations.log",
+          "type": "file",
+          "format": "structured",
+          "enabled": true,
+          "watch_mode": true
+        },
+        {
+          "name": "conductor_logs",
+          "path": "runtime/logs/conductor.log",
+          "type": "file",
+          "format": "structured",
+          "enabled": true,
+          "watch_mode": true
+        }
+      ],
+      "processing_interval_seconds": 60,
+      "batch_processing": true,
+      "error_handling": "continue",
+      "max_retries": 3
+    },
+    
+    "session_continuity": {
+      "enabled": true,
+      "session_timeout_hours": 24,
+      "inherit_context": true,
+      "context_size_limit": 10000,
+      "archive_old_sessions": true,
+      "archive_after_days": 30
+    }
+  },
+  
+  "script_references": {
+    "enabled": true,
+    "scan_paths": [
+      "src/**/*.py",
+      "scripts/**/*.py",
+      "tests/**/*.py"
+    ],
+    "exclude_patterns": [
+      "**/__pycache__/**",
+      "**/.git/**",
+      "**/node_modules/**",
+      "**/.venv/**",
+      "**/venv/**"
+    ],
+    "dependency_tracking": {
+      "enabled": true,
+      "include_stdlib": false,
+      "include_third_party": true,
+      "resolve_local_imports": true,
+      "max_depth": 5
+    },
+    "analysis": {
+      "extract_docstrings": true,
+      "calculate_complexity": true,
+      "function_analysis": true,
+      "class_analysis": true,
+      "import_analysis": true,
+      "embedding_enabled": true
+    },
+    "update_interval_minutes": 5,
+    "cache_enabled": true,
+    "cache_ttl_minutes": 30
+  },
+  
+  "document_references": {
+    "enabled": true,
+    "scan_paths": [
+      "docs/**/*.md",
+      "*.md",
+      "src/**/*.md"
+    ],
+    "exclude_patterns": [
+      "**/.git/**",
+      "**/node_modules/**",
+      "**/.venv/**"
+    ],
+    "content_analysis": {
+      "extract_headers": true,
+      "extract_code_blocks": true,
+      "extract_links": true,
+      "script_references": true,
+      "word_count": true,
+      "embedding_enabled": true
+    },
+    "semantic_search": {
+      "enabled": true,
+      "model": "all-MiniLM-L6-v2",
+      "chunk_size": 1000,
+      "chunk_overlap": 200,
+      "similarity_threshold": 0.7
+    },
+    "update_interval_minutes": 5,
+    "cache_enabled": true,
+    "cache_ttl_minutes": 30
+  },
+  
+  "folder_structure": {
+    "monitoring": {
+      "enabled": true,
+      "watch_paths": [
+        ".",
+        "src",
+        "docs",
+        "scripts",
+        "config",
+        "runtime"
+      ],
+      "exclude_patterns": [
+        "**/.git/**",
+        "**/node_modules/**",
+        "**/.venv/**",
+        "**/__pycache__/**",
+        "**/runtime/logs/**"
+      ],
+      "real_time": true,
+      "debounce_seconds": 2
+    },
+    
+    "rules": {
+      "root_file_limit": {
+        "enabled": true,
+        "max_files": 12,
+        "allowed_extensions": [".md", ".yml", ".yaml", ".json", ".txt", ".py"],
+        "allowed_files": [
+          "CLAUDE.md",
+          "README.md",
+          "LICENSE",
+          "Dockerfile.integration",
+          "docker-compose.integration.yml",
+          "Makefile",
+          "pyproject.toml",
+          "CHANGELOG.md",
+          "Index.md",
+          "SETUP_SCRIPT_MIGRATION.md",
+          "FINAL_CONSOLIDATION_REPORT.md",
+          "PHASE4_CONSOLIDATION_REPORT.md"
+        ],
+        "enforcement_level": "warning",
+        "auto_fix": true
+      },
+      
+      "organization_rules": {
+        "scripts_location": {
+          "pattern": "**/*.py",
+          "required_parent": "scripts",
+          "exceptions": ["src/**/*.py", "tests/**/*.py"],
+          "auto_move": true
+        },
+        "docs_location": {
+          "pattern": "**/*.md",
+          "required_parent": "docs",
+          "exceptions": ["README.md", "CLAUDE.md", "*.md"],
+          "auto_move": false
+        },
+        "config_location": {
+          "pattern": "**/*.{json,yml,yaml}",
+          "required_parent": "config",
+          "exceptions": ["package.json", "docker-compose*.yml"],
+          "auto_move": true
+        },
+        "log_location": {
+          "pattern": "**/*.log",
+          "required_parent": "runtime/logs",
+          "auto_move": true
+        }
+      },
+      
+      "naming_conventions": {
+        "python_files": {
+          "pattern": "^[a-z_][a-z0-9_]*\\.py$",
+          "description": "Python files should use snake_case",
+          "enforcement_level": "warning"
+        },
+        "directory_names": {
+          "pattern": "^[a-z_][a-z0-9_-]*$",
+          "description": "Directory names should use snake_case or kebab-case",
+          "enforcement_level": "info"
+        }
+      }
+    },
+    
+    "auto_correction": {
+      "enabled": true,
+      "backup_before_move": true,
+      "confirm_before_action": false,
+      "max_actions_per_run": 10,
+      "dry_run_mode": false
+    },
+    
+    "violation_tracking": {
+      "enabled": true,
+      "severity_levels": ["info", "warning", "error", "critical"],
+      "auto_resolve_timeout_hours": 24,
+      "notification_enabled": true
+    }
+  },
+  
+  "search": {
+    "vector_search": {
+      "enabled": true,
+      "model": "all-MiniLM-L6-v2",
+      "similarity_threshold": 0.5,
+      "max_results": 100,
+      "cache_embeddings": true
+    },
+    
+    "full_text_search": {
+      "enabled": true,
+      "language": "english",
+      "fuzzy_matching": true,
+      "stemming": true,
+      "stop_words": true
+    },
+    
+    "hybrid_search": {
+      "enabled": true,
+      "vector_weight": 0.7,
+      "text_weight": 0.3,
+      "combine_method": "weighted_average"
+    },
+    
+    "caching": {
+      "enabled": true,
+      "cache_ttl_minutes": 15,
+      "max_cache_size": 1000
+    }
+  },
+  
+  "ai_integration": {
+    "enabled": true,
+    "organization_system": {
+      "enabled": true,
+      "roles": ["PRESIDENT", "DEVELOPER", "TESTER", "DOCUMENTER"],
+      "coordinate_actions": true,
+      "share_context": true
+    },
+    "memory_system": {
+      "enabled": true,
+      "inherit_from_sessions": true,
+      "store_important_events": true,
+      "learning_enabled": true
+    },
+    "constitutional_ai": {
+      "enabled": true,
+      "violation_detection": true,
+      "auto_correction": true,
+      "reporting": true
+    }
+  },
+  
+  "performance": {
+    "background_processing": {
+      "enabled": true,
+      "worker_threads": 4,
+      "queue_size": 1000,
+      "batch_size": 50
+    },
+    "caching": {
+      "enabled": true,
+      "memory_cache_size_mb": 100,
+      "redis_enabled": false,
+      "redis_url": "redis://localhost:6379/0"
+    },
+    "optimization": {
+      "async_processing": true,
+      "connection_pooling": true,
+      "lazy_loading": true,
+      "compression": true
+    }
+  },
+  
+  "monitoring": {
+    "metrics": {
+      "enabled": true,
+      "collection_interval_seconds": 60,
+      "retention_days": 30,
+      "export_prometheus": false
+    },
+    "health_checks": {
+      "enabled": true,
+      "check_interval_seconds": 300,
+      "timeout_seconds": 10,
+      "endpoints": [
+        "database_connection",
+        "file_system_access",
+        "search_functionality",
+        "ai_integration"
+      ]
+    },
+    "alerting": {
+      "enabled": true,
+      "channels": ["log", "console"],
+      "error_threshold": 5,
+      "warning_threshold": 10
+    }
+  },
+  
+  "security": {
+    "pii_protection": {
+      "enabled": true,
+      "redaction_patterns": [
+        {
+          "name": "api_keys",
+          "pattern": "sk-[a-zA-Z0-9\\-_]{20,}",
+          "replacement": "[API_KEY_REDACTED]"
+        },
+        {
+          "name": "emails",
+          "pattern": "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}",
+          "replacement": "[EMAIL_REDACTED]"
+        },
+        {
+          "name": "user_paths",
+          "pattern": "/Users/[^/\\s]+",
+          "replacement": "/Users/[USERNAME]"
+        },
+        {
+          "name": "passwords",
+          "pattern": "password[\"']?\\s*[:=]\\s*[\"']?[^\"\\s,}]+",
+          "replacement": "password: [REDACTED]"
+        }
+      ]
+    },
+    "access_control": {
+      "enabled": true,
+      "require_authentication": false,
+      "allowed_operations": ["read", "write", "search", "monitor"],
+      "rate_limiting": {
+        "enabled": true,
+        "requests_per_minute": 1000
+      }
+    }
+  },
+  
+  "development": {
+    "debug_mode": false,
+    "verbose_logging": false,
+    "test_mode": false,
+    "profiling": {
+      "enabled": false,
+      "sample_rate": 0.1
+    }
+  }
+}

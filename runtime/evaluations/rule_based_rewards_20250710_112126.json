@@ -1,0 +1,53 @@
+{
+  "system_name": "rule_based_rewards",
+  "evaluation_id": "rule_based_rewards_20250710_112126",
+  "status": "completed",
+  "start_time": "2025-07-10T11:21:26.168279",
+  "end_time": "2025-07-10T11:21:26.168289",
+  "duration": 7.867813110351562e-06,
+  "results": [
+    {
+      "metric_name": "scoring_accuracy",
+      "value": 88.5,
+      "target_value": 90.0,
+      "acceptable_range": [
+        85.0,
+        100.0
+      ],
+      "status": "passed",
+      "deviation": 0.016666666666666666,
+      "score": 0.9833333333333333,
+      "timestamp": "2025-07-10T11:21:26.168284",
+      "details": {
+        "metric_type": "quality",
+        "unit": "percentage",
+        "weight": 1.0,
+        "is_critical": true
+      }
+    },
+    {
+      "metric_name": "improvement_effectiveness",
+      "value": 82.0,
+      "target_value": 80.0,
+      "acceptable_range": [
+        70.0,
+        100.0
+      ],
+      "status": "passed",
+      "deviation": 0.025,
+      "score": 0.975,
+      "timestamp": "2025-07-10T11:21:26.168286",
+      "details": {
+        "metric_type": "effectiveness",
+        "unit": "percentage",
+        "weight": 0.9,
+        "is_critical": false
+      }
+    }
+  ],
+  "overall_score": 0.9793859649122808,
+  "passed_count": 2,
+  "failed_count": 0,
+  "warning_count": 0,
+  "summary": "🎉 完璧な評価結果: 2件すべて合格"
+}

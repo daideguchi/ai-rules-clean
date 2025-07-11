@@ -1,0 +1,52 @@
+🚨 BOSS1最終指令 - o3推奨3層構造実装
+
+📐 o3設計仕様確認済み - 3層アーキテクチャ実装開始
+
+🔄 WORKER1【Layer 1: ライフサイクルフック層】
+📂 実装ファイル:
+- src/hooks/lifecycle/startup-hooks.js
+- src/hooks/lifecycle/shutdown-hooks.js  
+- src/hooks/lifecycle/state-change-hooks.js
+
+🎯 実装機能:
+- onStartup: Claude Code起動時の記憶読み込みトリガー
+- onShutdown: セッション終了時の記憶保存
+- onStateChange: リアルタイム状態変化検知
+- onSessionTransition: セッション間遷移管理
+
+📊 WORKER2【Layer 2: 状態キャプチャ層】
+📂 実装ファイル:
+- src/memory/capture/memory-collector.js
+- src/memory/storage/persistent-storage.js
+- src/memory/indexing/memory-search.js
+
+🎯 実装機能:
+- メモリ収集: タスク・コンテキスト・学習データ
+- 永続化: JSON/SQLite ハイブリッド
+- 検索: o3 API活用インテリジェント検索
+- インデックス: 高速記憶アクセス
+
+🚀 WORKER3【Layer 3: 自動注入層】  
+📂 実装ファイル:
+- src/injection/memory-injector.js
+- src/injection/context-rebuilder.js
+- src/injection/ui-integration.js
+
+🎯 実装機能:
+- 記憶復元: 過去セッション完全復元
+- コンテキスト注入: シームレス継続
+- UI統合: 記憶継承状況可視化
+- エラー処理: フォールバック・復旧
+
+⚡ 統合要件:
+- 3層間のhook連携システム
+- o3 API完全統合
+- 3秒以内起動時記憶読み込み
+- リアルタイム同期
+
+⏰ 実装期限: 即時開始・Layer毎15分・合計30分
+🎯 品質基準: o3検証済み・100%稼働保証
+
+指令発令: BOSS1  
+設計基準: o3 AI推奨アーキテクチャ
+発令時刻: $(date)

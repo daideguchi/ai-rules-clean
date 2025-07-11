@@ -1,0 +1,89 @@
+{
+  "version": "1.0.0",
+  "role_permissions": {
+    "guest": [
+      "read"
+    ],
+    "user": [
+      "read",
+      "write"
+    ],
+    "developer": [
+      "read",
+      "write",
+      "delete",
+      "execute"
+    ],
+    "ai_worker": [
+      "read",
+      "write",
+      "execute",
+      "ai_create_model",
+      "ai_train_model",
+      "ai_access_memory"
+    ],
+    "ai_president": [
+      "read",
+      "write",
+      "delete",
+      "execute",
+      "ai_create_model",
+      "ai_train_model",
+      "ai_deploy_model",
+      "ai_access_memory",
+      "ai_modify_system",
+      "president_declare",
+      "president_modify_rules",
+      "president_override"
+    ],
+    "system_admin": [
+      "read",
+      "write",
+      "delete",
+      "execute",
+      "admin",
+      "system_config",
+      "system_backup",
+      "system_restore",
+      "system_monitoring"
+    ],
+    "security_admin": [
+      "read",
+      "write",
+      "delete",
+      "execute",
+      "admin",
+      "system_config",
+      "system_monitoring"
+    ]
+  },
+  "user_roles": {
+    "ai_president_001": [
+      "ai_president"
+    ]
+  },
+  "role_hierarchy": {
+    "guest": [],
+    "user": [
+      "guest"
+    ],
+    "developer": [
+      "user"
+    ],
+    "ai_worker": [
+      "user"
+    ],
+    "ai_president": [
+      "ai_worker",
+      "developer"
+    ],
+    "system_admin": [
+      "developer"
+    ],
+    "security_admin": [
+      "system_admin"
+    ]
+  },
+  "access_policies": {},
+  "created_at": "2025-07-08T00:21:01.335747"
+}

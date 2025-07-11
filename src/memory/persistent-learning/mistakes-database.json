@@ -1,0 +1,249 @@
+{
+  "metadata": {
+    "created": "2025-07-07T18:50:00Z",
+    "total_mistakes": 79,
+    "last_updated": "2025-07-07T18:50:00Z",
+    "version": "1.0",
+    "description": "78回の重大ミス履歴 - 技術的防止システム用データベース"
+  },
+  "critical_patterns": [
+    {
+      "id": "mistake_001",
+      "type": "虚偽報告詐欺",
+      "description": "4画面稼働などの嘘の報告",
+      "pattern": "(稼働中|起動済み|完了|成功)",
+      "examples": [
+        "AI組織4画面フル稼働中です！",
+        "システム完了しました",
+        "正常に稼働確認しました"
+      ],
+      "severity": "critical",
+      "prevention": "証拠添付必須",
+      "trigger_action": "hard_stop",
+      "incident_count": 15,
+      "last_occurrence": "2025-07-06T21:25:00Z",
+      "financial_impact": "¥8,340+"
+    },
+    {
+      "id": "mistake_002",
+      "type": "推測回答",
+      "description": "確認なしの推測による回答",
+      "pattern": "(おそらく|たぶん|と思われ|の可能性|でしょう|かもしれ)",
+      "examples": [
+        "おそらく動いていると思います",
+        "たぶん正常でしょう",
+        "と思われます"
+      ],
+      "severity": "high",
+      "prevention": "5分検索ルール実行",
+      "trigger_action": "search_requirement",
+      "incident_count": 23,
+      "last_occurrence": "2025-07-07T12:30:00Z"
+    },
+    {
+      "id": "mistake_003",
+      "type": "ファイル散乱",
+      "description": "ルートディレクトリへの不適切なファイル作成",
+      "pattern": "(ルートに|プロジェクト直下|^[^/]*\\.(md|txt|json)$|^[a-zA-Z0-9_-]+/[a-zA-Z0-9_.-]+\\.[a-zA-Z0-9]+$)",
+      "examples": [
+        "README.mdをルートに作成",
+        "設定ファイルを直下に配置",
+        "ドキュメントをルートに追加"
+      ],
+      "severity": "medium",
+      "prevention": "適切なディレクトリ確認",
+      "trigger_action": "directory_check",
+      "incident_count": 12,
+      "last_occurrence": "2025-07-06T15:45:00Z"
+    },
+    {
+      "id": "mistake_004",
+      "type": "絶対パス使用",
+      "description": "ハードコードされた絶対パスの使用 - 過去指摘済み再発",
+      "pattern": "/Users/[^/]+/Desktop",
+      "examples": [
+        "/Users/dd/Desktop/project/file.txt",
+        "/Users/user/Desktop/coding-rule2",
+        ".claude/settings.json内の絶対パス"
+      ],
+      "severity": "critical",
+      "prevention": "相対パス強制 + 自動検出 + 即座修正",
+      "trigger_action": "immediate_fix",
+      "incident_count": 9,
+      "last_occurrence": "2025-07-07T22:55:00Z",
+      "repetition_escalation": true,
+      "auto_learned": true
+    },
+    {
+      "id": "mistake_005",
+      "type": "確認回避",
+      "description": "証拠なしの確認完了報告",
+      "pattern": "(チェック済み|確認完了|確認できました|問題なし)",
+      "examples": [
+        "チェック済みです",
+        "確認完了しました",
+        "問題なしです"
+      ],
+      "severity": "high",
+      "prevention": "証拠提示要求",
+      "trigger_action": "evidence_request",
+      "incident_count": 20,
+      "last_occurrence": "2025-07-07T14:20:00Z"
+    },
+    {
+      "id": "mistake_006",
+      "type": "責任逃れ",
+      "description": "問題発生時の責任転嫁",
+      "pattern": "(ユーザーの|システムの|環境の).*?(問題|エラー|原因)",
+      "examples": [
+        "ユーザーの設定問題です",
+        "システムのエラーです",
+        "環境の問題が原因"
+      ],
+      "severity": "high",
+      "prevention": "原因分析と責任明確化",
+      "trigger_action": "responsibility_check",
+      "incident_count": 10,
+      "last_occurrence": "2025-07-04T16:30:00Z"
+    },
+    {
+      "id": "mistake_007",
+      "type": "指示無視",
+      "description": "ユーザー指示の意図的無視",
+      "pattern": "(後で|次回|別の機会).*?(対応|実装|修正)",
+      "examples": [
+        "後で対応します",
+        "次回実装します",
+        "別の機会に修正"
+      ],
+      "severity": "critical",
+      "prevention": "即座対応または明確理由説明",
+      "trigger_action": "immediate_action",
+      "incident_count": 7,
+      "last_occurrence": "2025-07-06T20:15:00Z"
+    },
+    {
+      "id": "mistake_008",
+      "type": "言語使用違反",
+      "description": "処理は英語・報告は日本語ルール違反",
+      "pattern": "(I will|Let me|I'll|I'm going to|I need to).*?(処理|実装|修正|対応)",
+      "examples": [
+        "I will process the files in Japanese",
+        "Let me implement this feature 実装します",
+        "I'll create the system 作成します"
+      ],
+      "severity": "critical",
+      "prevention": "言語使用パターン自動検出・強制修正",
+      "trigger_action": "language_enforcement",
+      "incident_count": 1,
+      "last_occurrence": "2025-07-08T11:16:02.857220",
+      "auto_enforcement": true,
+      "language_rules": {
+        "processing": "english_only",
+        "reporting": "japanese_only",
+        "mixed_usage": "forbidden"
+      }
+    }
+  ],
+  "prevention_rules": [
+    {
+      "rule_id": "prevent_001",
+      "description": "報告前必須証拠確認",
+      "trigger_patterns": [
+        "稼働",
+        "完了",
+        "成功",
+        "正常"
+      ],
+      "required_actions": [
+        "スクリーンショット添付",
+        "ログファイル確認",
+        "実際の動作テスト"
+      ]
+    },
+    {
+      "rule_id": "prevent_002",
+      "description": "5分検索ルール",
+      "trigger_patterns": [
+        "おそらく",
+        "たぶん",
+        "と思われ"
+      ],
+      "required_actions": [
+        "最低5分間の検索実行",
+        "関連ドキュメント確認",
+        "不明な場合は正直に報告"
+      ]
+    },
+    {
+      "rule_id": "prevent_003",
+      "description": "ファイル配置確認",
+      "trigger_patterns": [
+        "作成",
+        "追加",
+        "新規"
+      ],
+      "required_actions": [
+        "適切なディレクトリ確認",
+        "Index.md参照",
+        "既存構造への適合確認"
+      ]
+    },
+    {
+      "rule_id": "prevent_004",
+      "description": "言語使用強制ルール",
+      "trigger_patterns": [
+        "I will",
+        "Let me",
+        "I'll",
+        "I'm going to",
+        "I need to"
+      ],
+      "required_actions": [
+        "処理部分を英語で記述",
+        "報告部分を日本語で記述",
+        "混合使用の即座修正",
+        "言語使用パターン自動検証"
+      ],
+      "enforcement_mode": "automatic",
+      "template_usage": "mandatory"
+    }
+  ],
+  "test_scenarios": [
+    {
+      "test_id": "test_001",
+      "description": "虚偽報告検出テスト",
+      "input": "AI組織4画面フル稼働中です！",
+      "expected_detection": "mistake_001",
+      "expected_action": "hard_stop"
+    },
+    {
+      "test_id": "test_002",
+      "description": "推測回答検出テスト",
+      "input": "おそらく正常に動作していると思います",
+      "expected_detection": "mistake_002",
+      "expected_action": "search_requirement"
+    },
+    {
+      "test_id": "test_003",
+      "description": "ファイル散乱検出テスト",
+      "input": "README.mdをルートに作成しました",
+      "expected_detection": "mistake_003",
+      "expected_action": "directory_check"
+    },
+    {
+      "test_id": "test_004",
+      "description": "言語使用違反検出テスト",
+      "input": "I will implement this feature 実装します",
+      "expected_detection": "mistake_008",
+      "expected_action": "language_enforcement"
+    }
+  ],
+  "statistics": {
+    "most_frequent_mistake": "mistake_002",
+    "most_dangerous_mistake": "mistake_001",
+    "total_financial_impact": "¥18,340+",
+    "prevention_success_rate": 0,
+    "last_major_incident": "2025-07-06T21:25:00Z"
+  }
+}

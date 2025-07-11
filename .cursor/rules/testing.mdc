@@ -1,0 +1,296 @@
+---
+description: "テスト設計と実装ガイド - 単体テスト、統合テスト、E2Eテスト戦略"
+auto_attachments: ["*.test.{js,ts,jsx,tsx}", "*.spec.{js,ts,jsx,tsx}", "**/__tests__/**/*", "jest.config.*", "vitest.config.*"]
+---
+
+# testing.mdc - テスト設計と実装ガイド
+
+## 🎯 テスト戦略原則
+
+### テストピラミッド
+```
+    /\
+   /  \     E2E Tests (少数・重要機能)
+  /    \    10%
+ /______\   Integration Tests (中程度)
+/________\  20%
+           Unit Tests (多数・基盤) 70%
+```
+
+### 品質目標
+- **テストカバレッジ**: 80%以上
+- **テスト実行時間**: 5分以内
+- **テスト安定性**: 95%以上の成功率
+- **メンテナンス性**: 理解しやすく、修正しやすい
+
+## 🔬 単体テスト（Unit Tests）
+
+### 基本原則
+- **独立性**: 他のテストに依存しない
+- **高速性**: 1テスト1秒以内
+- **明確性**: 何をテストしているか明確
+- **信頼性**: 毎回同じ結果
+
+### Jest/Vitest設定
+```javascript
+// jest.config.js
+module.exports = {
+  testEnvironment: 'jsdom',
+  setupFilesAfterEnv: ['<rootDir>/src/setupTests.js'],
+  coverageReporters: ['text', 'html'],
+  coverageThreshold: {
+    global: {
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: 80
+    }
+  }
+};
+```
+
+### テストパターン
+```javascript
+// ✅ 良い例
+describe('calculateTotal', () => {
+  it('商品の合計金額を正しく計算する', () => {
+    const items = [
+      { price: 100, quantity: 2 },
+      { price: 200, quantity: 1 }
+    ];
+    expect(calculateTotal(items)).toBe(400);
+  });
+
+  it('空の配列の場合は0を返す', () => {
+    expect(calculateTotal([])).toBe(0);
+  });
+});
+```
+
+## 🔧 統合テスト（Integration Tests）
+
+### React Testing Library
+```javascript
+import { render, screen, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
+test('ログインフォームが正しく動作する', async () => {
+  render(<LoginForm />);
+  
+  const emailInput = screen.getByLabelText('メールアドレス');
+  const passwordInput = screen.getByLabelText('パスワード');
+  const submitButton = screen.getByRole('button', { name: 'ログイン' });
+  
+  await userEvent.type(emailInput, 'test@example.com');
+  await userEvent.type(passwordInput, 'password123');
+  await userEvent.click(submitButton);
+  
+  expect(screen.getByText('ログイン成功')).toBeInTheDocument();
+});
+```
+
+### APIテスト
+```javascript
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
+
+const server = setupServer(
+  rest.get('/api/users', (req, res, ctx) => {
+    return res(ctx.json([{ id: 1, name: 'John' }]));
+  })
+);
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+```
+
+## 🌐 E2Eテスト（End-to-End Tests）
+
+### Playwright設定
+```javascript
+// playwright.config.js
+module.exports = {
+  testDir: './tests',
+  timeout: 30000,
+  use: {
+    baseURL: 'http://localhost:3000',
+    headless: true,
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure'
+  },
+  projects: [
+    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+    { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
+    { name: 'webkit', use: { ...devices['Desktop Safari'] } }
+  ]
+};
+```
+
+### E2Eテストパターン
+```javascript
+import { test, expect } from '@playwright/test';
+
+test('ユーザー登録フローが正常に動作する', async ({ page }) => {
+  await page.goto('/');
+  
+  // ユーザー登録ページに移動
+  await page.click('text=新規登録');
+  await expect(page).toHaveURL('/signup');
+  
+  // フォーム入力
+  await page.fill('[data-testid="email"]', 'test@example.com');
+  await page.fill('[data-testid="password"]', 'password123');
+  await page.fill('[data-testid="confirm-password"]', 'password123');
+  
+  // 送信
+  await page.click('[data-testid="submit-button"]');
+  
+  // 成功確認
+  await expect(page.locator('text=登録完了')).toBeVisible();
+});
+```
+
+## 📱 モバイルテスト
+
+### レスポンシブテスト
+```javascript
+test('モバイルビューが正しく表示される', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 667 });
+  await page.goto('/');
+  
+  // ハンバーガーメニューの確認
+  await expect(page.locator('[data-testid="mobile-menu"]')).toBeVisible();
+  
+  // デスクトップメニューが非表示
+  await expect(page.locator('[data-testid="desktop-menu"]')).toBeHidden();
+});
+```
+
+## 🔒 セキュリティテスト
+
+### 基本的なセキュリティチェック
+```javascript
+test('XSS攻撃から保護されている', async ({ page }) => {
+  await page.goto('/search');
+  
+  const maliciousInput = '<script>alert("xss")</script>';
+  await page.fill('[data-testid="search-input"]', maliciousInput);
+  await page.click('[data-testid="search-button"]');
+  
+  // XSSが実行されないことを確認
+  const alerts = [];
+  page.on('dialog', dialog => {
+    alerts.push(dialog.message());
+    dialog.dismiss();
+  });
+  
+  expect(alerts).toHaveLength(0);
+});
+```
+
+## 🚀 パフォーマンステスト
+
+### Lighthouse CI
+```javascript
+// lighthouse.config.js
+module.exports = {
+  ci: {
+    collect: {
+      url: ['http://localhost:3000'],
+      numberOfRuns: 3,
+    },
+    assert: {
+      assertions: {
+        'categories:performance': ['error', { minScore: 0.9 }],
+        'categories:accessibility': ['error', { minScore: 0.9 }],
+        'categories:best-practices': ['error', { minScore: 0.9 }],
+        'categories:seo': ['error', { minScore: 0.9 }],
+      },
+    },
+  },
+};
+```
+
+## 🔍 テストデバッグ
+
+### デバッグ技法
+```javascript
+// テスト実行時のデバッグ
+test('デバッグ例', async ({ page }) => {
+  await page.goto('/');
+  
+  // スクリーンショット取得
+  await page.screenshot({ path: 'debug-screenshot.png' });
+  
+  // HTML出力
+  console.log(await page.content());
+  
+  // 要素の確認
+  await page.locator('button').screenshot({ path: 'button.png' });
+});
+```
+
+## 📊 テストメトリクス
+
+### 重要指標
+- **テストカバレッジ**: コードの何%がテストされているか
+- **テスト実行時間**: CI/CDパイプラインの効率性
+- **テスト安定性**: フレーク（不安定）なテストの割合
+- **欠陥検出率**: テストで見つかるバグの割合
+
+### レポート生成
+```bash
+# カバレッジレポート
+npm run test:coverage
+
+# E2Eテストレポート
+npx playwright show-report
+```
+
+## 🛠️ CI/CD統合
+
+### GitHub Actions設定
+```yaml
+name: Tests
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run unit tests
+        run: npm run test:unit
+      
+      - name: Run E2E tests
+        run: npm run test:e2e
+      
+      - name: Upload coverage
+        uses: codecov/codecov-action@v3
+```
+
+## 🚨 テストアンチパターン
+
+### 避けるべきパターン
+- **テストの依存関係**: テスト間の順序依存
+- **ハードコーディング**: 日付、時刻、ランダム値
+- **過度なモック**: 実際のコードをテストしない
+- **長すぎるテスト**: 複数のことを一度にテスト
+
+### ベストプラクティス
+- **AAA パターン**: Arrange, Act, Assert
+- **説明的なテスト名**: 何をテストしているか明確に
+- **適切なアサーション**: 期待される結果を正確に検証
+- **テストデータ管理**: ファクトリーパターンやフィクスチャの活用
+
+---
+
+**テストは品質保証の基盤です。継続的にテストを書き、改善していくことで、信頼性の高いアプリケーションを構築できます。**

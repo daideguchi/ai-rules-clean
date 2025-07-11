@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "/Users/dd/Desktop/1_dev/coding-rule2/scripts/hooks/president_declaration_gate_safe.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ".*"
+      }
+    ]
+  },
+  "timeout": 10,
+  "description": "PRESIDENT宣言強制システム - 安全版"
+} 

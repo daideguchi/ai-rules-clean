@@ -1,0 +1,30 @@
+{
+  "mcpServers": {
+    "o3": {
+      "command": "python",
+      "args": [
+        "scripts/mcp/o3_mcp_server.py"
+      ],
+      "env": {
+        "OPENAI_API_KEY": "your-openai-api-key-here"
+      }
+    },
+    "gemini": {
+      "command": "python",
+      "args": [
+        "scripts/mcp/gemini_mcp_server.py"
+      ],
+      "env": {
+        "GOOGLE_API_KEY": "your-google-api-key-here"
+      }
+    },
+    "postgres": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-postgres",
+        "postgresql://localhost/coding_rule2_ai"
+      ]
+    }
+  }
+}

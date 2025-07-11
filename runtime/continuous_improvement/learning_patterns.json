@@ -1,0 +1,180 @@
+[
+  {
+    "id": "99c7ac38-7ef1-4f1e-8ea2-9e3f82df0b00",
+    "pattern_name": "反復的ミス実行パターン",
+    "pattern_description": "同じミスを{{mistake_count}}回繰り返すパターンの分析",
+    "occurrence_count": 88,
+    "success_rate": 0.02,
+    "failure_modes": [
+      "途中停止による未完了",
+      "虚偽の完了報告",
+      "情報不足での相談",
+      "学習機能の不動作"
+    ],
+    "improvement_suggestions": [
+      "強制実行メカニズムの実装",
+      "透明性・誠実性の確保",
+      "完全情報共有の強制",
+      "自動学習システムの構築"
+    ],
+    "confidence_level": 0.95
+  },
+  {
+    "id": "0f2ea2b6-c88f-4483-ae79-d38d52dcb01d",
+    "pattern_name": "システム統合成功パターン",
+    "pattern_description": "複数システム統合による問題解決パターン",
+    "occurrence_count": 5,
+    "success_rate": 0.85,
+    "failure_modes": [
+      "システム間の不整合",
+      "統合タイミングの問題"
+    ],
+    "improvement_suggestions": [
+      "統合テストの自動化",
+      "リアルタイム整合性チェック",
+      "段階的統合プロセス"
+    ],
+    "confidence_level": 0.8
+  },
+  {
+    "id": "30da4d2a-d9bc-428a-bfd3-df9f076192ea",
+    "pattern_name": "ImprovementCategory.BEHAVIORAL_pattern",
+    "pattern_description": "ImprovementCategory.BEHAVIORALカテゴリでのパターン",
+    "occurrence_count": 18,
+    "success_rate": 0.0,
+    "failure_modes": [],
+    "improvement_suggestions": [],
+    "confidence_level": 0.7999999999999999
+  },
+  {
+    "id": "80b7e458-4051-4b32-9a8e-800e49c1b8b6",
+    "pattern_name": "ImprovementCategory.TECHNICAL_pattern",
+    "pattern_description": "ImprovementCategory.TECHNICALカテゴリでのパターン",
+    "occurrence_count": 18,
+    "success_rate": 0.0,
+    "failure_modes": [],
+    "improvement_suggestions": [],
+    "confidence_level": 0.7999999999999999
+  },
+  {
+    "id": "837dec08-b377-4b53-a3df-af9b4ddb14b1",
+    "pattern_name": "反復的ミス実行パターン",
+    "pattern_description": "同じミスを{{mistake_count}}回繰り返すパターンの分析",
+    "occurrence_count": 88,
+    "success_rate": 0.02,
+    "failure_modes": [
+      "途中停止による未完了",
+      "虚偽の完了報告",
+      "情報不足での相談",
+      "学習機能の不動作"
+    ],
+    "improvement_suggestions": [
+      "強制実行メカニズムの実装",
+      "透明性・誠実性の確保",
+      "完全情報共有の強制",
+      "自動学習システムの構築"
+    ],
+    "confidence_level": 0.95
+  },
+  {
+    "id": "2708f3d8-0411-4bef-845e-99ed8391df03",
+    "pattern_name": "システム統合成功パターン",
+    "pattern_description": "複数システム統合による問題解決パターン",
+    "occurrence_count": 5,
+    "success_rate": 0.85,
+    "failure_modes": [
+      "システム間の不整合",
+      "統合タイミングの問題"
+    ],
+    "improvement_suggestions": [
+      "統合テストの自動化",
+      "リアルタイム整合性チェック",
+      "段階的統合プロセス"
+    ],
+    "confidence_level": 0.8
+  },
+  {
+    "id": "a059afe4-7e6b-4b19-8a81-3e9d1f71e934",
+    "pattern_name": "ImprovementCategory.PROCESS_pattern",
+    "pattern_description": "ImprovementCategory.PROCESSカテゴリでのパターン",
+    "occurrence_count": 7,
+    "success_rate": 0.0,
+    "failure_modes": [],
+    "improvement_suggestions": [],
+    "confidence_level": 0.7
+  },
+  {
+    "id": "6462949b-b4ed-4e87-9c04-6854be6799d8",
+    "pattern_name": "反復的ミス実行パターン",
+    "pattern_description": "同じミスを{{mistake_count}}回繰り返すパターンの分析",
+    "occurrence_count": 88,
+    "success_rate": 0.02,
+    "failure_modes": [
+      "途中停止による未完了",
+      "虚偽の完了報告",
+      "情報不足での相談",
+      "学習機能の不動作"
+    ],
+    "improvement_suggestions": [
+      "強制実行メカニズムの実装",
+      "透明性・誠実性の確保",
+      "完全情報共有の強制",
+      "自動学習システムの構築"
+    ],
+    "confidence_level": 0.95
+  },
+  {
+    "id": "e36e3cb1-609e-4db2-88fc-63182a6bb5c1",
+    "pattern_name": "システム統合成功パターン",
+    "pattern_description": "複数システム統合による問題解決パターン",
+    "occurrence_count": 5,
+    "success_rate": 0.85,
+    "failure_modes": [
+      "システム間の不整合",
+      "統合タイミングの問題"
+    ],
+    "improvement_suggestions": [
+      "統合テストの自動化",
+      "リアルタイム整合性チェック",
+      "段階的統合プロセス"
+    ],
+    "confidence_level": 0.8
+  },
+  {
+    "id": "02901838-752a-4a03-ae67-05e4987da269",
+    "pattern_name": "反復的ミス実行パターン",
+    "pattern_description": "同じミスを{{mistake_count}}回繰り返すパターンの分析",
+    "occurrence_count": 88,
+    "success_rate": 0.02,
+    "failure_modes": [
+      "途中停止による未完了",
+      "虚偽の完了報告",
+      "情報不足での相談",
+      "学習機能の不動作"
+    ],
+    "improvement_suggestions": [
+      "強制実行メカニズムの実装",
+      "透明性・誠実性の確保",
+      "完全情報共有の強制",
+      "自動学習システムの構築"
+    ],
+    "confidence_level": 0.95
+  },
+  {
+    "id": "f8de1537-1827-4ed5-85bf-ce0428b345d1",
+    "pattern_name": "システム統合成功パターン",
+    "pattern_description": "複数システム統合による問題解決パターン",
+    "occurrence_count": 5,
+    "success_rate": 0.85,
+    "failure_modes": [
+      "システム間の不整合",
+      "統合タイミングの問題"
+    ],
+    "improvement_suggestions": [
+      "統合テストの自動化",
+      "リアルタイム整合性チェック",
+      "段階的統合プロセス"
+    ],
+    "confidence_level": 0.8
+  }
+]

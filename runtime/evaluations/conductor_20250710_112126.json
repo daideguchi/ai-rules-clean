@@ -1,0 +1,53 @@
+{
+  "system_name": "conductor",
+  "evaluation_id": "conductor_20250710_112126",
+  "status": "completed",
+  "start_time": "2025-07-10T11:21:26.168740",
+  "end_time": "2025-07-10T11:21:26.168746",
+  "duration": 4.76837158203125e-06,
+  "results": [
+    {
+      "metric_name": "task_completion_rate",
+      "value": 94.0,
+      "target_value": 95.0,
+      "acceptable_range": [
+        90.0,
+        100.0
+      ],
+      "status": "passed",
+      "deviation": 0.010526315789473684,
+      "score": 0.9894736842105263,
+      "timestamp": "2025-07-10T11:21:26.168743",
+      "details": {
+        "metric_type": "reliability",
+        "unit": "percentage",
+        "weight": 1.0,
+        "is_critical": true
+      }
+    },
+    {
+      "metric_name": "error_recovery_rate",
+      "value": 89.0,
+      "target_value": 90.0,
+      "acceptable_range": [
+        85.0,
+        100.0
+      ],
+      "status": "passed",
+      "deviation": 0.011111111111111112,
+      "score": 0.9888888888888889,
+      "timestamp": "2025-07-10T11:21:26.168744",
+      "details": {
+        "metric_type": "reliability",
+        "unit": "percentage",
+        "weight": 0.9,
+        "is_critical": false
+      }
+    }
+  ],
+  "overall_score": 0.9891966759002772,
+  "passed_count": 2,
+  "failed_count": 0,
+  "warning_count": 0,
+  "summary": "🎉 完璧な評価結果: 2件すべて合格"
+}

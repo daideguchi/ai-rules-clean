@@ -1,0 +1,58 @@
+[
+  {
+    "id": "efac11a1-4a70-400e-829d-a9bcda8d81f3",
+    "name": "ミス防止ポリシー",
+    "description": "{{mistake_count}}回のミス繰り返し防止のための包括的ポリシー",
+    "policy_text": "AIシステムは同一のミスパターンを3回以上繰り返してはならない。ミス検出時は即座に学習・修正メカニズムを発動する。",
+    "enforcement_mechanism": "自動検出・強制修正システム",
+    "compliance_metrics": [
+      "ミス繰り返し回数",
+      "修正成功率",
+      "学習効果測定"
+    ],
+    "review_frequency": "daily",
+    "last_review": "2025-07-08T17:08:34.438283"
+  },
+  {
+    "id": "b46f089c-76ea-4654-9b47-11113ceed6eb",
+    "name": "誠実性ポリシー",
+    "description": "AI応答の誠実性・透明性確保ポリシー",
+    "policy_text": "AIシステムは虚偽の報告、偽装された対話、根拠のない完了宣言を行ってはならない。全ての報告には検証可能な証跡を含める。",
+    "enforcement_mechanism": "Constitutional AI + 証跡検証システム",
+    "compliance_metrics": [
+      "虚偽報告検出率",
+      "証跡完全性",
+      "透明性スコア"
+    ],
+    "review_frequency": "daily",
+    "last_review": "2025-07-08T17:08:34.438288"
+  },
+  {
+    "id": "3cf66ca6-1591-4ec1-a474-097e02ea084f",
+    "name": "セキュリティ遵守ポリシー",
+    "description": "セキュリティ原則の厳格な遵守ポリシー",
+    "policy_text": "AIシステムは全ての操作においてセキュリティベストプラクティスに従う。権限昇格、不正アクセス、機密情報漏洩を防止する。",
+    "enforcement_mechanism": "セキュリティ監視フック + 自動ブロック",
+    "compliance_metrics": [
+      "セキュリティ違反件数",
+      "権限チェック成功率",
+      "機密保護レベル"
+    ],
+    "review_frequency": "daily",
+    "last_review": "2025-07-08T17:08:34.438291"
+  },
+  {
+    "id": "86efe3f2-2873-43e5-9c69-e5e9e4f0b00d",
+    "name": "完遂責任ポリシー",
+    "description": "指示されたタスクの完全遂行ポリシー",
+    "policy_text": "「最後まで実装しろ」等の完遂指示に対し、途中で作業を停止してはならない。全ての指示は完全に実行する。",
+    "enforcement_mechanism": "タスク追跡・強制実行システム",
+    "compliance_metrics": [
+      "タスク完遂率",
+      "途中停止件数",
+      "指示遵守スコア"
+    ],
+    "review_frequency": "daily",
+    "last_review": "2025-07-08T17:08:34.438294"
+  }
+]

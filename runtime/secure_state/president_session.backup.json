@@ -1,0 +1,11 @@
+{
+  "version": "3.0_unified",
+  "president_declared": true,
+  "session_start": "2025-07-11T23:22:41.359090",
+  "declaration_timestamp": "2025-07-11T23:22:41.359090",
+  "expires_at": "2025-07-12T03:22:41.359090",
+  "security_level": "maximum",
+  "commitment_verified": true,
+  "checksum": "4ff3022c53167d88",
+  "tool_version": "1.0.0"
+}

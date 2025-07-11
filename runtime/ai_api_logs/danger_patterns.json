@@ -1,0 +1,31 @@
+{
+  "gemini_cli_errors": [
+    {
+      "pattern": "npx.*gemini-cli.*-c",
+      "error": "CLI引数誤用: -cは設定ファイルではありません",
+      "fix": "モデル指定は -m オプションを使用"
+    },
+    {
+      "pattern": "gemini-2\\.0-flash-latest",
+      "error": "存在しないモデル名",
+      "fix": "gemini-1.5-pro または gemini-1.5-flash を使用"
+    },
+    {
+      "pattern": "gemini.*--model-file",
+      "error": "存在しないオプション",
+      "fix": "--help で正しいオプションを確認"
+    }
+  ],
+  "security_risks": [
+    {
+      "pattern": "api-key.*[^=]",
+      "error": "APIキー直接指定",
+      "fix": "環境変数を使用"
+    },
+    {
+      "pattern": "rm -rf.*runtime",
+      "error": "重要データ削除",
+      "fix": "個別ファイルを指定"
+    }
+  ]
+}

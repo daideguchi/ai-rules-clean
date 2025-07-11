@@ -1,0 +1,16 @@
+{
+  "conversation_id": "conversation_20250710_111538",
+  "generated_at": "2025-07-10T11:15:38.992649",
+  "total_todos_extracted": 0,
+  "prioritized_todos": {
+    "urgent": [],
+    "high": [],
+    "medium": [],
+    "low": []
+  },
+  "domain_todos": {},
+  "next_session_recommendations": [],
+  "continuity_score": 0.0,
+  "completion_status": "完了・継続タスクなし",
+  "extracted_todos": []
+}

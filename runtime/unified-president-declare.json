@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "message": "セキュア宣言完了",
+  "session_data": {
+    "version": "3.0_unified",
+    "president_declared": true,
+    "session_start": "2025-07-11T23:30:33.567918",
+    "declaration_timestamp": "2025-07-11T23:30:33.567918",
+    "expires_at": "2025-07-12T03:30:33.567918",
+    "security_level": "maximum",
+    "commitment_verified": true,
+    "checksum": "4254aa6ce951ffe9",
+    "tool_version": "1.0.0"
+  },
+  "timestamp": "2025-07-11T23:30:33.569921"
+}

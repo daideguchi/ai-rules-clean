@@ -1,0 +1,19 @@
+{
+  "metadata": {
+    "created": "2025-07-05T15:27:44.405457",
+    "version": "1.0.0",
+    "wip_limits": {
+      "todo": 10,
+      "in_progress": 2,
+      "review": 3,
+      "done": 100
+    }
+  },
+  "columns": {
+    "todo": [],
+    "in_progress": [],
+    "review": [],
+    "done": []
+  },
+  "history": []
+}

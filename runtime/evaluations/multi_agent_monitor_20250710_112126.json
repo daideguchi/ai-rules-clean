@@ -1,0 +1,53 @@
+{
+  "system_name": "multi_agent_monitor",
+  "evaluation_id": "multi_agent_monitor_20250710_112126",
+  "status": "completed",
+  "start_time": "2025-07-10T11:21:26.168408",
+  "end_time": "2025-07-10T11:21:26.168416",
+  "duration": 5.9604644775390625e-06,
+  "results": [
+    {
+      "metric_name": "monitoring_coverage",
+      "value": 93.0,
+      "target_value": 95.0,
+      "acceptable_range": [
+        90.0,
+        100.0
+      ],
+      "status": "passed",
+      "deviation": 0.021052631578947368,
+      "score": 0.9789473684210527,
+      "timestamp": "2025-07-10T11:21:26.168411",
+      "details": {
+        "metric_type": "reliability",
+        "unit": "percentage",
+        "weight": 1.0,
+        "is_critical": true
+      }
+    },
+    {
+      "metric_name": "alert_response_time",
+      "value": 3.5,
+      "target_value": 5.0,
+      "acceptable_range": [
+        0.0,
+        10.0
+      ],
+      "status": "warning",
+      "deviation": 0.3,
+      "score": 0.7,
+      "timestamp": "2025-07-10T11:21:26.168413",
+      "details": {
+        "metric_type": "performance",
+        "unit": "seconds",
+        "weight": 0.8,
+        "is_critical": false
+      }
+    }
+  ],
+  "overall_score": 0.854970760233918,
+  "passed_count": 1,
+  "failed_count": 0,
+  "warning_count": 1,
+  "summary": "✅ 良好な評価結果: 1件合格, 1件警告"
+}

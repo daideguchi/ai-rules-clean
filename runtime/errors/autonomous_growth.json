@@ -1,0 +1,60 @@
+{
+  "91d7aaf8b3db49b8749b2aeb7e6d155a": {
+    "error_type": "ModuleNotFoundError",
+    "error_message": "No module named 'rich'",
+    "file_path": "src/ui/dashboard.py",
+    "context": {},
+    "first_occurrence": "2025-07-09T14:20:49.271549",
+    "occurrence_count": 1,
+    "last_occurrence": "2025-07-09T14:20:49.271556",
+    "status": "fix_generated",
+    "auto_fix_attempted": true
+  },
+  "26a5b93c8812d6f415a59c328f921933": {
+    "error_type": "NotRenderableError",
+    "error_message": "Unable to render generator",
+    "file_path": "src/ui/enhanced_dashboard.py",
+    "context": {},
+    "first_occurrence": "2025-07-09T14:20:49.271943",
+    "occurrence_count": 1,
+    "last_occurrence": "2025-07-09T14:20:49.271944",
+    "status": "fix_generated",
+    "auto_fix_attempted": true
+  },
+  "3905bebfe80f8b177c69816d1cb5683f": {
+    "error_type": "FileNotFoundError",
+    "error_message": "No such file or directory: 'config.json'",
+    "file_path": "src/config/loader.py",
+    "context": {},
+    "first_occurrence": "2025-07-09T14:20:49.272253",
+    "occurrence_count": 1,
+    "last_occurrence": "2025-07-09T14:20:49.272254",
+    "status": "fix_generated",
+    "auto_fix_attempted": true
+  },
+  "d17c501ec50546b72aa812b07143d791": {
+    "error_type": "PermissionError",
+    "error_message": "Permission denied",
+    "file_path": "setup_env.sh",
+    "context": {},
+    "first_occurrence": "2025-07-09T14:20:49.272711",
+    "occurrence_count": 1,
+    "last_occurrence": "2025-07-09T14:20:49.272713",
+    "status": "fix_generated",
+    "auto_fix_attempted": true
+  },
+  "e8218522765df2f1e2ec3893c92d052c": {
+    "error_type": "ModuleNotFoundError",
+    "error_message": "No module named 'corrector'",
+    "file_path": "src/conductor/core.py",
+    "context": {
+      "import_statement": "from corrector import CorrectionHandler",
+      "solution": "from .corrector import CorrectionHandler"
+    },
+    "first_occurrence": "2025-07-09T14:22:57.798317",
+    "occurrence_count": 1,
+    "last_occurrence": "2025-07-09T14:22:57.798323",
+    "status": "fix_generated",
+    "auto_fix_attempted": true
+  }
+}

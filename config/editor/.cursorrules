@@ -1,0 +1,47 @@
+# Claude Code + Cursor統合ルール
+# ============================
+
+## 🤖 Claude Code連携設定
+- Claude CLI統合済み (/opt/homebrew/bin/claude)
+- .cursor/rules/globals.mdc準拠
+- PRESIDENT AI システム対応
+
+## 🎯 プロジェクト固有ルール
+
+### Function-Based Grouping準拠
+```
+agents/     - AIエージェントシステム
+config/     - 設定管理 (env統合済み)
+docs/       - ドキュメント (reports統合済み)
+memory/     - メモリ継承システム
+operations/ - 運用・ログ管理
+scripts/    - 開発ツール
+src/        - コアソース
+tests/      - テストハーネス
+```
+
+### 絶対禁止事項
+- 絶対パス使用禁止: ${PROJECT_ROOT}使用
+- ファイル重複作成禁止: 既存統合優先
+- 8ディレクトリ制限違反禁止
+
+### 78回学習システム連携
+- docs/misc/president-mistakes.md参照
+- memory/ai/president_state_system.py活用
+- ベクトル検索による過去ミス防止
+
+### 緊急改善システム統合
+- PostgreSQL + pgvector状態永続化
+- JSON Lines統一ログシステム
+- プロアクティブファイル保護
+
+## 🔧 Claude Code CLI活用
+- ターミナルベース開発優先
+- yes/noインタラクション重視
+- IDE統合でdiff確認
+
+## 📋 品質保証
+- 8ディレクトリ制限遵守
+- Function-Based Grouping原則
+- 重複ファイル検出・統合
+- 絶対パス除去

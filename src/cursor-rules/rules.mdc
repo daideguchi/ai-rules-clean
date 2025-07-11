@@ -1,0 +1,22 @@
+# rules.mdc - 自動Git管理ルール・開発プロジェクトルール
+
+## Git自動管理ルール
+- 重要ファイル修正時はGitコミット・プッシュ実行
+- cursor rules変更時は即座反映
+- コミットメッセージ: "Update project rules: [変更内容の簡潔な説明]"
+
+## 開発プロジェクトルール
+- TypeScript/JavaScript: 型安全性重視、React hooks遵守
+- 既存ファイル編集優先、不要なファイル作成回避
+- Function-Based Grouping原則準拠 (8-directory limit)
+
+## AI Memory Inheritance System統合
+- セッション継承システム連携
+- .cursor-claude-sync.json自動更新
+- プロジェクト固有の要件理解・適応
+
+## PRESIDENT必須業務連携
+- cursor rules確認プロトコル準拠
+- 78回ミス学習システム統合
+- mandatory-verification.sh活用
+

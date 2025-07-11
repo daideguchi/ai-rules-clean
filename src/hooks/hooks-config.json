@@ -1,0 +1,57 @@
+{
+  "audio_hooks": {
+    "sound_enabled": false,
+    "tts_enabled": false,
+    "logging_enabled": true,
+    "volume": 0.3,
+    "sounds": {
+      "create": "gentle_create.wav",
+      "modify": "soft_modify.wav",
+      "delete": "gentle_delete.wav",
+      "success": "success_chime.wav",
+      "error": "gentle_error.wav",
+      "validation": "validation_beep.wav"
+    },
+    "tts_settings": {
+      "rate": 200,
+      "voice": "default",
+      "language": "ja",
+      "rate_limit_per_minute": 10,
+      "max_message_length": 50
+    }
+  },
+  "file_operations": {
+    "track_creates": true,
+    "track_modifications": true,
+    "track_deletions": true,
+    "track_validations": true,
+    "ignore_patterns": [
+      "*.tmp",
+      "*.temp",
+      "*.log",
+      ".DS_Store",
+      "__pycache__/*",
+      "node_modules/*",
+      ".git/*"
+    ]
+  },
+  "logging": {
+    "activity_log_path": "FILE_OPERATIONS_LOG.md",
+    "interaction_log_path": "AI_INTERACTIONS_LOG.md",
+    "max_entries_per_file": 1000,
+    "auto_rotate": true,
+    "include_stack_trace": false
+  },
+  "notifications": {
+    "desktop_notifications": false,
+    "console_output": true,
+    "colored_output": true,
+    "progress_indicators": true
+  },
+  "security": {
+    "sandbox_audio_commands": true,
+    "timeout_seconds": 5,
+    "allowed_commands": ["say", "espeak-ng", "aplay", "afplay", "paplay"],
+    "log_security_events": true
+  }
+}

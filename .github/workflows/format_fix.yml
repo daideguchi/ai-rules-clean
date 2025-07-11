@@ -1,0 +1,46 @@
+name: Format Compatibility Fix
+
+on:
+  workflow_dispatch:
+
+jobs:
+  format-fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install black ruff
+      
+      - name: Run black formatter
+        run: black .
+      
+      - name: Run ruff format
+        run: ruff format .
+      
+      - name: Check if changes were made
+        run: |
+          if [[ -n $(git status --porcelain) ]]; then
+            echo "Changes detected, will commit"
+            echo "changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "No changes detected"
+            echo "changes=false" >> $GITHUB_OUTPUT
+          fi
+        id: check_changes
+      
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.changes == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "🔧 AUTO: Black/Ruff Format Compatibility Fix"
+          git push

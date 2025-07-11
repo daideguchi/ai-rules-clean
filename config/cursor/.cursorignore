@@ -1,0 +1,29 @@
+# Build artifacts
+/dist/
+/build/
+/coverage/
+/node_modules/
+
+# Secrets and environment
+.env
+*.key
+*.pem
+*secret*
+
+# Runtime data
+/runtime/logs/**/*.log
+/runtime/tmp/
+*.lock
+
+# OS / IDE
+.DS_Store
+.vscode/*
+
+# Large files
+*.tar.gz
+*.zip
+backup-*/
+
+# Git internals
+.git/objects/
+.git/refs/remotes/
