@@ -15,6 +15,17 @@
       "env": {
         "GEMINI_API_KEY": "${GEMINI_API_KEY}"
       }
+    },
+    "n8n-mcp": {
+      "command": "npx",
+      "args": ["n8n-mcp"],
+      "env": {
+        "MCP_MODE": "stdio",
+        "LOG_LEVEL": "error",
+        "DISABLE_CONSOLE_OUTPUT": "true",
+        "N8N_API_URL": "https://app.n8n.io",
+        "N8N_API_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxZDhkZjBkNS1jNTc2LTRkMTctOTZmZC1lYzYwNjUyZDQ2OTQiLCJpc3MiOiJuOG4iLCJhdWQiOiJwdWJsaWMtYXBpIiwiaWF0IjoxNzUyMzE5Mzk5fQ.m3nqC6d3HimtXRhlVAHu-jDG70Xex9KA8PgKZ0Z1-B8"
+      }
     }
   }
 }
