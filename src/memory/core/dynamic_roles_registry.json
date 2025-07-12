@@ -1,0 +1,7 @@
+{
+  "roles": {
+    "president": {
+      "id": "president",
+      "name": "PRESIDENT",
+      "display_name": "プレジデント",
+      "role_type": 

@@ -1,0 +1,15 @@
+# Large legacy docs
+docs/archive/**
+docs/development/history/**
+
+# Large datasets
+runtime/logs/agents/**/*.log
+src/integrations/gemini/dialogue_logs/**
+
+# Temporary files
+/runtime/tmp/**
+.cursor/tools/temp/**
+
+# Backup directories
+backup-*/
+*-backup/

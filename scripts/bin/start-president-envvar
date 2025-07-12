@@ -1,0 +1,45 @@
+#!/bin/bash
+set -euo pipefail
+
+# 🚀 PRESIDENT環境変数方式起動スクリプト
+# Gemini推奨の環境変数方式を実装
+
+echo "👑 PRESIDENT環境変数方式起動中..."
+
+# プロジェクトルート設定
+PROJECT_ROOT="$(realpath "$(dirname "$0")")"
+export CLAUDE_HOOKS="$PROJECT_ROOT/scripts/hooks"
+
+echo "📍 PROJECT_ROOT: $PROJECT_ROOT"
+echo "📍 CLAUDE_HOOKS: $CLAUDE_HOOKS"
+
+# フックディレクトリ確認
+if [[ ! -d "$CLAUDE_HOOKS" ]]; then
+    echo "❌ エラー: フックディレクトリが見つかりません: $CLAUDE_HOOKS"
+    exit 1
+fi
+
+# 環境変数設定ファイルを使用
+if [[ -f "$PROJECT_ROOT/claude-settings-envvar.json" ]]; then
+    echo "🔧 環境変数版設定ファイル使用"
+    
+    # 現在設定をバックアップ
+    cp .claude/settings.json .claude/settings.json.backup.$(date +%s)
+    
+    # 環境変数版に切り替え
+    cp claude-settings-envvar.json .claude/settings.json
+    
+    echo "✅ 環境変数版設定に切り替え完了"
+else
+    echo "⚠️ 環境変数版設定ファイルが見つかりません"
+fi
+
+cd "$PROJECT_ROOT"
+
+echo "🚀 PRESIDENT起動..."
+echo "環境変数:"
+echo "  CLAUDE_HOOKS=$CLAUDE_HOOKS"
+echo "  PWD=$(pwd)"
+
+# Claude起動
+exec claude --dangerously-skip-permissions

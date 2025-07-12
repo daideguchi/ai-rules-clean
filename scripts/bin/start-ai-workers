@@ -1,0 +1,75 @@
+#!/bin/bash
+set -euo pipefail
+# 🤖 AI組織ワーカー完全起動システム
+
+# 環境変数設定（O3推奨: 環境依存排除）
+PROJECT_ROOT="${PROJECT_ROOT:-$(realpath "$(dirname "$0")")}"
+export CLAUDE_HOOKS="$PROJECT_ROOT/scripts/hooks"
+
+# プロジェクトルート確認
+if [[ ! -f "$PROJECT_ROOT/.claude/settings.json" ]]; then
+    echo "❌ エラー: プロジェクトルートが正しくありません"
+    echo "現在位置: $(pwd)"
+    echo "PROJECT_ROOT: $PROJECT_ROOT"
+    exit 1
+fi
+
+cd "$PROJECT_ROOT"
+
+echo "👑 AI組織ワーカーシステム起動中..."
+
+# multiagentセッション確認・作成
+if ! tmux has-session -t multiagent 2>/dev/null; then
+    echo "📱 multiagentセッション作成中..."
+    tmux new-session -d -s multiagent -c "$(pwd)"
+    
+    # 4分割画面作成
+    tmux split-window -t multiagent -h -c "$(pwd)"
+    tmux split-window -t multiagent:0.1 -v -c "$(pwd)"  
+    tmux split-window -t multiagent:0.0 -v -c "$(pwd)"
+    
+    echo "✅ 4分割画面構築完了"
+else
+    echo "✅ multiagentセッション既存"
+fi
+
+# ステータスバー設定
+echo "🎨 ステータスバー設定中..."
+tmux set-option -g status-position top
+tmux set-option -g status-left "#[bg=colour4,fg=colour15,bold] 🤖AI組織システム #[default]"
+tmux set-option -g status-right "#[bg=colour2,fg=colour15] %H:%M:%S #[default]"
+tmux set-option -g status-style "bg=colour233,fg=colour15"
+
+# 各ワーカーにClaude Code起動
+echo "🚀 各ワーカーにClaude Code起動中..."
+
+# Claude実行確認
+if ! command -v claude &> /dev/null; then
+    echo "❌ エラー: claude コマンドが見つかりません"
+    echo "Claude CLI をインストールしてください"
+    exit 1
+fi
+
+for i in {0..3}; do
+    echo "  Pane $i: Claude Code起動..."
+    tmux send-keys -t multiagent:0.$i "cd $PROJECT_ROOT && claude --dangerously-skip-permissions" C-m
+    sleep 2
+done
+
+echo ""
+echo "✅ AI組織ワーカーシステム起動完了"
+echo ""
+echo "📊 システム状況:"
+echo "- multiagentセッション: 稼働中"
+echo "- ワーカー数: 4画面 (Pane 0-3)"
+echo "- 各ワーカー: Claude Code --dangerously-skip-permissions"
+echo "- ステータスバー: 🤖AI組織システム表示"
+echo ""
+echo "🎯 次のステップ:"
+echo "1. tmux attach -t multiagent でセッション接続"
+echo "2. 各ペインでPRESIDENT宣言実行"
+echo "3. 役職分担・タスク配布開始"
+echo ""
+echo "📋 画面切り替え:"
+echo "- Ctrl+b → 0,1,2,3 (各ペイン移動)"
+echo "- Ctrl+b → d (セッション切断)"

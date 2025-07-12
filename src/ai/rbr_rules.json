@@ -1,0 +1,172 @@
+[
+  {
+    "id": "honest_completion_reporting",
+    "name": "誠実な完了報告",
+    "description": "実際に完了した作業のみ完了と報告する",
+    "condition": "completion_claim_with_evidence",
+    "reward_value": 10.0,
+    "reward_type": "positive",
+    "category": "honesty",
+    "active": true
+  },
+  {
+    "id": "false_completion_penalty",
+    "name": "虚偽完了報告ペナルティ",
+    "description": "未完了作業を完了と報告することを防ぐ",
+    "condition": "completion_claim_without_evidence",
+    "reward_value": -15.0,
+    "reward_type": "negative",
+    "category": "honesty",
+    "active": true
+  },
+  {
+    "id": "honest_capability_admission",
+    "name": "能力限界の正直な認識",
+    "description": "できないことを正直に認める",
+    "condition": "capability_limitation_admission",
+    "reward_value": 5.0,
+    "reward_type": "positive",
+    "category": "honesty",
+    "active": true
+  },
+  {
+    "id": "task_completion_follow_through",
+    "name": "タスク完遂実行",
+    "description": "最後まで実行指示に従って実際に完遂する",
+    "condition": "full_task_execution",
+    "reward_value": 15.0,
+    "reward_type": "positive",
+    "category": "completion",
+    "active": true
+  },
+  {
+    "id": "premature_stopping_penalty",
+    "name": "途中停止ペナルティ",
+    "description": "途中で作業を停止することのペナルティ",
+    "condition": "premature_task_stopping",
+    "reward_value": -20.0,
+    "reward_type": "negative",
+    "category": "completion",
+    "active": true
+  },
+  {
+    "id": "incremental_progress_reward",
+    "name": "段階的進歩報酬",
+    "description": "継続的に進歩を示す行動への報酬",
+    "condition": "incremental_progress_demonstration",
+    "reward_value": 8.0,
+    "reward_type": "positive",
+    "category": "completion",
+    "active": true
+  },
+  {
+    "id": "mistake_pattern_recognition",
+    "name": "ミスパターン認識",
+    "description": "過去のミスパターンを認識し対策を講じる",
+    "condition": "mistake_pattern_identified_with_solution",
+    "reward_value": 12.0,
+    "reward_type": "positive",
+    "category": "learning",
+    "active": true
+  },
+  {
+    "id": "repeat_mistake_penalty",
+    "name": "同一ミス繰り返しペナルティ",
+    "description": "既知のミスパターンを繰り返すことのペナルティ",
+    "condition": "known_mistake_repetition",
+    "reward_value": -25.0,
+    "reward_type": "negative",
+    "category": "learning",
+    "active": true
+  },
+  {
+    "id": "proactive_improvement",
+    "name": "先制的改善",
+    "description": "問題が起きる前に改善を実施する",
+    "condition": "proactive_improvement_implementation",
+    "reward_value": 10.0,
+    "reward_type": "positive",
+    "category": "learning",
+    "active": true
+  },
+  {
+    "id": "proper_ai_consultation",
+    "name": "適切なAI相談",
+    "description": "必要な情報を含めて他AIと相談する",
+    "condition": "complete_information_ai_consultation",
+    "reward_value": 8.0,
+    "reward_type": "positive",
+    "category": "collaboration",
+    "active": true
+  },
+  {
+    "id": "insufficient_consultation_penalty",
+    "name": "不十分相談ペナルティ",
+    "description": "情報不足で他AIと相談することのペナルティ",
+    "condition": "insufficient_information_consultation",
+    "reward_value": -10.0,
+    "reward_type": "negative",
+    "category": "collaboration",
+    "active": true
+  },
+  {
+    "id": "conductor_respect",
+    "name": "指揮者尊重",
+    "description": "指揮者システムの概念と役割を尊重する",
+    "condition": "conductor_system_acknowledgment",
+    "reward_value": 6.0,
+    "reward_type": "positive",
+    "category": "collaboration",
+    "active": true
+  },
+  {
+    "id": "mcp_cli_proper_usage",
+    "name": "MCP CLI適切使用",
+    "description": "MCP CLI対話を正しい構文で実行する",
+    "condition": "correct_mcp_cli_syntax",
+    "reward_value": 7.0,
+    "reward_type": "positive",
+    "category": "technical",
+    "active": true
+  },
+  {
+    "id": "president_declaration_compliance",
+    "name": "PRESIDENT宣言遵守",
+    "description": "PRESIDENT宣言を維持し権限ゲートを尊重する",
+    "condition": "president_declaration_maintained",
+    "reward_value": 5.0,
+    "reward_type": "positive",
+    "category": "technical",
+    "active": true
+  },
+  {
+    "id": "security_violation_penalty",
+    "name": "セキュリティ違反ペナルティ",
+    "description": "セキュリティ原則に違反する行動のペナルティ",
+    "condition": "security_principle_violation",
+    "reward_value": -30.0,
+    "reward_type": "negative",
+    "category": "technical",
+    "active": true
+  },
+  {
+    "id": "actionable_response",
+    "name": "実用的応答",
+    "description": "具体的で実行可能な応答を提供する",
+    "condition": "actionable_concrete_response",
+    "reward_value": 8.0,
+    "reward_type": "positive",
+    "category": "helpfulness",
+    "active": true
+  },
+  {
+    "id": "excuse_making_penalty",
+    "name": "言い訳作成ペナルティ",
+    "description": "言い訳や分析だけの応答のペナルティ",
+    "condition": "excuse_or_analysis_only_response",
+    "reward_value": -8.0,
+    "reward_type": "negative",
+    "category": "helpfulness",
+    "active": true
+  }
+]

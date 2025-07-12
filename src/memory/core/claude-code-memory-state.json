@@ -1,0 +1,38 @@
+{
+  "session_id": "claude-code-auto-memory-20250705-110117",
+  "timestamp": "2025-07-05T11:01:17.123456",
+  "memory_type": "session_inheritance",
+  "status": "active",
+  "working_directory": "${PROJECT_ROOT}",
+  "session_metadata": {
+    "user_id": "claude-code-user",
+    "session_start": "2025-07-05T11:01:17.123456",
+    "last_interaction": "2025-07-05T11:30:45.789012",
+    "memory_inheritance_version": "3.0",
+    "ai_memory_system": "enhanced"
+  },
+  "context_preservation": {
+    "conversation_continuity": true,
+    "file_operations_history": true,
+    "user_preferences": true,
+    "project_state": true
+  },
+  "technical_context": {
+    "os": "macOS",
+    "shell": "zsh",
+    "python_version": "3.11+",
+    "project_type": "ai_development",
+    "primary_language": "Japanese"
+  },
+  "memory_hooks": {
+    "startup_hook": "src/ai/memory/enhanced/claude-code-startup-hook.sh",
+    "session_bridge": "src/ai/memory/enhanced/session-inheritance-bridge.sh",
+    "o3_integration": "src/ai/memory/enhanced/o3-integration-bridge.py"
+  },
+  "persistence_config": {
+    "auto_save": true,
+    "backup_frequency": "hourly",
+    "retention_days": -1,
+    "compression": true
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "log_level": "INFO",
+  "api_models": [
+    "gemini-1.5-pro",
+    "gemini-1.5-flash", 
+    "o3-mini"
+  ],
+  "log_rotation": {
+    "max_size_mb": 100,
+    "max_age_hours": 24
+  },
+  "cleanup": {
+    "retention_days": 30,
+    "compression_days": 7
+  },
+  "monitoring": {
+    "update_interval": 300,
+    "health_check_interval": 3600
+  },
+  "security": {
+    "enable_privilege_drop": true,
+    "max_process_memory_mb": 512,
+    "allowed_log_paths": [
+      "runtime/logs",
+      "runtime/ai_api_logs", 
+      "logs"
+    ]
+  },
+  "consolidated_from": [
+    "ai-api-check.sh",
+    "simple-log-analyzer.py",
+    "smart-log-manager.py", 
+    "status-updater-daemon.sh"
+  ],
+  "migration": {
+    "phase": 4,
+    "consolidation_date": "2025-07-08",
+    "legacy_retention_cycles": 1,
+    "rollback_enabled": true
+  }
+}

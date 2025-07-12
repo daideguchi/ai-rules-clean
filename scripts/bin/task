@@ -1,0 +1,42 @@
+#!/bin/bash
+set -euo pipefail
+
+# 超シンプルなタスクメモシステム
+# 使用方法:
+# task "説明"  → タスク追加
+# task        → タスク一覧表示
+
+TASK_FILE="runtime/current-tasks.md"
+
+# runtimeディレクトリが存在しない場合は作成
+mkdir -p "$(dirname "$TASK_FILE")"
+
+# 引数がない場合はリスト表示
+if [ $# -eq 0 ]; then
+    if [ -f "$TASK_FILE" ]; then
+        echo "📋 現在のタスクリスト:"
+        echo ""
+        cat "$TASK_FILE"
+    else
+        echo "📋 タスクリストは空です"
+        echo ""
+        echo "使用方法: task \"説明\" でタスクを追加"
+    fi
+    exit 0
+fi
+
+# 引数がある場合はタスク追加
+TASK_DESC="$1"
+TIMESTAMP=$(date "+%Y-%m-%d %H:%M")
+
+# ファイルが存在しない場合は作成
+if [ ! -f "$TASK_FILE" ]; then
+    echo "# 現在のタスクリスト" > "$TASK_FILE"
+    echo "" >> "$TASK_FILE"
+fi
+
+# タスクを追加
+echo "- [ ] $TASK_DESC ($TIMESTAMP)" >> "$TASK_FILE"
+
+echo "✅ タスクを追加しました: $TASK_DESC"
+echo "📋 task コマンドで一覧表示" 

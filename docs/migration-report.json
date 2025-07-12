@@ -1,0 +1,50 @@
+{
+  "migration_date": "2025-07-05T15:14:19.694962",
+  "total_files_moved": 46,
+  "files_by_category": {
+    "enduser": 10,
+    "developer": 18,
+    "operator": 18
+  },
+  "errors": [],
+  "backup_location": "docs-backup-1751696059",
+  "categories": {
+    "enduser": {
+      "description": "エンドユーザー向けドキュメント",
+      "patterns": [
+        "README*",
+        "GUIDE*",
+        "MANUAL*",
+        "TUTORIAL*",
+        "instructions/",
+        "procedures/",
+        "user*"
+      ]
+    },
+    "developer": {
+      "description": "開発者向け技術ドキュメント",
+      "patterns": [
+        "architecture/",
+        "specs/",
+        "TECH*",
+        "API*",
+        "rules/",
+        "DESIGN*",
+        "IMPLEMENTATION*"
+      ]
+    },
+    "operator": {
+      "description": "運用・メンテナンス向けドキュメント",
+      "patterns": [
+        "reports/",
+        "memory/",
+        "analysis/",
+        "monitoring/",
+        "REPORT*",
+        "ANALYSIS*",
+        "FAILURE*",
+        "INTEGRITY*"
+      ]
+    }
+  }
+}

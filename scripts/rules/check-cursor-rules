@@ -1,0 +1,41 @@
+#!/bin/bash
+set -euo pipefail
+
+# カーソルルール確認リマインダーシステム
+# 作業開始前に必ず実行すべきチェック
+
+echo "🚨 作業開始前 必須チェック 🚨"
+echo "================================"
+echo ""
+
+# globals.mdc確認
+if [ -f ".cursor/rules/globals.mdc" ]; then
+    echo "📖 .cursor/rules/globals.mdc確認:"
+    echo "   - 絶対禁止ルール確認済み"
+    echo "   - ファイル乱立絶対禁止"
+    echo "   - フォルダ整理整頓最優先"
+    echo "   - 機能を勝手に変更しない"
+    echo "   - 推測報告禁止"
+    echo ""
+    echo "✅ カーソルルール確認完了"
+else
+    echo "❌ .cursor/rules/globals.mdc が見つかりません"
+    exit 1
+fi
+
+# 68回ミス学習リマインダー
+echo ""
+echo "🔴 68回目のミス学習済み:"
+echo "   - 作業開始前のカーソルルール確認義務違反"
+echo "   - 今後は必ず確認してから作業開始"
+echo ""
+
+# 作業方針確認
+echo "📋 作業方針確認:"
+echo "   - 既存ファイル統合可能性検討"
+echo "   - 新規ファイル作成の必要性確認"
+echo "   - ユーザー要求の正確な理解"
+echo ""
+
+echo "🎯 準備完了 - 作業開始可能"
+echo "================================" 

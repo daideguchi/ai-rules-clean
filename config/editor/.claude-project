@@ -1,0 +1,15 @@
+{
+  "name": "AI開発支援プロジェクト",
+  "description": "Cursor + Claude Code連携開発環境",
+  "rules": [
+    "日本語でコミュニケーション",
+    "ユーザーの要求を最優先",
+    "機能を勝手に変更しない",
+    "Cursor作業内容との連携を保持"
+  ],
+  "memory": {
+    "sync_with_cursor": true,
+    "track_changes": true,
+    "preserve_context": true
+  }
+}

@@ -1,0 +1,42 @@
+# 🔒 絶対に移動・削除禁止ファイル・ディレクトリ
+# =====================================
+
+## 🚨 最重要 - 移動・削除で即座にシステム破綻
+.env                           # API keys - 漏洩リスク極大
+.git/                          # Git履歴 - 破損で開発履歴消失
+ai-instructions/roles/         # AI指示書 - 移動でAI機能停止
+scripts/load-env.sh           # 環境変数読み込み - 必須システム
+.mcp.json                     # Claude統合設定 - 移動で連携破綻
+
+## 🔧 重要システムファイル
+src/ai/memory/core/           # 記憶継承システム - 機能停止リスク
+runtime/logs/                # 動作ログ - 障害解析不可
+ai-agents/                   # AI組織システム - 管理機能停止
+pyproject.toml               # Python依存関係 - 実行エラー
+.gitignore                   # Git管理 - 機密漏洩リスク
+
+## 🛡️ セキュリティ関連
+.env.example                  # 設定テンプレート
+.forbidden-move               # この一覧自体
+
+## 💡 移動・削除許可ファイル
+docs/                        # ドキュメント（移動OK）
+tests/                       # テストファイル（移動OK）
+ops/                         # 運用スクリプト（移動OK）
+README.md                    # プロジェクト説明（移動OK）
+LICENSE                      # ライセンス（移動OK）
+
+## 🔄 ログ・一時ファイル（削除OK）
+runtime/logs/*.log           # 古いログファイル
+runtime/temp/               # 一時ファイル
+*.tmp                       # 一時ファイル
+*.bak                       # バックアップファイル
+
+## 🚨 緊急時の復旧方法
+緊急時は以下のコマンドで最低限の復旧可能:
+bash src/ai/memory/core/session-bridge.sh init
+source scripts/load-env.sh
+
+## 📋 定期確認推奨
+このファイルは月1回見直しを推奨
+重要ファイルの追加・変更を反映すること
