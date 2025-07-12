@@ -1,0 +1,431 @@
+{
+  "hooks": {
+    "Start": [
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/cursor_rules_validator.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/runtime_orchestrator_hook.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/session_memory_loader.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/session_start_auto_president.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/conversation_logger_hook.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/template_enforcement_hook.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/notification_router.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/runtime_orchestrator_hook.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ".*"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/conversation_logger_hook.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ".*"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/post_auto_format.py",
+            "type": "command"
+          }
+        ],
+        "matcher": "Edit|Write|MultiEdit"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/post_memory_vectorize.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ".*"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/behavior_monitoring_hook.py",
+            "type": "command"
+          }
+        ],
+        "matcher": "Edit|Write|MultiEdit|Bash|Task"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/realtime_violation_monitor.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ".*"
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "python3 src/enforcement/meta_cognitive_monitor.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ".*"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/critical_president_enforcer.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ".*"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/pre_action_validator.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ".*"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/language_enforcement_hook.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ".*"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/system_status_display.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ".*"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/dynamic_mode_enforcement_hook.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ".*"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/unified_enforcement_hook.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ".*"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/runtime_orchestrator_hook.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ".*"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/conversation_logger_hook.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ".*"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/breakthrough_memory_hook.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ".*"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/absolute_thinking_enforcer.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ".*"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/gemini_command_validator.py",
+            "type": "command"
+          }
+        ],
+        "matcher": "Bash"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/pre_execution_validator.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ".*"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/comprehensive_president_checker.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ".*"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/president_declaration_gate.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ".*"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/task_verification_enforcer.py",
+            "type": "command"
+          }
+        ],
+        "matcher": "Edit|Write|MultiEdit|Bash|Task"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/pre_bash_validator.py",
+            "type": "command"
+          }
+        ],
+        "matcher": "Bash"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/pre_file_security_check.py",
+            "type": "command"
+          }
+        ],
+        "matcher": "Edit|Write|MultiEdit"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/pre_mcp_logger.py",
+            "type": "command"
+          }
+        ],
+        "matcher": "mcp__.*"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/ai_api_interceptor.py",
+            "type": "command"
+          }
+        ],
+        "matcher": "Bash"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/memory_inheritance_hook.py",
+            "type": "command"
+          }
+        ],
+        "matcher": "Edit|Write|MultiEdit|Bash|Task"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/search_activity_logger.py",
+            "type": "command"
+          }
+        ],
+        "matcher": "Read|Grep|Glob|Task|LS"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/todo_status_tracker.py",
+            "type": "command"
+          }
+        ],
+        "matcher": "TodoRead|TodoWrite"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/english_processing_enforcement_hook.py",
+            "type": "command"
+          }
+        ],
+        "matcher": "Edit|Write|MultiEdit|Bash|Task"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/pre_documentation_sync.py",
+            "type": "command"
+          }
+        ],
+        "matcher": "Edit|Write|MultiEdit"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/pre_response_validator.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ".*"
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/template_enforcement_hook.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ".*"
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/runtime_orchestrator_hook.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/conversation_logger_hook.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/conversation_exit_todo_hook.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/session_audit_logger.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      },
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/session_recommendations.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "command": "scripts/hooks/subagent_memory_merge.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      }
+    ]
+  },
+  "timeout": 120
+}
