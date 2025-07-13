@@ -4517,3 +4517,1197 @@ class RuleVersionManager:
 
 **技術レビュー**: システムアーキテクト、セキュリティエンジニア  
 **ビジネスレビュー**: プロダクトマネージャー、品質保証チーム
+
+---
+
+# INTEGRATION IMPLEMENTATION GUIDE
+
+# asagami AI × Cursor Rules 統合実装ガイド
+
+## 概要
+このドキュメントは、asagami AIとCursor Rulesの連携による「適応型開発環境」を実現するための包括的な実装ガイドです。
+
+## 1. アーキテクチャ概要
+
+### 1.1 システム構成図
+```
+┌─────────────────┐    ┌──────────────────┐    ┌──────────────────┐
+│   asagami AI    │◄──►│  MCP Server      │◄──►│   Cursor IDE     │
+│   (Django)      │    │  (Python)        │    │   (Claude Code)  │
+├─────────────────┤    ├──────────────────┤    ├──────────────────┤
+│• 学習データ管理 │    │• データ分析      │    │• 開発支援       │
+│• 問題生成       │    │• ルール生成      │    │• ログ収集       │
+│• 進捗追跡       │    │• AI処理          │    │• 適応型アシスト │
+│• ユーザー管理   │    │• 統合処理        │    │• フィードバック │
+└─────────────────┘    └──────────────────┘    └──────────────────┘
+```
+
+### 1.2 データフロー
+```
+学習 → 分析 → ルール生成 → 開発支援 → フィードバック → 改善
+ ↑                                                    ↓
+ └────────────── 継続的改善サイクル ──────────────────┘
+```
+
+## 2. 実装フェーズ
+
+### Phase 1: 基盤構築 (4週間)
+**目標**: MVPの実装と基本的な連携機能の確立
+
+#### 2.1.1 asagami AI側の拡張
+```python
+# 新規APIエンドポイントの追加
+# app/urls.py に追加
+path('api/cursor-integration/', include('cursor_integration.urls')),
+
+# cursor_integration/urls.py
+urlpatterns = [
+    path('learning-data/<int:user_id>/', views.get_learning_data, name='get_learning_data'),
+    path('generate-rules/', views.generate_cursor_rules, name='generate_cursor_rules'),
+    path('practice-logs/', views.collect_practice_logs, name='collect_practice_logs'),
+]
+```
+
+#### 2.1.2 新規Djangoアプリの作成
+```bash
+python manage.py startapp cursor_integration
+```
+
+#### 2.1.3 必要なモデル追加
+```python
+# cursor_integration/models.py
+class CursorRuleProfile(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    rule_version = models.CharField(max_length=50)
+    generated_at = models.DateTimeField(auto_now_add=True)
+    rule_config = models.JSONField()
+    is_active = models.BooleanField(default=True)
+
+class PracticeLog(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    session_id = models.CharField(max_length=100)
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
+    error_data = models.JSONField()
+    completion_data = models.JSONField()
+    productivity_metrics = models.JSONField()
+
+class LearningAnalysis(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    analysis_date = models.DateField(auto_now_add=True)
+    weak_points = models.JSONField()
+    strong_points = models.JSONField()
+    improvement_suggestions = models.JSONField()
+    confidence_score = models.FloatField()
+```
+
+### Phase 2: MCP サーバー構築 (3週間)
+
+#### 2.2.1 MCPサーバーのセットアップ
+```python
+# mcp_server/server.py
+from mcp import McpServer
+from mcp.types import Tool, TextContent
+
+class AsagamiMcpServer(McpServer):
+    def __init__(self):
+        super().__init__("asagami-mcp-server", "1.0.0")
+        self.setup_tools()
+    
+    def setup_tools(self):
+        @self.tool()
+        async def analyze_learning_data(user_id: int, period: int = 30):
+            """学習データを分析して弱点と強みを特定"""
+            # Django APIを呼び出してデータを取得
+            analysis_result = await self.fetch_learning_data(user_id, period)
+            return self.process_analysis(analysis_result)
+        
+        @self.tool()
+        async def generate_cursor_rules(analysis_data: dict):
+            """分析結果からCursor Rulesを生成"""
+            rules = await self.create_adaptive_rules(analysis_data)
+            return self.format_cursor_rules(rules)
+```
+
+#### 2.2.2 AI分析エンジンの実装
+```python
+# mcp_server/ai_engine.py
+import openai
+from typing import Dict, List
+
+class LearningAnalysisEngine:
+    def __init__(self, openai_api_key: str):
+        self.client = openai.OpenAI(api_key=openai_api_key)
+    
+    async def analyze_weak_points(self, user_data: Dict) -> List[Dict]:
+        """ユーザーの学習データから弱点を分析"""
+        prompt = f"""
+        学習データを分析して、ユーザーの弱点を特定してください：
+        - 問題解答データ: {user_data['question_results']}
+        - 学習時間: {user_data['study_time']}
+        - エラーパターン: {user_data['error_patterns']}
+        
+        以下の形式でJSONレスポンスを返してください：
+        {{
+            "weak_points": [
+                {{
+                    "topic": "トピック名",
+                    "score": 数値スコア,
+                    "priority": "high/medium/low",
+                    "improvement_suggestions": ["提案1", "提案2"]
+                }}
+            ]
+        }}
+        """
+        
+        response = await self.client.chat.completions.create(
+            model="gpt-4",
+            messages=[{"role": "user", "content": prompt}],
+            response_format={"type": "json_object"}
+        )
+        
+        return json.loads(response.choices[0].message.content)
+```
+
+### Phase 3: Cursor Rules生成エンジン (2週間)
+
+#### 2.3.1 ルール生成ロジック
+```python
+# mcp_server/rule_generator.py
+class CursorRuleGenerator:
+    def __init__(self):
+        self.rule_templates = self.load_rule_templates()
+    
+    def generate_personalized_rules(self, weak_points: List[Dict], user_profile: Dict) -> Dict:
+        """個人に特化したCursor Rulesを生成"""
+        rules = {
+            "version": "1.0",
+            "user_profile": user_profile,
+            "rules": {},
+            "templates": [],
+            "suggestions": []
+        }
+        
+        for weak_point in weak_points:
+            topic = weak_point['topic']
+            if topic in self.rule_templates:
+                personalized_rule = self.customize_rule(
+                    self.rule_templates[topic], 
+                    weak_point,
+                    user_profile
+                )
+                rules['rules'][topic] = personalized_rule
+        
+        return rules
+    
+    def customize_rule(self, template: Dict, weak_point: Dict, profile: Dict) -> Dict:
+        """テンプレートをユーザーに合わせてカスタマイズ"""
+        rule = template.copy()
+        
+        # スキルレベルに応じた調整
+        skill_level = profile.get('skill_level', 'intermediate')
+        if skill_level == 'beginner':
+            rule['severity'] = 'error'
+            rule['auto_fix'] = True
+        elif skill_level == 'advanced':
+            rule['severity'] = 'info'
+            rule['auto_fix'] = False
+        
+        # 弱点に応じたメッセージのカスタマイズ
+        rule['message'] = rule['message'].format(
+            topic=weak_point['topic'],
+            suggestions=', '.join(weak_point['improvement_suggestions'])
+        )
+        
+        return rule
+```
+
+### Phase 4: フィードバックループ実装 (3週間)
+
+#### 2.4.1 実践ログ収集システム
+```python
+# cursor_integration/views.py
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+
+@csrf_exempt
+def collect_practice_logs(request):
+    """Cursorからの実践ログを収集"""
+    if request.method == 'POST':
+        log_data = json.loads(request.body)
+        
+        # ログデータの保存
+        practice_log = PracticeLog.objects.create(
+            user_id=log_data['user_id'],
+            session_id=log_data['session_id'],
+            start_time=log_data['session_start'],
+            end_time=log_data['session_end'],
+            error_data=log_data['development_data']['errors_encountered'],
+            completion_data=log_data['development_data']['code_completions'],
+            productivity_metrics=log_data['development_data']['productivity_metrics']
+        )
+        
+        # 非同期でフィードバック分析を実行
+        analyze_feedback.delay(practice_log.id)
+        
+        return JsonResponse({'status': 'success', 'log_id': practice_log.id})
+```
+
+#### 2.4.2 フィードバック分析タスク
+```python
+# cursor_integration/tasks.py
+from celery import shared_task
+from .ai_engine import LearningAnalysisEngine
+
+@shared_task
+def analyze_feedback(practice_log_id):
+    """実践ログを分析してフィードバックを生成"""
+    practice_log = PracticeLog.objects.get(id=practice_log_id)
+    
+    # エラーパターンの分析
+    error_analysis = analyze_error_patterns(practice_log.error_data)
+    
+    # 新しい弱点の検出
+    new_weak_points = detect_new_weak_points(error_analysis)
+    
+    # 学習コンテンツの更新提案
+    if new_weak_points:
+        generate_new_learning_content.delay(
+            practice_log.user_id, 
+            new_weak_points
+        )
+    
+    # ルールの効果測定
+    rule_effectiveness = measure_rule_effectiveness(practice_log)
+    
+    return {
+        'new_weak_points': new_weak_points,
+        'rule_effectiveness': rule_effectiveness
+    }
+```
+
+## 3. 技術スタック
+
+### 3.1 バックエンド
+- **Django**: 4.2+ (既存システム)
+- **Python**: 3.9+
+- **PostgreSQL**: 14+ (既存データベース)
+- **Redis**: 7+ (キャッシュ・セッション管理)
+- **Celery**: 5+ (非同期タスク処理)
+
+### 3.2 MCP サーバー
+- **mcp**: 最新版
+- **FastAPI**: 0.104+ (API部分)
+- **OpenAI API**: GPT-4 (AI分析)
+- **asyncio**: 非同期処理
+
+### 3.3 フロントエンド（拡張）
+- **React**: 18.2+ (既存)
+- **Axios**: API通信
+- **WebSocket**: リアルタイム通信
+
+## 4. 設定とデプロイ
+
+### 4.1 環境変数
+```bash
+# .env
+OPENAI_API_KEY=your_openai_api_key
+MCP_SERVER_URL=http://localhost:8001
+CURSOR_WEBHOOK_SECRET=your_webhook_secret
+REDIS_URL=redis://localhost:6379
+```
+
+### 4.2 Dockerコンテナ構成
+```yaml
+# docker-compose.yml
+version: '3.8'
+services:
+  django:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://user:pass@db:5432/asagami
+    depends_on:
+      - db
+      - redis
+  
+  mcp-server:
+    build: ./mcp_server
+    ports:
+      - "8001:8001"
+    environment:
+      - DJANGO_API_URL=http://django:8000
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+  
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+  
+  celery:
+    build: .
+    command: celery -A mysite worker -l info
+    depends_on:
+      - redis
+      - db
+```
+
+## 5. セキュリティ考慮事項
+
+### 5.1 データ保護
+- 個人学習データの暗号化
+- APIアクセストークンの適切な管理
+- CORS設定の最適化
+
+### 5.2 認証・認可
+```python
+# cursor_integration/authentication.py
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+
+class CursorIntegrationView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    
+    def get(self, request, *args, **kwargs):
+        # 権限チェック
+        if not request.user.has_perm('cursor_integration.view_data'):
+            return Response({'error': 'Permission denied'}, status=403)
+```
+
+## 6. テスト戦略
+
+### 6.1 単体テスト
+```python
+# tests/test_rule_generator.py
+class TestCursorRuleGenerator(TestCase):
+    def setUp(self):
+        self.generator = CursorRuleGenerator()
+        self.sample_weak_points = [
+            {
+                'topic': 'SQL Injection',
+                'score': 65,
+                'priority': 'high'
+            }
+        ]
+    
+    def test_generate_personalized_rules(self):
+        rules = self.generator.generate_personalized_rules(
+            self.sample_weak_points,
+            {'skill_level': 'intermediate'}
+        )
+        self.assertIn('SQL Injection', rules['rules'])
+```
+
+### 6.2 統合テスト
+```python
+# tests/test_integration.py
+class TestAsagamiCursorIntegration(TestCase):
+    def test_end_to_end_workflow(self):
+        # 1. 学習データの生成
+        user = create_test_user()
+        create_learning_data(user)
+        
+        # 2. MCP分析の実行
+        analysis = call_mcp_analysis(user.id)
+        
+        # 3. Cursor Rules生成
+        rules = generate_cursor_rules(analysis)
+        
+        # 4. ルール配信
+        response = deploy_rules_to_cursor(rules)
+        
+        self.assertEqual(response.status_code, 200)
+```
+
+## 7. モニタリングとメトリクス
+
+### 7.1 KPI設定
+- 学習改善率: 前月比での問題正答率向上
+- 開発エラー減少率: Cursor使用前後のエラー発生率比較
+- ユーザー満足度: フィードバックスコア
+- システムパフォーマンス: API応答時間、MCP処理時間
+
+### 7.2 ログ設定
+```python
+# settings/logging.py
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'cursor_integration': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': 'logs/cursor_integration.log',
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'cursor_integration': {
+            'handlers': ['cursor_integration'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}
+```
+
+## 8. ロードマップ
+
+### 8.1 短期目標 (3ヶ月)
+- [ ] MVPの完成とβテスト開始
+- [ ] 基本的な学習データ分析機能
+- [ ] シンプルなCursor Rules生成
+- [ ] フィードバック収集システム
+
+### 8.2 中期目標 (6ヶ月)
+- [ ] AI分析精度の向上
+- [ ] チーム機能の実装
+- [ ] リアルタイム更新システム
+- [ ] 外部ツール連携（GitHub、Slack等）
+
+### 8.3 長期目標 (12ヶ月)
+- [ ] 機械学習による予測分析
+- [ ] 自動的な学習コンテンツ生成
+- [ ] 企業向けエンタープライズ機能
+- [ ] 他のIDE対応（VS Code、IntelliJ等）
+
+## 9. 成功指標
+
+### 9.1 技術的指標
+- API応答時間: < 500ms (95%ile)
+- MCP処理時間: < 2秒
+- システム稼働率: > 99.9%
+- エラー率: < 0.1%
+
+### 9.2 ビジネス指標
+- ユーザーの学習効率向上: +30%
+- 開発エラー減少: -50%
+- ユーザー満足度: > 4.5/5.0
+- 継続利用率: > 80%
+
+---
+
+**作成日**: 2025-07-13  
+**バージョン**: 1.0  
+**作成者**: asagami AI開発チーム  
+**レビュー**: 開発効率化推進チーム
+
+---
+
+# MCP DESIGN SPECIFICATION
+
+# asagami AI × Cursor Rules MCP設計仕様書
+
+## 概要
+asagami AIの学習データを分析し、個人・チームの弱点に基づいてCursor Rulesを自動生成するModel Context Protocol（MCP）サーバーの設計仕様書です。
+
+## 1. システム概要
+
+### 1.1 目的
+- 学習データから適応型開発環境を構築
+- 個人の苦手分野に特化したCursor Rulesの自動生成
+- 実践ログとの継続的フィードバックループの実現
+
+### 1.2 基本構成
+```
+asagami AI (Django) ←→ MCP Server ←→ Cursor (Claude Code)
+                         ↕
+                   AI Analysis Engine
+```
+
+## 2. MCP サーバー仕様
+
+### 2.1 サーバー情報
+- **名前**: `asagami-mcp-server`
+- **バージョン**: `1.0.0`
+- **プロトコル**: MCP v1.0
+- **ポート**: 8001
+
+### 2.2 提供ツール
+
+#### 2.2.1 学習データ分析ツール
+```json
+{
+  "name": "analyze_learning_data",
+  "description": "学習データを分析して弱点と強みを特定",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "user_id": {"type": "integer", "description": "ユーザーID"},
+      "department_id": {"type": "integer", "description": "部門ID（オプション）"},
+      "analysis_period": {"type": "string", "description": "分析期間（日数）", "default": "30"},
+      "analysis_type": {"type": "string", "enum": ["individual", "team", "department"], "default": "individual"}
+    },
+    "required": ["user_id"]
+  }
+}
+```
+
+#### 2.2.2 Cursor Rules生成ツール
+```json
+{
+  "name": "generate_cursor_rules",
+  "description": "分析結果からCursor Rulesを生成",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "analysis_data": {"type": "object", "description": "分析結果データ"},
+      "rule_template": {"type": "string", "description": "ルールテンプレート種別"},
+      "target_skills": {"type": "array", "items": {"type": "string"}, "description": "対象スキル領域"},
+      "severity_level": {"type": "string", "enum": ["basic", "intermediate", "advanced"], "default": "intermediate"}
+    },
+    "required": ["analysis_data"]
+  }
+}
+```
+
+#### 2.2.3 実践ログ収集ツール
+```json
+{
+  "name": "collect_practice_logs",
+  "description": "Cursorでの実践ログを収集・分析",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "user_id": {"type": "integer", "description": "ユーザーID"},
+      "session_id": {"type": "string", "description": "セッションID"},
+      "error_logs": {"type": "array", "description": "エラーログ"},
+      "completion_data": {"type": "object", "description": "コード補完データ"},
+      "time_metrics": {"type": "object", "description": "時間指標"}
+    },
+    "required": ["user_id", "session_id"]
+  }
+}
+```
+
+#### 2.2.4 フィードバック処理ツール
+```json
+{
+  "name": "process_feedback",
+  "description": "実践ログからフィードバックを処理し、学習コンテンツを更新",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "practice_data": {"type": "object", "description": "実践データ"},
+      "feedback_type": {"type": "string", "enum": ["error_pattern", "skill_gap", "improvement"]},
+      "auto_generate_content": {"type": "boolean", "default": true}
+    },
+    "required": ["practice_data", "feedback_type"]
+  }
+}
+```
+
+## 3. データ構造
+
+### 3.1 学習分析データ
+```json
+{
+  "user_id": 123,
+  "analysis_date": "2025-07-13",
+  "weak_points": [
+    {
+      "topic": "データ暗号化",
+      "score": 65,
+      "problem_areas": ["鍵管理", "暗号化アルゴリズム選択"],
+      "frequency": 8,
+      "improvement_suggestions": ["基礎理論の復習", "実装パターンの練習"]
+    }
+  ],
+  "strong_points": [
+    {
+      "topic": "API設計",
+      "score": 92,
+      "mastery_level": "advanced"
+    }
+  ],
+  "learning_patterns": {
+    "preferred_time": "morning",
+    "avg_session_duration": 45,
+    "retention_rate": 0.78
+  }
+}
+```
+
+### 3.2 Cursor Rules構造
+```json
+{
+  "version": "1.0",
+  "generated_at": "2025-07-13T10:30:00Z",
+  "user_profile": {
+    "user_id": 123,
+    "skill_level": "intermediate",
+    "focus_areas": ["security", "database"]
+  },
+  "rules": {
+    "security": {
+      "encryption": {
+        "reminder": "暗号化実装時は鍵管理の要件を必ず確認してください",
+        "auto_suggestions": true,
+        "code_templates": ["aes_encryption.py", "key_management.py"]
+      }
+    },
+    "code_quality": {
+      "warnings": ["hardcoded_secrets", "sql_injection_risk"],
+      "auto_fix": true
+    }
+  }
+}
+```
+
+## 4. API連携
+
+### 4.1 asagami AI連携エンドポイント
+- `GET /api/mcp/learning-data/{user_id}` - 学習データ取得
+- `GET /api/mcp/question-results/{user_id}` - 問題解答結果取得
+- `GET /api/mcp/team-analytics/{department_id}` - チーム分析データ取得
+- `POST /api/mcp/feedback` - フィードバックデータ送信
+
+### 4.2 Cursor連携エンドポイント
+- `POST /mcp/cursor-rules` - Cursor Rules生成
+- `POST /mcp/practice-logs` - 実践ログ送信
+- `GET /mcp/personalized-rules/{user_id}` - 個人用ルール取得
+
+## 5. AI分析エンジン
+
+### 5.1 弱点検出アルゴリズム
+```python
+def detect_weak_points(user_data):
+    """
+    学習データから弱点を検出
+    - 問題解答の正答率分析
+    - 回答時間の統計分析
+    - 間違いパターンの分類
+    - トピック間の関連性分析
+    """
+    pass
+```
+
+### 5.2 ルール生成ロジック
+```python
+def generate_adaptive_rules(weak_points, user_profile):
+    """
+    個人に特化したCursor Rulesを生成
+    - 弱点に対する具体的なアドバイス
+    - コードテンプレートの提案
+    - エラー防止のためのチェック
+    - 学習リソースへのリンク
+    """
+    pass
+```
+
+## 6. セキュリティ
+
+### 6.1 認証・認可
+- JWT トークンベース認証
+- ユーザー別データアクセス制御
+- 組織レベルの権限管理
+
+### 6.2 データ保護
+- 個人学習データの暗号化
+- GDPR準拠のデータ処理
+- 監査ログの記録
+
+## 7. 拡張性
+
+### 7.1 プラグインアーキテクチャ
+- カスタム分析エンジンの追加
+- 外部学習プラットフォーム連携
+- サードパーティーIDE対応
+
+### 7.2 スケーラビリティ
+- 水平スケーリング対応
+- キャッシュ戦略
+- 非同期処理
+
+## 8. モニタリング
+
+### 8.1 メトリクス
+- MCP サーバーのパフォーマンス
+- ルール生成の成功率
+- ユーザーの学習改善率
+
+### 8.2 ログ
+- API呼び出しログ
+- エラーログ
+- ユーザー行動ログ
+
+## 9. 実装ロードマップ
+
+### Phase 1: 基本MCP サーバー
+- 学習データ分析機能
+- 基本的なCursor Rules生成
+
+### Phase 2: 高度な分析
+- AI による詳細分析
+- パーソナライズされたルール生成
+
+### Phase 3: フィードバックループ
+- 実践ログ収集
+- 継続的改善システム
+
+---
+
+**作成日**: 2025-07-13  
+**バージョン**: 1.0  
+**作成者**: asagami AI開発チーム
+
+---
+
+# REST API DESIGN SPECIFICATION
+
+# asagami AI × Cursor Rules REST API設計仕様書
+
+## 概要
+asagami AIとCursor Rulesの連携を実現するREST API設計仕様書です。学習データの分析からCursor Rulesの生成、実践ログの収集まで、継続的な学習改善サイクルを支援します。
+
+## 1. API概要
+
+### 1.1 目的
+- 学習データの分析と集計
+- 個人・チーム別の弱点検出
+- Cursor Rulesの自動生成と配信
+- 実践ログの収集とフィードバック処理
+
+### 1.2 基本情報
+- **ベースURL**: `https://api.asagami.ai/v1`
+- **認証**: JWT Bearer Token
+- **データ形式**: JSON
+- **文字エンコーディング**: UTF-8
+
+## 2. 認証・認可
+
+### 2.1 認証方式
+```http
+Authorization: Bearer <JWT_TOKEN>
+```
+
+### 2.2 スコープ
+- `read:learning_data` - 学習データ読み取り
+- `write:feedback` - フィードバック書き込み
+- `generate:rules` - Cursor Rules生成
+- `admin:analytics` - 管理者分析機能
+
+## 3. 学習データ分析API
+
+### 3.1 個人学習データ取得
+```
+GET /api/cursor-integration/learning-data/{user_id}
+```
+
+**パラメータ:**
+- `user_id` (required): ユーザーID
+- `period` (optional): 分析期間（日数、デフォルト30）
+- `subject_filter` (optional): 科目フィルター
+
+**レスポンス例:**
+```json
+{
+  "user_id": 123,
+  "analysis_period": 30,
+  "summary": {
+    "total_notes": 45,
+    "total_questions": 180,
+    "average_score": 78.5,
+    "study_hours": 67.2
+  },
+  "weak_points": [
+    {
+      "topic": "データベース設計",
+      "subject_id": 5,
+      "score": 62,
+      "question_count": 15,
+      "error_patterns": ["正規化の理解不足", "インデックス設計の誤り"],
+      "recommended_actions": ["正規化理論の復習", "パフォーマンステストの実践"]
+    }
+  ],
+  "strong_points": [
+    {
+      "topic": "API設計",
+      "subject_id": 3,
+      "score": 94,
+      "mastery_level": "advanced"
+    }
+  ],
+  "learning_patterns": {
+    "preferred_study_time": "09:00-11:00",
+    "avg_session_duration": 45,
+    "retention_rate": 0.82,
+    "difficulty_preference": "intermediate"
+  }
+}
+```
+
+### 3.2 チーム学習分析
+```
+GET /api/cursor-integration/team-analytics/{department_id}
+```
+
+**レスポンス例:**
+```json
+{
+  "department_id": 10,
+  "team_size": 12,
+  "analysis_date": "2025-07-13",
+  "common_weak_points": [
+    {
+      "topic": "セキュリティ実装",
+      "affected_members": 8,
+      "average_score": 65,
+      "priority": "high"
+    }
+  ],
+  "skill_distribution": {
+    "beginner": 3,
+    "intermediate": 7,
+    "advanced": 2
+  },
+  "improvement_suggestions": [
+    "セキュリティ基礎のチーム勉強会",
+    "コードレビューでのセキュリティチェック強化"
+  ]
+}
+```
+
+## 4. Cursor Rules生成API
+
+### 4.1 個人用ルール生成
+```
+POST /api/cursor-integration/generate-rules
+```
+
+**リクエスト例:**
+```json
+{
+  "user_id": 123,
+  "analysis_data": {
+    "weak_points": [...],
+    "strong_points": [...],
+    "learning_patterns": {...}
+  },
+  "rule_config": {
+    "strictness_level": "intermediate",
+    "focus_areas": ["security", "performance"],
+    "include_templates": true,
+    "auto_suggestions": true
+  }
+}
+```
+
+**レスポンス例:**
+```json
+{
+  "rule_id": "rule_123_20250713",
+  "generated_at": "2025-07-13T10:30:00Z",
+  "user_profile": {
+    "user_id": 123,
+    "skill_level": "intermediate",
+    "specializations": ["web_development", "database"]
+  },
+  "cursor_rules": {
+    "security": {
+      "sql_injection": {
+        "enabled": true,
+        "severity": "error",
+        "message": "SQLインジェクション対策：プリペアドステートメントを使用してください",
+        "examples": ["examples/prepared_statement.py"],
+        "auto_fix": true
+      },
+      "password_handling": {
+        "enabled": true,
+        "severity": "warning",
+        "message": "パスワードの平文保存は禁止です。ハッシュ化を実装してください"
+      }
+    },
+    "performance": {
+      "database_queries": {
+        "enabled": true,
+        "message": "N+1クエリ問題に注意：バッチロード処理を検討してください"
+      }
+    },
+    "code_templates": [
+      {
+        "name": "secure_database_connection",
+        "file_path": "templates/db_connection.py",
+        "description": "セキュアなデータベース接続テンプレート"
+      }
+    ]
+  },
+  "personalized_suggestions": [
+    "データベース設計の復習をお勧めします",
+    "セキュリティ実装のベストプラクティスを確認してください"
+  ]
+}
+```
+
+### 4.2 チーム用ルール生成
+```
+POST /api/cursor-integration/generate-team-rules
+```
+
+**リクエスト例:**
+```json
+{
+  "department_id": 10,
+  "team_analytics": {...},
+  "rule_config": {
+    "shared_standards": true,
+    "compliance_rules": ["GDPR", "PCI_DSS"],
+    "team_best_practices": true
+  }
+}
+```
+
+## 5. 実践ログ収集API
+
+### 5.1 開発セッションログ送信
+```
+POST /api/cursor-integration/practice-logs
+```
+
+**リクエスト例:**
+```json
+{
+  "user_id": 123,
+  "session_id": "sess_20250713_001",
+  "session_start": "2025-07-13T09:00:00Z",
+  "session_end": "2025-07-13T10:30:00Z",
+  "development_data": {
+    "errors_encountered": [
+      {
+        "error_type": "syntax_error",
+        "error_message": "Uncaught TypeError: Cannot read property",
+        "file_path": "src/auth.js",
+        "line_number": 45,
+        "resolution_time": 180,
+        "resolution_method": "cursor_suggestion"
+      }
+    ],
+    "code_completions": [
+      {
+        "trigger": "database connection",
+        "suggestion_used": true,
+        "completion_time": 5,
+        "satisfaction_rating": 4
+      }
+    ],
+    "rule_triggers": [
+      {
+        "rule_id": "security.sql_injection",
+        "triggered_at": "2025-07-13T09:45:00Z",
+        "user_action": "accepted",
+        "effectiveness": "high"
+      }
+    ],
+    "productivity_metrics": {
+      "lines_of_code": 156,
+      "files_modified": 3,
+      "commits_made": 2,
+      "test_coverage": 0.78
+    }
+  }
+}
+```
+
+### 5.2 エラーパターン分析
+```
+GET /api/cursor-integration/error-patterns/{user_id}
+```
+
+**レスポンス例:**
+```json
+{
+  "user_id": 123,
+  "analysis_period": 7,
+  "common_errors": [
+    {
+      "error_category": "database_queries",
+      "frequency": 12,
+      "avg_resolution_time": 240,
+      "improvement_trend": "stable",
+      "recommendations": [
+        "ORM使用方法の復習",
+        "データベース設計パターンの学習"
+      ]
+    }
+  ],
+  "skill_improvement": [
+    {
+      "skill": "error_handling",
+      "before_score": 65,
+      "current_score": 78,
+      "improvement_rate": 0.2
+    }
+  ]
+}
+```
+
+## 6. フィードバック処理API
+
+### 6.1 学習コンテンツ更新提案
+```
+POST /api/cursor-integration/feedback-analysis
+```
+
+**リクエスト例:**
+```json
+{
+  "user_id": 123,
+  "feedback_data": {
+    "error_patterns": [...],
+    "skill_gaps": [...],
+    "improvement_areas": [...]
+  },
+  "auto_generate": true
+}
+```
+
+**レスポンス例:**
+```json
+{
+  "feedback_id": "fb_123_20250713",
+  "analysis_results": {
+    "new_weak_points_detected": [
+      {
+        "topic": "非同期処理",
+        "confidence": 0.85,
+        "evidence": ["Promise未処理エラー3回", "async/await使用ミス2回"]
+      }
+    ],
+    "improvement_confirmed": [
+      {
+        "topic": "SQL最適化",
+        "improvement_score": 15,
+        "evidence": ["N+1クエリエラー0回（前週3回）"]
+      }
+    ]
+  },
+  "content_suggestions": [
+    {
+      "type": "new_question",
+      "topic": "非同期処理",
+      "difficulty": "intermediate",
+      "description": "Promise とasync/awaitの適切な使い分け"
+    },
+    {
+      "type": "update_rule",
+      "rule_id": "performance.database_queries",
+      "change": "strictness_increase",
+      "reason": "改善が確認されたため、より高度なパターンを追加"
+    }
+  ]
+}
+```
+
+### 6.2 継続的改善レポート
+```
+GET /api/cursor-integration/improvement-report/{user_id}
+```
+
+**レスポンス例:**
+```json
+{
+  "user_id": 123,
+  "report_period": "2025-06-13 to 2025-07-13",
+  "overall_improvement": {
+    "score_change": "+12.5",
+    "skill_level_change": "intermediate → upper-intermediate",
+    "confidence_index": 0.78
+  },
+  "learning_effectiveness": {
+    "asagami_study_impact": 0.65,
+    "cursor_practice_impact": 0.72,
+    "combined_effectiveness": 0.89
+  },
+  "next_focus_areas": [
+    "クラウドアーキテクチャ設計",
+    "マイクロサービス実装"
+  ],
+  "recommended_actions": [
+    "AWSコースの受講",
+    "Docker実践プロジェクトの開始"
+  ]
+}
+```
+
+## 7. 統計・分析API
+
+### 7.1 システム全体統計
+```
+GET /api/cursor-integration/system-analytics
+```
+
+### 7.2 ROI分析
+```
+GET /api/cursor-integration/roi-analysis/{organization_id}
+```
+
+## 8. Webhook統合
+
+### 8.1 リアルタイム通知
+```
+POST /webhooks/cursor-integration/notifications
+```
+
+### 8.2 自動ルール更新
+```
+POST /webhooks/cursor-integration/rule-updates
+```
+
+## 9. エラーハンドリング
+
+### 9.1 エラーレスポンス形式
+```json
+{
+  "error": {
+    "code": "ANALYSIS_FAILED",
+    "message": "学習データの分析に失敗しました",
+    "details": "insufficient_data",
+    "timestamp": "2025-07-13T10:30:00Z"
+  }
+}
+```
+
+### 9.2 エラーコード一覧
+- `INVALID_USER_ID` - 無効なユーザーID
+- `INSUFFICIENT_DATA` - 分析に必要なデータが不足
+- `RULE_GENERATION_FAILED` - ルール生成に失敗
+- `UNAUTHORIZED_ACCESS` - 認証エラー
+
+## 10. レート制限
+
+### 10.1 制限値
+- 学習データ取得: 100 requests/hour/user
+- ルール生成: 10 requests/hour/user
+- ログ送信: 1000 requests/hour/user
+
+## 11. 実装優先度
+
+### Phase 1 (MVP)
+- 基本的な学習データ分析API
+- シンプルなCursor Rules生成
+- 基本的な実践ログ収集
+
+### Phase 2 (拡張機能)
+- 高度な分析機能
+- チーム機能
+- リアルタイム更新
+
+### Phase 3 (AI強化)
+- 機械学習による予測分析
+- 自動的な学習コンテンツ生成
+- パーソナライゼーションの高度化
+
+---
+
+**作成日**: 2025-07-13  
+**バージョン**: 1.0  
+**作成者**: asagami AI開発チーム
