@@ -1,0 +1,258 @@
+{
+  "name": "Supabase REST API Tracker - 確実動作版",
+  "active": true,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "claude-performance",
+        "options": {}
+      },
+      "name": "Claude Performance Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [300, 300],
+      "webhookId": "claude-performance"
+    },
+    {
+      "parameters": {
+        "functionCode": "// AI パフォーマンスデータ処理・Supabase REST API用データ整形\nconst hookData = items[0].json;\n\n// Supabase REST API用データ構造\nconst performanceData = {\n  session_id: hookData.session_id || `session_${Date.now()}`,\n  timestamp: new Date().toISOString(),\n  task_success: hookData.success || false,\n  execution_time: hookData.execution_time || 0,\n  tool_calls_count: (hookData.tools_used || []).length,\n  tool_calls: hookData.tools_used || [],\n  error_count: hookData.error_count || 0,\n  thinking_tag_used: hookData.thinking_tag_used || false,\n  todo_tracking: hookData.todo_tracking || false,\n  task_complexity: hookData.task_complexity || 'simple',\n  user_feedback: hookData.user_feedback || null\n};\n\n// 成功パターン分析\nconst successPatterns = [];\nif (performanceData.task_success) {\n  if (performanceData.thinking_tag_used) successPatterns.push('thinking_tag_usage');\n  if (performanceData.todo_tracking) successPatterns.push('todo_tracking');\n  if (performanceData.execution_time < 5) successPatterns.push('fast_execution');\n  if (performanceData.tool_calls_count <= 3) successPatterns.push('efficient_tool_usage');\n  if (performanceData.error_count === 0) successPatterns.push('error_free_execution');\n}\n\n// 失敗パターン分析\nconst failurePatterns = [];\nif (!performanceData.task_success) {\n  if (!performanceData.thinking_tag_used) failurePatterns.push('missing_thinking_tag');\n  if (performanceData.error_count > 0) failurePatterns.push('execution_errors');\n  if (performanceData.execution_time > 30) failurePatterns.push('slow_execution');\n  if (performanceData.tool_calls_count > 10) failurePatterns.push('excessive_tool_usage');\n}\n\n// 学習スコア計算\nperformanceData.learning_score = successPatterns.length - failurePatterns.length;\nperformanceData.success_patterns = successPatterns;\nperformanceData.failure_patterns = failurePatterns;\n\nconsole.log('🤖 AI Performance Data for Supabase REST API:', {\n  session: performanceData.session_id,\n  success: performanceData.task_success,\n  patterns: [...successPatterns, ...failurePatterns],\n  score: performanceData.learning_score\n});\n\nreturn [{ json: performanceData }];"
+      },
+      "name": "Process for Supabase REST API",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://hetcpqtsineqaopnnvtn.supabase.co/rest/v1/ai_performance_log",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "sb_secret_Duj9K4FLWZDIIjNbef5RLA_p0Wbj4Xa"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer sb_secret_Duj9K4FLWZDIIjNbef5RLA_p0Wbj4Xa"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=representation"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json}}",
+        "options": {
+          "timeout": 10000
+        }
+      },
+      "name": "Insert to ai_performance_log",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [700, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{$json.learning_score}}",
+              "operation": "larger",
+              "value2": 0
+            }
+          ]
+        }
+      },
+      "name": "Check Success Pattern",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [900, 250]
+    },
+    {
+      "parameters": {
+        "url": "https://hetcpqtsineqaopnnvtn.supabase.co/rest/v1/ai_learning_patterns",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "sb_secret_Duj9K4FLWZDIIjNbef5RLA_p0Wbj4Xa"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer sb_secret_Duj9K4FLWZDIIjNbef5RLA_p0Wbj4Xa"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ {\n  \"timestamp\": $json.timestamp,\n  \"pattern_type\": \"success\",\n  \"patterns\": $json.success_patterns,\n  \"effectiveness_score\": $json.learning_score,\n  \"session_id\": $json.session_id\n} }}",
+        "options": {}
+      },
+      "name": "Store Success Pattern",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [1100, 200]
+    },
+    {
+      "parameters": {
+        "url": "https://hetcpqtsineqaopnnvtn.supabase.co/rest/v1/ai_learning_patterns",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "sb_secret_Duj9K4FLWZDIIjNbef5RLA_p0Wbj4Xa"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer sb_secret_Duj9K4FLWZDIIjNbef5RLA_p0Wbj4Xa"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ {\n  \"timestamp\": $json.timestamp,\n  \"pattern_type\": \"failure\",\n  \"patterns\": $json.failure_patterns,\n  \"effectiveness_score\": $json.learning_score,\n  \"session_id\": $json.session_id\n} }}",
+        "options": {}
+      },
+      "name": "Store Failure Pattern",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [1100, 350]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "name": "Merge Results",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [1300, 275]
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "name": "Send Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1500, 275]
+    }
+  ],
+  "connections": {
+    "Claude Performance Webhook": {
+      "main": [
+        [
+          {
+            "node": "Process for Supabase REST API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process for Supabase REST API": {
+      "main": [
+        [
+          {
+            "node": "Insert to ai_performance_log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert to ai_performance_log": {
+      "main": [
+        [
+          {
+            "node": "Check Success Pattern",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Success Pattern": {
+      "main": [
+        [
+          {
+            "node": "Store Success Pattern",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Store Failure Pattern",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Store Success Pattern": {
+      "main": [
+        [
+          {
+            "node": "Merge Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Store Failure Pattern": {
+      "main": [
+        [
+          {
+            "node": "Merge Results",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge Results": {
+      "main": [
+        [
+          {
+            "node": "Send Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "ai-growth-rest-api",
+      "id": "rest-api-001"
+    }
+  ],
+  "meta": {
+    "templateCredsSetupCompleted": true
+  }
+}

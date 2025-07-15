@@ -1,0 +1,20 @@
+{
+  "test_summary": {
+    "total_tests": 17,
+    "passed_tests": 16,
+    "failed_tests": 1,
+    "success_rate": 94.12
+  },
+  "failed_test_details": [
+    {
+      "test_type": "high_risk_phrase",
+      "input": "project/file.txt",
+      "risk_score": 0,
+      "detected_patterns": 0,
+      "should_detect": false,
+      "success": false
+    }
+  ],
+  "timestamp": 1751901690.095443,
+  "ci_status": "FAIL"
+}

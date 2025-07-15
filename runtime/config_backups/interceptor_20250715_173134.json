@@ -1,0 +1,11 @@
+{
+  "active": true,
+  "version": "2.0",
+  "last_updated": "2025-07-11T09:18:19.452726",
+  "features": {
+    "automatic_classification": true,
+    "lightweight_president": true,
+    "dynamic_escalation": true,
+    "reference_monitor": true
+  }
+}

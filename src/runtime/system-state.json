@@ -1,0 +1,10 @@
+{
+  "session_id": "20250704_194941",
+  "mode": "president_solo",
+  "start_time": "2025-07-04T19:49:41+09:00",
+  "status": "active",
+  "agents": {
+    "president": "active",
+    "team": "inactive"
+  }
+}

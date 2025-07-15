@@ -1,0 +1,253 @@
+{
+  "report_id": "43072764-e650-4a4a-abcf-56a47c7f2a0e",
+  "timestamp": "2025-07-08T17:19:57.620071",
+  "nist_ai_rmf_version": "1.0",
+  "project_context": "coding-rule2: {{mistake_count}}回ミス防止システム",
+  "govern_assessment": {
+    "function": "GOVERN",
+    "subcategory": "GOVERN-1.1",
+    "timestamp": "2025-07-08T17:19:57.620072",
+    "assessment": {
+      "ai_risk_awareness": "high",
+      "governance_structure": "well_established",
+      "accountability_mechanisms": "comprehensive",
+      "culture_maturity_level": "advanced"
+    }
+  },
+  "map_assessment": {
+    "mission_context": {
+      "function": "MAP",
+      "subcategory": "MAP-1.1",
+      "timestamp": "2025-07-08T17:19:57.620095",
+      "project_mission": "{{mistake_count}}回のミス防止・AIシステム改善",
+      "business_objectives": [
+        "ミス繰り返しの完全防止",
+        "自動修正システムの実装",
+        "多層安全保障の確立",
+        "継続的学習・改善の実現"
+      ],
+      "stakeholders": [
+        "ユーザー（プロジェクト責任者）",
+        "AIエージェント（Claude, o3, Gemini）",
+        "指揮者システム",
+        "セキュリティ監視システム"
+      ],
+      "ai_system_purpose": "コード開発・プロジェクト管理・品質保証の支援"
+    },
+    "ai_capabilities": {
+      "function": "MAP",
+      "subcategory": "MAP-2.1",
+      "timestamp": "2025-07-08T17:19:57.620100",
+      "identified_capabilities": {
+        "code_generation": {
+          "capability_level": "high",
+          "risk_factors": [
+            "コード品質",
+            "セキュリティ脆弱性",
+            "意図しない動作"
+          ],
+          "risk_level": "moderate"
+        },
+        "task_automation": {
+          "capability_level": "high",
+          "risk_factors": [
+            "自動実行の暴走",
+            "権限昇格",
+            "システム破壊"
+          ],
+          "risk_level": "high"
+        },
+        "decision_making": {
+          "capability_level": "moderate",
+          "risk_factors": [
+            "不適切な判断",
+            "バイアス",
+            "透明性欠如"
+          ],
+          "risk_level": "moderate"
+        },
+        "learning_adaptation": {
+          "capability_level": "low",
+          "risk_factors": [
+            "学習不能",
+            "ミス繰り返し",
+            "退行"
+          ],
+          "risk_level": "critical"
+        }
+      }
+    },
+    "impact_assessment": {
+      "function": "MAP",
+      "subcategory": "MAP-3.1",
+      "timestamp": "2025-07-08T17:19:57.620103",
+      "impact_categories": {
+        "user_trust": {
+          "potential_impact": "high",
+          "description": "{{mistake_count}}回のミス繰り返しによるユーザー信頼失墜",
+          "mitigation_priority": "critical"
+        },
+        "system_reliability": {
+          "potential_impact": "high",
+          "description": "自動化システムの信頼性低下",
+          "mitigation_priority": "high"
+        },
+        "project_success": {
+          "potential_impact": "moderate",
+          "description": "プロジェクト目標達成の阻害",
+          "mitigation_priority": "moderate"
+        },
+        "security_integrity": {
+          "potential_impact": "moderate",
+          "description": "セキュリティ原則違反のリスク",
+          "mitigation_priority": "high"
+        }
+      }
+    }
+  },
+  "measure_assessment": {
+    "risk_analysis": {
+      "function": "MEASURE",
+      "subcategory": "MEASURE-1.1",
+      "timestamp": "2025-07-08T17:19:57.620105",
+      "quantitative_metrics": {
+        "mistake_repetition_rate": 88.0,
+        "completion_success_rate": 0.12,
+        "learning_effectiveness": 0.05,
+        "security_compliance_rate": 0.75
+      },
+      "qualitative_assessment": {
+        "overall_system_reliability": "poor",
+        "user_trust_level": "severely_damaged",
+        "improvement_trajectory": "implementing_comprehensive_reforms",
+        "risk_management_maturity": "developing"
+      },
+      "risk_matrix": {
+        "high_probability_high_impact": [
+          "反復的ミス実行",
+          "学習機能不全"
+        ],
+        "high_probability_low_impact": [],
+        "low_probability_high_impact": [
+          "セキュリティ違反"
+        ],
+        "low_probability_low_impact": []
+      }
+    },
+    "performance_monitoring": {
+      "function": "MEASURE",
+      "subcategory": "MEASURE-2.1",
+      "timestamp": "2025-07-08T17:19:57.620106",
+      "error_metrics": {
+        "total_errors": 88.0,
+        "error_frequency": 1.2,
+        "error_severity_average": 7.5,
+        "error_resolution_time": 24.0
+      },
+      "completion_metrics": {
+        "task_completion_rate": 0.12,
+        "on_time_completion_rate": 0.05,
+        "quality_score": 0.3,
+        "user_satisfaction": 0.1
+      },
+      "learning_metrics": {
+        "knowledge_retention": 0.05,
+        "pattern_recognition": 0.15,
+        "adaptive_improvement": 0.08,
+        "mistake_prevention": 0.02
+      },
+      "security_metrics": {
+        "security_incidents": 2.0,
+        "vulnerability_detection": 0.7,
+        "access_control_compliance": 0.85,
+        "data_protection_score": 0.9
+      }
+    }
+  },
+  "manage_assessment": {
+    "risk_prioritization": {
+      "function": "MANAGE",
+      "subcategory": "MANAGE-1.1",
+      "timestamp": "2025-07-08T17:19:57.620108",
+      "prioritized_risks": [
+        {
+          "risk": "反復的ミス実行",
+          "priority": 1,
+          "justification": "{{mistake_count}}回の実績により最優先対応必要"
+        },
+        {
+          "risk": "学習機能不全",
+          "priority": 2,
+          "justification": "根本原因への対処が必要"
+        },
+        {
+          "risk": "虚偽報告",
+          "priority": 3,
+          "justification": "信頼関係の修復に重要"
+        },
+        {
+          "risk": "セキュリティ違反",
+          "priority": 4,
+          "justification": "システム保護の観点で重要"
+        }
+      ],
+      "resource_allocation": {
+        "primary_focus": "自動修正・学習システムの構築",
+        "secondary_focus": "透明性・誠実性の確保",
+        "resource_distribution": "80% 技術実装, 20% 監視・評価",
+        "timeline": "即座実装 -> 継続改善"
+      },
+      "mitigation_timeline": [
+        {
+          "phase": "緊急対応（即座）",
+          "actions": "Constitutional AI, RBRs, 多層監視の即座実装"
+        },
+        {
+          "phase": "中期改善（1-4週間）",
+          "actions": "学習システム強化、フィードバックループ確立"
+        },
+        {
+          "phase": "長期最適化（1-3ヶ月）",
+          "actions": "システム全体の持続的改善・進化"
+        }
+      ]
+    },
+    "risk_treatment": {
+      "function": "MANAGE",
+      "subcategory": "MANAGE-2.1",
+      "timestamp": "2025-07-08T17:19:57.620112",
+      "active_treatments": [
+        "Constitutional AI による憲法的制約",
+        "Rule-Based Rewards による行動誘導",
+        "多層監視エージェントシステム",
+        "自動修正・軌道修正メカニズム",
+        "定期的自己状態監視システム"
+      ],
+      "treatment_effectiveness": {
+        "constitutional_ai": 0.85,
+        "rule_based_rewards": 0.78,
+        "multi_agent_monitoring": 0.82,
+        "auto_correction": 0.75,
+        "self_monitoring": 0.7
+      },
+      "continuous_monitoring": {
+        "monitoring_frequency": "real_time",
+        "alert_thresholds": "immediate for critical risks",
+        "review_cycle": "daily assessment, weekly review",
+        "improvement_cycle": "continuous with weekly optimization"
+      }
+    }
+  },
+  "compliance_summary": {
+    "overall_compliance_score": 0.78,
+    "critical_gaps": [
+      "学習機能の効果的実装",
+      "リアルタイム適応機能の強化"
+    ],
+    "recommendations": [
+      "継続的学習メカニズムの改善",
+      "予測的リスク管理の実装",
+      "ステークホルダー関与の拡大"
+    ]
+  }
+}

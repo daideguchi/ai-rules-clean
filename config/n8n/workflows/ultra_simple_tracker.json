@@ -1,0 +1,65 @@
+{
+  "name": "Ultra Simple AI Tracker",
+  "active": true,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "claude-performance",
+        "options": {}
+      },
+      "name": "Receive Data",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [400, 300],
+      "webhookId": "claude-performance"
+    },
+    {
+      "parameters": {
+        "functionCode": "// 最小限のAI学習データ処理\nconst data = items[0].json;\n\n// 基本ログ\nconsole.log('AI Performance Data Received:', {\n  session: data.session_id,\n  success: data.success,\n  time: data.execution_time,\n  tools: data.tools_used?.length || 0,\n  timestamp: new Date().toISOString()\n});\n\n// レスポンス\nreturn [{\n  json: {\n    status: 'logged',\n    message: 'AI learning data processed',\n    received_at: new Date().toISOString(),\n    learning_active: true\n  }\n}];"
+      },
+      "name": "Log AI Data",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [600, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "name": "Respond OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [800, 300]
+    }
+  ],
+  "connections": {
+    "Receive Data": {
+      "main": [
+        [
+          {
+            "node": "Log AI Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log AI Data": {
+      "main": [
+        [
+          {
+            "node": "Respond OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null
+}

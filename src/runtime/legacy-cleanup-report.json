@@ -1,0 +1,52 @@
+{
+  "cleanup_plan": {
+    "scan_date": "2025-07-05T15:17:15.069895",
+    "total_items": 1,
+    "total_size_mb": 0.3930244445800781,
+    "safe_items": 1,
+    "review_items": 0,
+    "deprecated_items": {
+      "directories": [],
+      "files": [],
+      "backup_dirs": [
+        "docs-backup-1751696059"
+      ]
+    },
+    "safety_analysis": {
+      "safe_to_delete": {
+        "directories": [],
+        "files": [],
+        "backup_dirs": [
+          {
+            "path": "docs-backup-1751696059",
+            "size": 412116,
+            "reason": "バックアップファイル/ディレクトリ"
+          }
+        ]
+      },
+      "needs_review": {
+        "directories": [],
+        "files": [],
+        "backup_dirs": []
+      },
+      "total_size": 412116
+    }
+  },
+  "execution_results": {
+    "deleted": [
+      {
+        "path": "docs-backup-1751696059",
+        "size": 412116,
+        "reason": "バックアップファイル/ディレクトリ"
+      }
+    ],
+    "errors": [],
+    "total_freed_mb": 0.3930244445800781,
+    "dry_run": true
+  },
+  "recommendations": [
+    "定期的なクリーンアップスケジュールの設定を検討してください。",
+    ".gitignoreの更新でtempファイル生成を防止してください。",
+    "CI/CDパイプラインにクリーンアップステップの追加を検討してください。"
+  ]
+}

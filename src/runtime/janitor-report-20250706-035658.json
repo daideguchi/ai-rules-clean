@@ -1,0 +1,24 @@
+{
+  "timestamp": "2025-07-06T03:56:58.037149",
+  "project_root": "${PROJECT_ROOT}",
+  "checks": {
+    "root_directory_count": {
+      "check": "root_directory_count",
+      "count": 5,
+      "max_allowed": 8,
+      "violation": false,
+      "directories": [
+        "runtime",
+        "docs",
+        "scripts",
+        "ops",
+        "src"
+      ]
+    },
+    "stray_files": {
+      "count": 0,
+      "items": []
+    }
+  },
+  "overall_health": "healthy"
+}

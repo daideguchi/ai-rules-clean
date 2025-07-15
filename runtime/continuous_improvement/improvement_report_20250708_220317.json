@@ -1,0 +1,40 @@
+{
+  "report_id": "b768c41a-4571-4827-9924-b7aeb9fca4c4",
+  "timestamp": "2025-07-08T22:03:17.976787",
+  "period": "30 days",
+  "feedback_summary": {
+    "total_feedback": 5,
+    "by_category": {
+      "behavioral": 2,
+      "technical": 2,
+      "process": 1
+    },
+    "by_type": {
+      "pattern": 2,
+      "failure": 1,
+      "insight": 2
+    },
+    "average_impact": 7.3,
+    "average_learning_value": 8.4
+  },
+  "improvement_actions": {
+    "total_actions": 0,
+    "completed": 0,
+    "completion_rate": 0,
+    "average_impact": 0
+  },
+  "learning_patterns": {
+    "total_patterns": 0,
+    "high_confidence_patterns": 0,
+    "most_significant_pattern": null
+  },
+  "system_integration": {
+    "integrated_systems": 6,
+    "integration_effectiveness": 0.85
+  },
+  "recommendations": [
+    "学習機能の根本的改善",
+    "ミス防止システムの継続的強化",
+    "予測的問題検出の実装"
+  ]
+}

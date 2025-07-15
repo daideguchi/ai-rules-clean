@@ -1,0 +1,69 @@
+{
+  "timestamp": "2025-07-06T03:51:54.386197",
+  "project_root": "${PROJECT_ROOT}",
+  "checks": {
+    "root_directory_count": {
+      "check": "root_directory_count",
+      "count": 7,
+      "max_allowed": 8,
+      "violation": false,
+      "directories": [
+        "config",
+        "runtime",
+        "docs",
+        "scripts",
+        "ops",
+        "assets",
+        "src"
+      ]
+    },
+    "stray_files": {
+      "count": 7,
+      "items": [
+        {
+          "type": "misplaced_file",
+          "path": "${PROJECT_ROOT}/refactor-strategy-o3-analysis.md",
+          "suggested_location": "docs/",
+          "reason": "ルートレベルに配置すべきでないファイル"
+        },
+        {
+          "type": "misplaced_file",
+          "path": "${PROJECT_ROOT}/quick-memory-check.sh",
+          "suggested_location": "scripts/",
+          "reason": "ルートレベルに配置すべきでないファイル"
+        },
+        {
+          "type": "misplaced_file",
+          "path": "${PROJECT_ROOT}/test-memory-inheritance.sh",
+          "suggested_location": "scripts/",
+          "reason": "ルートレベルに配置すべきでないファイル"
+        },
+        {
+          "type": "misplaced_file",
+          "path": "${PROJECT_ROOT}/refactor-structure-mapping.md",
+          "suggested_location": "docs/",
+          "reason": "ルートレベルに配置すべきでないファイル"
+        },
+        {
+          "type": "misplaced_file",
+          "path": "${PROJECT_ROOT}/README_backup.md",
+          "suggested_location": "docs/",
+          "reason": "ルートレベルに配置すべきでないファイル"
+        },
+        {
+          "type": "misplaced_file",
+          "path": "${PROJECT_ROOT}/start-with-hooks.sh",
+          "suggested_location": "scripts/",
+          "reason": "ルートレベルに配置すべきでないファイル"
+        },
+        {
+          "type": "misplaced_file",
+          "path": "${PROJECT_ROOT}/claude-restart-checklist.md",
+          "suggested_location": "docs/",
+          "reason": "ルートレベルに配置すべきでないファイル"
+        }
+      ]
+    }
+  },
+  "overall_health": "needs_attention"
+}

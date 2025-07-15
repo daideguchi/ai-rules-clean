@@ -1,0 +1,31 @@
+{
+  "log_categories": {
+    "system_logs": {
+      "path": "logs/*.log",
+      "max_size_mb": 10,
+      "max_age_days": 30,
+      "compress_after_days": 7
+    },
+    "evaluation_reports": {
+      "path": "evaluations/*.json",
+      "consolidate": true,
+      "max_age_days": 90,
+      "archive_pattern": "archives/evaluations/{year}-{month}"
+    },
+    "nist_compliance": {
+      "path": "nist_ai_rmf/compliance_report_*.json",
+      "consolidate_by": "daily",
+      "max_age_days": 180
+    },
+    "continuous_improvement": {
+      "path": "continuous_improvement/improvement_report_*.json",
+      "consolidate_by": "weekly",
+      "max_age_days": 90
+    }
+  },
+  "archive_settings": {
+    "base_path": "archives",
+    "compression": "gzip",
+    "structure": "{category}/{year}/{month}/{filename}"
+  }
+}

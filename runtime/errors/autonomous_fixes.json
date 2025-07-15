@@ -1,0 +1,57 @@
+{
+  "91d7aaf8b3db49b8749b2aeb7e6d155a": {
+    "error_hash": "91d7aaf8b3db49b8749b2aeb7e6d155a",
+    "fix_code": "\n# 🔧 自動生成修正コード\n# エラー: ModuleNotFoundError\n# ファイル: src/ui/dashboard.py\n# 発生回数: 1回\n\n\n# 修正方法1: モジュールインストール\n# pip install rich\n\n# 修正方法2: インポートエラーハンドリング\ntry:\n    import rich\nexcept ImportError:\n    print(\"警告: richが見つかりません。pip install richを実行してください。\")\n    rich = None\n\n# 修正方法3: 条件付きインポート\nif rich is not None:\n    # richを使用するコード\n    pass\n",
+    "applied_at": "2025-07-09T14:20:49.271781",
+    "strategies": [
+      "pip install {module}",
+      "sys.path.append('{path}')",
+      "relative import修正"
+    ],
+    "status": "generated"
+  },
+  "26a5b93c8812d6f415a59c328f921933": {
+    "error_hash": "26a5b93c8812d6f415a59c328f921933",
+    "fix_code": "\n# 🔧 自動生成修正コード\n# エラー: NotRenderableError\n# ファイル: src/ui/enhanced_dashboard.py\n# 発生回数: 1回\n\n\n# 修正方法1: Live()の使用を避ける\n# 元のコード（エラーが発生）:\n# with Live(generator(), console=console):\n#     pass\n\n# 修正後のコード:\nfor item in generator():\n    console.clear()\n    console.print(item)\n    time.sleep(1)\n\n# 修正方法2: 直接print使用\nconsole.print(\"直接表示内容\")\n",
+    "applied_at": "2025-07-09T14:20:49.272091",
+    "strategies": [
+      "ジェネレータを関数に変更",
+      "with Live()構文を削除",
+      "直接print()使用"
+    ],
+    "status": "generated"
+  },
+  "3905bebfe80f8b177c69816d1cb5683f": {
+    "error_hash": "3905bebfe80f8b177c69816d1cb5683f",
+    "fix_code": "\n# 🔧 自動生成修正コード\n# エラー: FileNotFoundError\n# ファイル: src/config/loader.py\n# 発生回数: 1回\n\n\n# 修正方法1: ファイル存在チェック\nfrom pathlib import Path\n\nfile_path = Path(\"src/config/loader.py\")\nif not file_path.exists():\n    print(f\"ファイルが見つかりません: {file_path}\")\n    file_path.parent.mkdir(parents=True, exist_ok=True)\n    file_path.touch()\n\n# 修正方法2: デフォルト値設定\ntry:\n    with open(\"src/config/loader.py\", \"r\") as f:\n        content = f.read()\nexcept FileNotFoundError:\n    content = \"\"  # デフォルト値\n",
+    "applied_at": "2025-07-09T14:20:49.272505",
+    "strategies": [
+      "パス確認・修正",
+      "ファイル存在チェック追加",
+      "相対パス→絶対パス変更"
+    ],
+    "status": "generated"
+  },
+  "d17c501ec50546b72aa812b07143d791": {
+    "error_hash": "d17c501ec50546b72aa812b07143d791",
+    "fix_code": "\n# 🔧 自動生成修正コード\n# エラー: PermissionError\n# ファイル: setup_env.sh\n# 発生回数: 1回\n\n\n# 修正方法1: 権限チェック・修正\nimport os\nimport stat\n\nfile_path = \"setup_env.sh\"\nif os.path.exists(file_path):\n    # 実行権限追加\n    os.chmod(file_path, stat.S_IRWXU | stat.S_IRGRP | stat.S_IXGRP)\n\n# 修正方法2: 権限エラーハンドリング\ntry:\n    # 権限が必要な操作\n    pass\nexcept PermissionError:\n    print(\"権限エラー: sudo権限が必要です\")\n",
+    "applied_at": "2025-07-09T14:20:49.272895",
+    "strategies": [
+      "chmod +x {file}",
+      "sudo権限で実行",
+      "ファイル所有者変更"
+    ],
+    "status": "generated"
+  },
+  "e8218522765df2f1e2ec3893c92d052c": {
+    "error_hash": "e8218522765df2f1e2ec3893c92d052c",
+    "fix_code": "\n# 🔧 自動生成修正コード\n# エラー: ModuleNotFoundError\n# ファイル: src/conductor/core.py\n# 発生回数: 1回\n\n\n# 修正方法1: モジュールインストール\n# pip install corrector\n\n# 修正方法2: インポートエラーハンドリング\ntry:\n    import corrector\nexcept ImportError:\n    print(\"警告: correctorが見つかりません。pip install correctorを実行してください。\")\n    corrector = None\n\n# 修正方法3: 条件付きインポート\nif corrector is not None:\n    # correctorを使用するコード\n    pass\n",
+    "applied_at": "2025-07-09T14:22:57.798733",
+    "strategies": [
+      "pip install {module}",
+      "sys.path.append('{path}')",
+      "relative import修正"
+    ],
+    "status": "applied"
+  }
+}

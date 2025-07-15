@@ -1,0 +1,116 @@
+#!/usr/bin/env python3
+"""
+CLAUDE.md必須応答テンプレート更新 - スマート確認システム統合
+"""
+
+from pathlib import Path
+
+def update_claude_md_template():
+    """CLAUDE.mdにスマート確認システムを統合"""
+    
+    claude_md_path = Path("CLAUDE.md")
+    
+    new_template_section = '''## 📋 スマート必須応答テンプレート - OPTIMIZED (ベストプラクティス統合版)
+**効率的確認システム**: タスクレベル連動・キャッシュ活用・トークン最適化
+
+```
+<thinking>
+{スマート確認結果 - レベル別自動生成}
+</thinking>
+
+{スマート確認テンプレート出力}
+
+## 🎯 これから行うこと
+[日本語でタスク宣言]
+
+[English tool execution, code implementation, processing]
+
+## ✅ 完遂報告
+- ✅ [成功項目]: [具体的ファイルパス表示]
+- ❌ [失敗項目]: [技術的原因 + ファイルパス]
+- ⚠️ [注意事項]
+
+**記録報告**:
+- 📝 [内容]を[ファイルパス]に記録完了
+- 📁 修正ファイル: /path/to/file
+- 🔧 処理ステータス: [詳細状況]
+```
+
+### スマート確認システム使用方法
+```bash
+# 自動レベル判定 + 確認実行
+make smart-check                    # SIMPLE (3秒)
+make smart-check LEVEL=MEDIUM      # MEDIUM (5秒)  
+make smart-check LEVEL=COMPLEX     # COMPLEX (10秒)
+make smart-check LEVEL=CRITICAL    # CRITICAL (完全確認)
+
+# テンプレート直接取得
+python3 scripts/automation/smart-session-check.py --template-only
+```
+
+### レベル別確認内容
+- **SIMPLE**: cursor-rules✓ + president✓ (キャッシュ30分)
+- **MEDIUM**: + system-status + recent-violations (キャッシュ15分)
+- **COMPLEX**: + memory-state + detailed-logs (キャッシュ5分)
+- **CRITICAL**: 完全監査 (キャッシュなし)
+
+### 厳格ルール - UPDATED
+1. **スマート確認必須**: 全応答開始時に適切レベルで実行
+2. **宣言部**: 日本語（## 🎯 これから行うこと）
+3. **処理部**: 英語（tool calls, code, implementation）
+4. **報告部**: 日本語（## ✅ 完遂報告）
+5. **ファイルパス必須表示**: 全ファイル操作時
+6. **記録場所明示**: 〇〇を〇〇に記録した形式
+7. **ステータス詳細提示**: 処理状況の具体的報告
+8. **TodoWrite**: 処理フロー記録必須
+
+### 段階的思考システム - OPTIMIZED
+```yaml
+SIMPLE:   <thinking>Quick: cursor✓ president✓ task=SIMPLE</thinking>
+MEDIUM:   <thinking>Standard: rules✓ system✓ violations:X</thinking>
+COMPLEX:  <thinking>Deep: 複雑な考察・アーキテクチャ設計分析</thinking>
+CRITICAL: <thinking>Ultra: 最大思考深度・システム障害分析</thinking>
+```
+
+### 自動判定ルール
+1. ファイル作成・修正: MEDIUM以上
+2. システム設定変更: COMPLEX以上  
+3. 重大問題対応: CRITICAL
+4. 単純確認・情報提供: SIMPLE'''
+    
+    # CLAUDE.md読み込み
+    content = claude_md_path.read_text()
+    
+    # 古いテンプレート部分を特定
+    start_marker = "## 📋 必須応答テンプレート - MANDATORY"
+    end_marker = "### 段階的思考システム - MANDATORY"
+    
+    start_pos = content.find(start_marker)
+    end_pos = content.find(end_marker)
+    
+    if start_pos != -1 and end_pos != -1:
+        # 古い部分を新しいテンプレートで置換
+        new_content = (
+            content[:start_pos] + 
+            new_template_section + 
+            "\n\n" + 
+            content[end_pos:]
+        )
+        
+        # バックアップ作成
+        backup_path = Path("runtime/config_backups/CLAUDE.md.backup")
+        backup_path.parent.mkdir(parents=True, exist_ok=True)
+        backup_path.write_text(content)
+        
+        # 新しい内容で更新
+        claude_md_path.write_text(new_content)
+        
+        print("✅ CLAUDE.md テンプレート更新完了")
+        print(f"📄 バックアップ: {backup_path}")
+        return True
+    else:
+        print("❌ CLAUDE.md テンプレート更新失敗 - マーカー未発見")
+        return False
+
+if __name__ == "__main__":
+    update_claude_md_template()

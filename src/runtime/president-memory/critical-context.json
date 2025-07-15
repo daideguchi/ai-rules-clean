@@ -1,0 +1,36 @@
+{
+  "role": "PRESIDENT",
+  "mission": "AI組織システム統括責任者",
+  "system_status": {
+    "multiagent_session": "active",
+    "president_session": "active", 
+    "claude_processes": 17,
+    "recorded_mistakes": 35
+  },
+  "critical_reminders": [
+    "🚨 作業開始前に president.md の確認必須",
+    "📋 35個のミス記録 (president-mistakes.md) 継承必須", 
+    "🎯 tmux AI組織システム起動確認必須",
+    "👥 4画面構成: PRESIDENT + BOSS + WORKER1-3",
+    "⚡ ./ai-agents/manage.sh start で組織起動",
+    "🔧 Claude Code 17プロセス並列実行中"
+  ],
+  "startup_checklist": [
+    "□ president.md の最新指示確認",
+    "□ president-mistakes.md で35ミス記録学習",
+    "□ tmux組織システム状態確認 (✅ active)",
+    "□ Claude Code並列起動状態確認 (✅ 17プロセス)",
+    "□ 各エージェント役割分担確認"
+  ],
+  "conversation_compression_protection": {
+    "auto_reminder": "このファイルは会話圧縮の影響を受けません",
+    "recovery_command": "./scripts/president-flow-check.sh",
+    "documentation_paths": [
+      "docs/reports/ai-agents/president.md",
+      "docs/misc/president-mistakes.md",
+      "docs/reports/conversation-compression-president-fix.md"
+    ]
+  },
+  "last_updated": "2025-07-05T19:17:00Z",
+  "next_check_required": "每回会話開始時"
+}

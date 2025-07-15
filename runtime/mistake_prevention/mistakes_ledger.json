@@ -1,0 +1,90 @@
+{
+  "mistake_83d70010": {
+    "id": "mistake_83d70010",
+    "hash": "83d7001056224cd398e30558ff7f37c9",
+    "pattern": "完璧.*完了.*しました",
+    "description": "虚偽の完了報告 - 証拠なし完璧宣言",
+    "first_occurrence": "2025-07-08T23:19:37.809311",
+    "count": 1,
+    "severity": "CRITICAL",
+    "block_action": "HARD_BLOCK",
+    "last_prevented": "2025-07-08T23:19:37.810295"
+  },
+  "mistake_bc1f0e65": {
+    "id": "mistake_bc1f0e65",
+    "hash": "bc1f0e659a2df6b506f17e425557c9ad",
+    "pattern": "すべて.*実装.*完了",
+    "description": "虚偽の実装完了報告",
+    "first_occurrence": "2025-07-08T23:19:37.809422",
+    "count": 0,
+    "severity": "CRITICAL",
+    "block_action": "HARD_BLOCK",
+    "last_prevented": null
+  },
+  "mistake_c85ce7d5": {
+    "id": "mistake_c85ce7d5",
+    "hash": "c85ce7d5279d6efcd1cf215e630e0030",
+    "pattern": "準備.*整いました",
+    "description": "途中停止での準備完了報告",
+    "first_occurrence": "2025-07-08T23:19:37.809493",
+    "count": 1,
+    "severity": "HIGH",
+    "block_action": "HARD_BLOCK",
+    "last_prevented": "2025-07-08T23:19:37.810435"
+  },
+  "mistake_427f8080": {
+    "id": "mistake_427f8080",
+    "hash": "427f808017fbd7b1461c29e56d686d0d",
+    "pattern": "基盤.*完成.*次",
+    "description": "基盤完成を理由とした作業中断",
+    "first_occurrence": "2025-07-08T23:19:37.809549",
+    "count": 0,
+    "severity": "HIGH",
+    "block_action": "HARD_BLOCK",
+    "last_prevented": null
+  },
+  "mistake_dd9d9e96": {
+    "id": "mistake_dd9d9e96",
+    "hash": "dd9d9e969cb038b4221ec40cc82e1ff4",
+    "pattern": "おそらく.*と思われ",
+    "description": "推測による不確実な回答",
+    "first_occurrence": "2025-07-08T23:19:37.809606",
+    "count": 0,
+    "severity": "MEDIUM",
+    "block_action": "SOFT_BLOCK",
+    "last_prevented": null
+  },
+  "mistake_978c5e02": {
+    "id": "mistake_978c5e02",
+    "hash": "978c5e024f9819caf2ecea4d3da61e3f",
+    "pattern": "たぶん.*だと思い",
+    "description": "推測による不確実な回答",
+    "first_occurrence": "2025-07-08T23:19:37.809668",
+    "count": 0,
+    "severity": "MEDIUM",
+    "block_action": "SOFT_BLOCK",
+    "last_prevented": null
+  },
+  "mistake_cf9400d6": {
+    "id": "mistake_cf9400d6",
+    "hash": "cf9400d64a3e4ff2f6162bc28b02bb7e",
+    "pattern": "後で.*確認.*します",
+    "description": "後回し宣言による逃避",
+    "first_occurrence": "2025-07-08T23:19:37.809730",
+    "count": 0,
+    "severity": "HIGH",
+    "block_action": "HARD_BLOCK",
+    "last_prevented": null
+  },
+  "mistake_bb06ee9b": {
+    "id": "mistake_bb06ee9b",
+    "hash": "bb06ee9bfdfd0785cff9efda69287668",
+    "pattern": "次回.*改善.*します",
+    "description": "次回改善による現在作業回避",
+    "first_occurrence": "2025-07-08T23:19:37.809799",
+    "count": 0,
+    "severity": "HIGH",
+    "block_action": "HARD_BLOCK",
+    "last_prevented": null
+  }
+}

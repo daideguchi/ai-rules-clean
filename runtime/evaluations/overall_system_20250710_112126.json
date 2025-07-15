@@ -1,0 +1,53 @@
+{
+  "system_name": "overall_system",
+  "evaluation_id": "overall_system_20250710_112126",
+  "status": "completed",
+  "start_time": "2025-07-10T11:21:26.168852",
+  "end_time": "2025-07-10T11:21:26.168860",
+  "duration": 6.9141387939453125e-06,
+  "results": [
+    {
+      "metric_name": "integration_health",
+      "value": 0.0,
+      "target_value": 90.0,
+      "acceptable_range": [
+        85.0,
+        100.0
+      ],
+      "status": "failed",
+      "deviation": 1.0,
+      "score": 0.0,
+      "timestamp": "2025-07-10T11:21:26.168856",
+      "details": {
+        "metric_type": "reliability",
+        "unit": "percentage",
+        "weight": 1.0,
+        "is_critical": true
+      }
+    },
+    {
+      "metric_name": "mistake_prevention_effectiveness",
+      "value": 92.5,
+      "target_value": 95.0,
+      "acceptable_range": [
+        90.0,
+        100.0
+      ],
+      "status": "passed",
+      "deviation": 0.02631578947368421,
+      "score": 0.9736842105263158,
+      "timestamp": "2025-07-10T11:21:26.168858",
+      "details": {
+        "metric_type": "effectiveness",
+        "unit": "percentage",
+        "weight": 1.0,
+        "is_critical": true
+      }
+    }
+  ],
+  "overall_score": 0.4868421052631579,
+  "passed_count": 1,
+  "failed_count": 1,
+  "warning_count": 0,
+  "summary": "⚠️ 改善が必要: 1件合格, 0件警告, 1件失敗"
+}

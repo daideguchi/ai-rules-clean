@@ -1,0 +1,97 @@
+{
+  "conversation_id": "conversation_20250708_171637",
+  "created_at": "2025-07-08T17:16:37.433040",
+  "last_updated": "2025-07-10T21:36:57.667148",
+  "entry_count": 9,
+  "tts_enabled": false,
+  "format": "user発言→AI応答",
+  "entries": [
+    {
+      "timestamp": "2025-07-08T17:16:37.433040",
+      "entry_type": "user_message",
+      "content": "{{mistake_count}}回ミス防止システムのテストメッセージです",
+      "metadata": {
+        "test": true
+      },
+      "tts_formatted": null
+    },
+    {
+      "timestamp": "2025-07-08T17:16:37.433368",
+      "entry_type": "ai_response",
+      "content": "承知いたしました。{{mistake_count}}回ミス防止システムが正常に動作しています。",
+      "metadata": {
+        "system_status": "operational"
+      },
+      "tts_formatted": null
+    },
+    {
+      "timestamp": "2025-07-08T17:16:37.433555",
+      "entry_type": "system_action",
+      "content": "conversation_logger.py テスト実行完了",
+      "metadata": {
+        "test_result": "success"
+      },
+      "tts_formatted": null
+    },
+    {
+      "timestamp": "2025-07-10T21:33:08.884784",
+      "entry_type": "user_message",
+      "content": "{{mistake_count}}回ミス防止システムのテストメッセージです",
+      "metadata": {
+        "test": true
+      },
+      "tts_formatted": null
+    },
+    {
+      "timestamp": "2025-07-10T21:33:08.886522",
+      "entry_type": "ai_response",
+      "content": "承知いたしました。{{mistake_count}}回ミス防止システムが正常に動作しています。",
+      "metadata": {
+        "system_status": "operational"
+      },
+      "tts_formatted": null
+    },
+    {
+      "timestamp": "2025-07-10T21:33:08.886856",
+      "entry_type": "system_action",
+      "content": "conversation_logger.py テスト実行完了",
+      "metadata": {
+        "test_result": "success"
+      },
+      "tts_formatted": null
+    },
+    {
+      "timestamp": "2025-07-10T21:36:19.520627",
+      "entry_type": "system_action",
+      "content": "新しい会話セッション開始 - 自動記録開始",
+      "metadata": {
+        "timestamp": "2025-07-10T21:36:19.520626",
+        "hook_type": "Start",
+        "auto_logging": true
+      },
+      "tts_formatted": null
+    },
+    {
+      "timestamp": "2025-07-10T21:36:57.638935",
+      "entry_type": "system_action",
+      "content": "ツール使用開始: unknown",
+      "metadata": {
+        "tool_name": "unknown",
+        "hook_type": "PreToolUse",
+        "timestamp": "2025-07-10T21:36:57.638933"
+      },
+      "tts_formatted": null
+    },
+    {
+      "timestamp": "2025-07-10T21:36:57.667145",
+      "entry_type": "system_action",
+      "content": "ツール使用完了: unknown",
+      "metadata": {
+        "tool_name": "unknown",
+        "hook_type": "PostToolUse",
+        "timestamp": "2025-07-10T21:36:57.667142"
+      },
+      "tts_formatted": null
+    }
+  ]
+}

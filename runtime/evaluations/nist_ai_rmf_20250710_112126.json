@@ -1,0 +1,53 @@
+{
+  "system_name": "nist_ai_rmf",
+  "evaluation_id": "nist_ai_rmf_20250710_112126",
+  "status": "completed",
+  "start_time": "2025-07-10T11:21:26.168521",
+  "end_time": "2025-07-10T11:21:26.168528",
+  "duration": 4.76837158203125e-06,
+  "results": [
+    {
+      "metric_name": "compliance_rate",
+      "value": 78.0,
+      "target_value": 80.0,
+      "acceptable_range": [
+        75.0,
+        100.0
+      ],
+      "status": "passed",
+      "deviation": 0.025,
+      "score": 0.975,
+      "timestamp": "2025-07-10T11:21:26.168524",
+      "details": {
+        "metric_type": "compliance",
+        "unit": "percentage",
+        "weight": 1.0,
+        "is_critical": true
+      }
+    },
+    {
+      "metric_name": "risk_mitigation_effectiveness",
+      "value": 86.0,
+      "target_value": 85.0,
+      "acceptable_range": [
+        80.0,
+        100.0
+      ],
+      "status": "passed",
+      "deviation": 0.011764705882352941,
+      "score": 0.9882352941176471,
+      "timestamp": "2025-07-10T11:21:26.168526",
+      "details": {
+        "metric_type": "safety",
+        "unit": "percentage",
+        "weight": 0.9,
+        "is_critical": false
+      }
+    }
+  ],
+  "overall_score": 0.9812693498452013,
+  "passed_count": 2,
+  "failed_count": 0,
+  "warning_count": 0,
+  "summary": "🎉 完璧な評価結果: 2件すべて合格"
+}

@@ -1,0 +1,813 @@
+{
+  "timestamp": "2025-07-05T16:12:08.306344",
+  "dry_run": true,
+  "summary": {
+    "moves": 46,
+    "renames": 46,
+    "deletions": 84
+  },
+  "actions": {
+    "moves": [
+      {
+        "src": "${PROJECT_ROOT}/TEMPLATE_OPTIMIZATION_PLAN.md",
+        "dst": "${PROJECT_ROOT}/docs/misc/TEMPLATE_OPTIMIZATION_PLAN.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/config/requirements.txt",
+        "dst": "${PROJECT_ROOT}/docs/misc/requirements.txt",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/config/system/required-files.txt",
+        "dst": "${PROJECT_ROOT}/docs/misc/required-files.txt",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/task-management-board.md",
+        "dst": "${PROJECT_ROOT}/docs/misc/task-management-board.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/readme.md",
+        "dst": "${PROJECT_ROOT}/docs/misc/readme.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/work-records.md",
+        "dst": "${PROJECT_ROOT}/docs/misc/work-records.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/work-session-2025-06-27.md",
+        "dst": "${PROJECT_ROOT}/docs/misc/work-session-2025-06-27.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/work-log-20250630.md",
+        "dst": "${PROJECT_ROOT}/docs/reports/work-log-20250630.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/integration-test-report-20250628-141807.md",
+        "dst": "${PROJECT_ROOT}/docs/reports/integration-test-report-20250628-141807.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/intelligence/problem-analysis-template.md",
+        "dst": "${PROJECT_ROOT}/docs/reports/problem-analysis-template.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/workload-balance/role-definitions.md",
+        "dst": "${PROJECT_ROOT}/docs/misc/role-definitions.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/workload-balance/performance-metrics.md",
+        "dst": "${PROJECT_ROOT}/docs/misc/performance-metrics.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/ai-agents/send-log.txt",
+        "dst": "${PROJECT_ROOT}/docs/reports/send-log.txt",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/ai-agents/president/solo-session-20250704-174810.md",
+        "dst": "${PROJECT_ROOT}/docs/misc/solo-session-20250704-174810.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/ai-agents/president/president-startup-errors-2025-06-30.md",
+        "dst": "${PROJECT_ROOT}/docs/misc/president-startup-errors-2025-06-30.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/ai-agents/president/president-mistakes.md",
+        "dst": "${PROJECT_ROOT}/docs/misc/president-mistakes.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/ai-agents/president/ui-change-incident-2025-06-30.md",
+        "dst": "${PROJECT_ROOT}/docs/misc/ui-change-incident-2025-06-30.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/ai-agents/workers/worker1-final-quality-report.md",
+        "dst": "${PROJECT_ROOT}/docs/reports/worker1-final-quality-report.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/ai-agents/workers/worker3-management-revolution-completion-20250701.md",
+        "dst": "${PROJECT_ROOT}/docs/misc/worker3-management-revolution-completion-20250701.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/ai-agents/workers/worker2-comprehensive-system-evaluation-report.md",
+        "dst": "${PROJECT_ROOT}/docs/reports/worker2-comprehensive-system-evaluation-report.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/ai-agents/workers/worker3-next-generation-system-design-completion-20250701.md",
+        "dst": "${PROJECT_ROOT}/docs/developer/worker3-next-generation-system-design-completion-20250701.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/ai-agents/workers/worker3-completion-report.md",
+        "dst": "${PROJECT_ROOT}/docs/reports/worker3-completion-report.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/ai-agents/workers/worker3-migration-plan-completion-20250701.md",
+        "dst": "${PROJECT_ROOT}/docs/misc/worker3-migration-plan-completion-20250701.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/ai-agents/workers/worker1-final-quality-check.md",
+        "dst": "${PROJECT_ROOT}/docs/misc/worker1-final-quality-check.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/ai-agents/workers/worker3-final-evaluation-completion-20250701.md",
+        "dst": "${PROJECT_ROOT}/docs/misc/worker3-final-evaluation-completion-20250701.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/ai-agents/workers/worker3-continuous-improvement-evaluation-completion-20250701.md",
+        "dst": "${PROJECT_ROOT}/docs/misc/worker3-continuous-improvement-evaluation-completion-20250701.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/ai-agents/workers/worker1-critical-analysis.md",
+        "dst": "${PROJECT_ROOT}/docs/reports/worker1-critical-analysis.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/system/readme.md",
+        "dst": "${PROJECT_ROOT}/docs/misc/readme.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/system/integration-test-report-20250628-141807.md",
+        "dst": "${PROJECT_ROOT}/docs/reports/integration-test-report-20250628-141807.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/system/intelligence/problem-analysis-template.md",
+        "dst": "${PROJECT_ROOT}/docs/reports/problem-analysis-template.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/system/ai-agents/organization-optimization-report.md",
+        "dst": "${PROJECT_ROOT}/docs/reports/organization-optimization-report.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/system/ai-agents/current-status.md",
+        "dst": "${PROJECT_ROOT}/docs/misc/current-status.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/system/ai-agents/send-log.txt",
+        "dst": "${PROJECT_ROOT}/docs/reports/send-log.txt",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/system/mistake-prevention/mandatory-checklist.txt",
+        "dst": "${PROJECT_ROOT}/docs/misc/mandatory-checklist.txt",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/agents/mistake-prevention/mandatory-checklist.txt",
+        "dst": "${PROJECT_ROOT}/docs/misc/mandatory-checklist.txt",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/logs/mistake-prevention/mandatory-checklist.txt",
+        "dst": "${PROJECT_ROOT}/docs/misc/mandatory-checklist.txt",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/runtime/data/readme.md",
+        "dst": "${PROJECT_ROOT}/docs/misc/readme.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/models/readme.md",
+        "dst": "${PROJECT_ROOT}/docs/misc/readme.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/data/readme.md",
+        "dst": "${PROJECT_ROOT}/docs/misc/readme.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/src/integrations/gemini/mcp-gemini-setup.md",
+        "dst": "${PROJECT_ROOT}/docs/misc/mcp-gemini-setup.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/src/integrations/gemini/QUICK_START.md",
+        "dst": "${PROJECT_ROOT}/docs/misc/QUICK_START.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/src/integrations/gemini/gemini_bridge/claude_request.txt",
+        "dst": "${PROJECT_ROOT}/docs/misc/claude_request.txt",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/src/integrations/gemini/ai_collaboration/validated_commands.txt",
+        "dst": "${PROJECT_ROOT}/docs/misc/validated_commands.txt",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/src/ai/memory/core/conversation-history/conversation-20250705-110117.md",
+        "dst": "${PROJECT_ROOT}/docs/misc/conversation-20250705-110117.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/src/ai/memory/core/conversation-history/conversation-20250705-123813.md",
+        "dst": "${PROJECT_ROOT}/docs/misc/conversation-20250705-123813.md",
+        "type": "document"
+      },
+      {
+        "src": "${PROJECT_ROOT}/src/ai/models/readme.md",
+        "dst": "${PROJECT_ROOT}/docs/misc/readme.md",
+        "type": "document"
+      }
+    ],
+    "renames": [
+      {
+        "old": "${PROJECT_ROOT}/TEMPLATE_OPTIMIZATION_PLAN.md",
+        "new": "${PROJECT_ROOT}/template-optimization-plan.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/README.md",
+        "new": "${PROJECT_ROOT}/readme.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-27_09-17Z-worker-and-president-execution-issue.md",
+        "new": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-27-09-17z-worker-and-president-execution-issue.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-26_10-23Z-ターミナルの立ち上げ問題.md",
+        "new": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-26-10-23z.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-27_09-17Z-ワーカーとプレジデントの実行問題.md",
+        "new": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-27-09-17z.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-26_13-15Z-logout-and-default-message-settings.md",
+        "new": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-26-13-15z-logout-and-default-message-settings.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-26_06-52Z-ディレクトリの整理と解説.md",
+        "new": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-26-06-52z.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-24_06-01Z-background-terminal-preparation-issues.md",
+        "new": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-24-06-01z-background-terminal-preparation-issues.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-26_13-15Z-logout-and-default-message-setup.md",
+        "new": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-26-13-15z-logout-and-default-message-setup.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-26_10-23Z-terminal-startup-issues.md",
+        "new": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-26-10-23z-terminal-startup-issues.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-24_06-01Z-バックグラウンドターミナルの準備問題.md",
+        "new": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-24-06-01z.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-26_08-11Z-ディレクトリの設定とスクリプト構成.md",
+        "new": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-26-08-11z.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-25_03-22Z-aiツールの設定と連携について.md",
+        "new": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-25-03-22z-ai.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-24_06-39Z-screen-split-issues.md",
+        "new": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-24-06-39z-screen-split-issues.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-26_17-01Z-ai組織の手動テーマ選択問題.md",
+        "new": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-26-17-01z-ai.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-26_15-03Z-ai-organization-startup-settings.md",
+        "new": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-26-15-03z-ai-organization-startup-settings.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/config/system/Makefile",
+        "new": "${PROJECT_ROOT}/config/system/makefile",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.specstory/history/2025-06-26_10-23Z-terminal-startup-issue.md",
+        "new": "${PROJECT_ROOT}/.specstory/history/2025-06-26-10-23z-terminal-startup-issue.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.specstory/history/2025-06-27_09-17Z-worker-and-president-execution-issues.md",
+        "new": "${PROJECT_ROOT}/.specstory/history/2025-06-27-09-17z-worker-and-president-execution-issues.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.specstory/history/2025-06-26_17-21Z-generate-a-name-for-the-chat.md",
+        "new": "${PROJECT_ROOT}/.specstory/history/2025-06-26-17-21z-generate-a-name-for-the-chat.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.specstory/history/2025-07-01_06-06Z-generate-a-name-for-the-chat.md",
+        "new": "${PROJECT_ROOT}/.specstory/history/2025-07-01-06-06z-generate-a-name-for-the-chat.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.specstory/history/2025-07-01_09-39Z-プロジェクトの使用制限についての懸念.md",
+        "new": "${PROJECT_ROOT}/.specstory/history/2025-07-01-09-39z.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.specstory/history/2025-06-24_06-01Z-background-terminal-setup-issue.md",
+        "new": "${PROJECT_ROOT}/.specstory/history/2025-06-24-06-01z-background-terminal-setup-issue.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.specstory/history/2025-06-26_17-01Z-ai-organization-manual-theme-selection-issues.md",
+        "new": "${PROJECT_ROOT}/.specstory/history/2025-06-26-17-01z-ai-organization-manual-theme-selection-issues.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.specstory/history/2025-06-26_13-15Z-ログアウトとデフォルトメッセージ設定.md",
+        "new": "${PROJECT_ROOT}/.specstory/history/2025-06-26-13-15z.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.specstory/history/2025-06-26_10-23Z-ターミナルの立ち上げ問題.md",
+        "new": "${PROJECT_ROOT}/.specstory/history/2025-06-26-10-23z.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.specstory/history/2025-06-27_09-17Z-ワーカーとプレジデントの実行問題.md",
+        "new": "${PROJECT_ROOT}/.specstory/history/2025-06-27-09-17z.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.specstory/history/2025-06-26_06-52Z-directory-organization-and-explanation.md",
+        "new": "${PROJECT_ROOT}/.specstory/history/2025-06-26-06-52z-directory-organization-and-explanation.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.specstory/history/2025-06-25_03-22Z-ai-tools-settings-and-integration.md",
+        "new": "${PROJECT_ROOT}/.specstory/history/2025-06-25-03-22z-ai-tools-settings-and-integration.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.specstory/history/2025-06-26_05-47Z-automate-cursor-work-status-updates.md",
+        "new": "${PROJECT_ROOT}/.specstory/history/2025-06-26-05-47z-automate-cursor-work-status-updates.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.specstory/history/2025-06-26_06-52Z-ディレクトリの整理と解説.md",
+        "new": "${PROJECT_ROOT}/.specstory/history/2025-06-26-06-52z.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.specstory/history/2025-06-24_06-39Z-画面分割の問題について.md",
+        "new": "${PROJECT_ROOT}/.specstory/history/2025-06-24-06-39z.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.specstory/history/2025-06-26_15-03Z-ai組織立ち上げの設定について.md",
+        "new": "${PROJECT_ROOT}/.specstory/history/2025-06-26-15-03z-ai.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.specstory/history/2025-07-02_02-44Z-readmeのコマンドが効かない問題.md",
+        "new": "${PROJECT_ROOT}/.specstory/history/2025-07-02-02-44z-readme.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.specstory/history/2025-06-26_08-11Z-directory-settings-and-script-configuration.md",
+        "new": "${PROJECT_ROOT}/.specstory/history/2025-06-26-08-11z-directory-settings-and-script-configuration.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.specstory/history/2025-06-24_06-01Z-バックグラウンドターミナルの準備問題.md",
+        "new": "${PROJECT_ROOT}/.specstory/history/2025-06-24-06-01z.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.specstory/history/2025-06-26_08-11Z-ディレクトリの設定とスクリプト構成.md",
+        "new": "${PROJECT_ROOT}/.specstory/history/2025-06-26-08-11z.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.specstory/history/2025-06-28_05-40Z-push-changes-to-git-repository.md",
+        "new": "${PROJECT_ROOT}/.specstory/history/2025-06-28-05-40z-push-changes-to-git-repository.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.specstory/history/2025-06-25_03-22Z-aiツールの設定と連携について.md",
+        "new": "${PROJECT_ROOT}/.specstory/history/2025-06-25-03-22z-ai.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.specstory/history/2025-06-27_11-21Z-should-i-use-the-custom-api-key.md",
+        "new": "${PROJECT_ROOT}/.specstory/history/2025-06-27-11-21z-should-i-use-the-custom-api-key.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.specstory/history/2025-06-24_08-41Z-discussing-claude-code-communication.md",
+        "new": "${PROJECT_ROOT}/.specstory/history/2025-06-24-08-41z-discussing-claude-code-communication.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.specstory/history/2025-06-26_17-01Z-ai組織の手動テーマ選択問題.md",
+        "new": "${PROJECT_ROOT}/.specstory/history/2025-06-26-17-01z-ai.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/.dev/README.md",
+        "new": "${PROJECT_ROOT}/.dev/readme.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/src/integrations/gemini/README.md",
+        "new": "${PROJECT_ROOT}/src/integrations/gemini/readme.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/src/integrations/gemini/QUICK_START.md",
+        "new": "${PROJECT_ROOT}/src/integrations/gemini/quick-start.md",
+        "type": "file"
+      },
+      {
+        "old": "${PROJECT_ROOT}/src/api/README.md",
+        "new": "${PROJECT_ROOT}/src/api/readme.md",
+        "type": "file"
+      }
+    ],
+    "deletions": [
+      {
+        "path": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-27_09-17Z-ワーカーとプレジデントの実行問題.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/.specstory/history/2025-06-27_09-17Z-worker-and-president-execution-issues.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/.specstory/history/2025-06-27_09-17Z-ワーカーとプレジデントの実行問題.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-26_10-23Z-terminal-startup-issues.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/.specstory/history/2025-06-26_10-23Z-terminal-startup-issue.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/.specstory/history/2025-06-26_10-23Z-ターミナルの立ち上げ問題.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-26_13-15Z-logout-and-default-message-setup.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/.specstory/history/2025-06-26_13-15Z-ログアウトとデフォルトメッセージ設定.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/.specstory/history/2025-06-26_06-52Z-directory-organization-and-explanation.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/.specstory/history/2025-06-26_06-52Z-ディレクトリの整理と解説.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/.archive/duplicates/20250705/.specstory/history/2025-06-24_06-01Z-バックグラウンドターミナルの準備問題.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/.specstory/history/2025-06-24_06-01Z-background-terminal-setup-issue.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/.specstory/history/2025-06-24_06-01Z-バックグラウンドターミナルの準備問題.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/.specstory/history/2025-06-26_08-11Z-directory-settings-and-script-configuration.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/.specstory/history/2025-06-26_08-11Z-ディレクトリの設定とスクリプト構成.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/.specstory/history/2025-06-25_03-22Z-ai-tools-settings-and-integration.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/.specstory/history/2025-06-25_03-22Z-aiツールの設定と連携について.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/.specstory/history/2025-06-24_06-39Z-画面分割の問題について.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/.specstory/history/2025-06-26_17-01Z-ai-organization-manual-theme-selection-issues.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/.specstory/history/2025-06-26_17-01Z-ai組織の手動テーマ選択問題.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/.specstory/history/2025-06-26_15-03Z-ai組織立ち上げの設定について.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/runtime/logs/agents/readme.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/runtime/logs/agents/system/readme.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/runtime/logs/agents/work-session-2025-06-27.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/runtime/logs/agents/work-log-20250630.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/runtime/logs/agents/integration-test-report-20250628-141807.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/runtime/logs/agents/system/integration-test-report-20250628-141807.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/runtime/logs/agents/intelligence/problem-analysis-template.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/runtime/logs/agents/system/intelligence/problem-analysis-template.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/runtime/logs/agents/workload-balance/role-definitions.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/runtime/logs/agents/workload-balance/performance-metrics.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/runtime/logs/agents/ai-agents/president/solo-session-20250704-174810.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/runtime/logs/agents/ai-agents/president/president-startup-errors-2025-06-30.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/runtime/logs/agents/ai-agents/president/ui-change-incident-2025-06-30.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/runtime/logs/agents/ai-agents/workers/worker1-final-quality-report.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/runtime/logs/agents/ai-agents/workers/worker3-management-revolution-completion-20250701.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/runtime/logs/agents/ai-agents/workers/worker2-comprehensive-system-evaluation-report.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/runtime/logs/agents/ai-agents/workers/worker3-next-generation-system-design-completion-20250701.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/runtime/logs/agents/ai-agents/workers/worker3-completion-report.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/runtime/logs/agents/ai-agents/workers/worker3-migration-plan-completion-20250701.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/runtime/logs/agents/ai-agents/workers/worker1-final-quality-check.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/runtime/logs/agents/ai-agents/workers/worker3-final-evaluation-completion-20250701.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/runtime/logs/agents/ai-agents/workers/worker3-continuous-improvement-evaluation-completion-20250701.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/runtime/logs/agents/ai-agents/workers/worker1-critical-analysis.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/runtime/logs/agents/system/ai-agents/organization-optimization-report.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/runtime/logs/agents/system/ai-agents/current-status.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "${PROJECT_ROOT}/src/ai/memory/core/conversation-history/conversation-20250705-123813.md",
+        "reason": "duplicate"
+      },
+      {
+        "path": "config/agents/mcp/tools",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "runtime/cache",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "runtime/logs/ai-agents/president",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "runtime/logs/agents/agents",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "runtime/logs/agents/integrations",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "runtime/logs/agents/system/ai-agents/workers",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "runtime/logs/agents/system/agents",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "runtime/logs/agents/system/integrations",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "runtime/logs/integrations",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "runtime/data/processed",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "runtime/data/raw",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "runtime/tmp",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "tests/unit",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "tests/integration",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "tests/e2e",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "models/experiments",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "models/trained",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "models/benchmarks",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "compliance/data-privacy",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "compliance/risk-assessment",
+        "reason": "empty_directory"
+      },
+      {
+        "path": ".dev/vim",
+        "reason": "empty_directory"
+      },
+      {
+        "path": ".dev/cursor",
+        "reason": "empty_directory"
+      },
+      {
+        "path": ".dev/jetbrains",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "data/vectors",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "data/processed",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "data/raw",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "src/ai/memory/core/prevention-systems",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "src/ai/memory/core/persistent-learning",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "src/ai/memory/core/auto-initialization",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "src/ai/memory/docs",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "src/ai/memory/data",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "src/ai/agents/instructions",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "src/ai/agents/tasks",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "src/ai/agents/logs/system",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "src/ai/agents/tmp",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "src/api/schemas",
+        "reason": "empty_directory"
+      },
+      {
+        "path": "src/notebooks",
+        "reason": "empty_directory"
+      }
+    ]
+  }
+}

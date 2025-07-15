@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  misaip-ai:
+    build:
+      context: .
+      dockerfile: Dockerfile.integration
+    container_name: "misaip-ai-${PROJECT_NAME:-default}"
+    environment:
+      - MISAIP_MODE=integration
+      - PROJECT_NAME=${PROJECT_NAME:-default}
+      - DB_HOST=misaip-db
+      - DB_NAME=${PROJECT_NAME:-default}_misaip_ai
+      - PYTHONPATH=/app
+    depends_on:
+      - misaip-db
+    volumes:
+      - misaip_logs:/app/runtime/logs
+      - ./config:/app/config:ro
+    networks:
+      - misaip_internal
+    ports:
+      - "${MISAIP_PORT:-8088}:8000"
+    restart: unless-stopped
+
+  misaip-db:
+    image: pgvector/pgvector:pg15
+    container_name: "misaip-db-${PROJECT_NAME:-default}"
+    environment:
+      - POSTGRES_DB=${PROJECT_NAME:-default}_misaip_ai
+      - POSTGRES_USER=misaip_user
+      - POSTGRES_PASSWORD=${MISAIP_DB_PASSWORD:-secure_password}
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - misaip_data:/var/lib/postgresql/data
+      - ./scripts/db_init:/docker-entrypoint-initdb.d
+    networks:
+      - misaip_internal
+    ports:
+      - "${MISAIP_DB_PORT:-55432}:5432"
+    restart: unless-stopped
+
+  misaip-monitor:
+    image: misaip-ai:latest
+    container_name: "misaip-monitor-${PROJECT_NAME:-default}"
+    command: ["python3", "/app/scripts/hooks/periodic_self_monitor.py", "--daemon"]
+    environment:
+      - MISAIP_MODE=monitor
+      - DB_HOST=misaip-db
+    depends_on:
+      - misaip-db
+    volumes:
+      - misaip_logs:/app/runtime/logs
+    networks:
+      - misaip_internal
+    restart: unless-stopped
+
+volumes:
+  misaip_data:
+    name: "misaip_data_${PROJECT_NAME:-default}"
+  misaip_logs:
+    name: "misaip_logs_${PROJECT_NAME:-default}"
+
+networks:
+  misaip_internal:
+    name: "misaip_network_${PROJECT_NAME:-default}"
+    driver: bridge
+    internal: true

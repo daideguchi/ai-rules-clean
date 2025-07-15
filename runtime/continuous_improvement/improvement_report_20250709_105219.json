@@ -1,0 +1,55 @@
+{
+  "report_id": "b90052b0-71c5-448c-ad58-eac282d879e5",
+  "timestamp": "2025-07-09T10:52:19.987725",
+  "period": "30 days",
+  "feedback_summary": {
+    "total_feedback": 20,
+    "by_category": {
+      "ImprovementCategory.BEHAVIORAL": 6,
+      "ImprovementCategory.TECHNICAL": 6,
+      "ImprovementCategory.PROCESS": 3,
+      "behavioral": 2,
+      "technical": 2,
+      "process": 1
+    },
+    "by_type": {
+      "FeedbackType.PATTERN": 6,
+      "FeedbackType.FAILURE": 3,
+      "FeedbackType.INSIGHT": 6,
+      "pattern": 2,
+      "failure": 1,
+      "insight": 2
+    },
+    "average_impact": 7.3,
+    "average_learning_value": 8.4
+  },
+  "improvement_actions": {
+    "total_actions": 0,
+    "completed": 0,
+    "completion_rate": 0,
+    "average_impact": 0
+  },
+  "learning_patterns": {
+    "total_patterns": 9,
+    "high_confidence_patterns": 3,
+    "most_significant_pattern": {
+      "name": "反復的ミス実行パターン",
+      "description": "同じミスを{{mistake_count}}回繰り返すパターンの分析",
+      "confidence": 0.95,
+      "occurrences": 88
+    }
+  },
+  "system_integration": {
+    "integrated_systems": 6,
+    "integration_effectiveness": 0.85
+  },
+  "recommendations": [
+    "透明性・誠実性の確保",
+    "完全情報共有の強制",
+    "自動学習システムの構築",
+    "強制実行メカニズムの実装",
+    "学習機能の根本的改善",
+    "予測的問題検出の実装",
+    "ミス防止システムの継続的強化"
+  ]
+}

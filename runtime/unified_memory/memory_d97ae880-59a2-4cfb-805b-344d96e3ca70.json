@@ -1,0 +1,10 @@
+{
+  "id": "d97ae880-59a2-4cfb-805b-344d96e3ca70",
+  "timestamp": "2025-07-09T01:44:03.134751+00:00",
+  "content": "Testing unified memory manager system integration",
+  "event_type": "system_test",
+  "source": "unified_manager_test",
+  "importance": "high",
+  "session_id": "session-20250708-130000",
+  "embedding": null
+}

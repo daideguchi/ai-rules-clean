@@ -1,0 +1,294 @@
+{
+  "name": "Autonomous Prompt Evolution - 自動プロンプト進化",
+  "active": true,
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 2 * * *"
+            }
+          ]
+        }
+      },
+      "name": "Daily Evolution Trigger",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [200, 300]
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "query": "SELECT \n  pattern_type,\n  patterns,\n  effectiveness_score,\n  improvement_targets,\n  COUNT(*) as frequency\nFROM ai_learning_patterns \nWHERE timestamp > datetime('now', '-1 day')\nGROUP BY pattern_type, patterns\nORDER BY effectiveness_score DESC, frequency DESC",
+        "options": {}
+      },
+      "name": "Analyze Daily Patterns",
+      "type": "n8n-nodes-base.sqlite",
+      "typeVersion": 1,
+      "position": [400, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "// 日次パターン分析から新しいプロンプトルールを生成\nconst patterns = items;\n\nconst evolutionData = {\n  timestamp: new Date().toISOString(),\n  analysis_period: '24h',\n  \n  // 成功パターン集計\n  success_patterns: patterns.filter(p => p.json.pattern_type === 'success'),\n  failure_patterns: patterns.filter(p => p.json.pattern_type === 'failure'),\n  \n  // 新しいルール候補\n  new_rules: [],\n  deprecated_rules: [],\n  \n  // 進化戦略\n  evolution_strategy: 'incremental'\n};\n\n// 高頻度成功パターンから新ルール生成\nevolutionData.success_patterns.forEach(pattern => {\n  if (pattern.json.frequency >= 5 && pattern.json.effectiveness_score > 2) {\n    \n    if (pattern.json.patterns.includes('thinking_tag_usage')) {\n      evolutionData.new_rules.push({\n        type: 'mandatory_thinking',\n        rule: 'CRITICAL: All responses MUST start with <thinking> tag',\n        priority: 'high',\n        source: 'success_pattern_analysis'\n      });\n    }\n    \n    if (pattern.json.patterns.includes('todo_tracking')) {\n      evolutionData.new_rules.push({\n        type: 'todo_enforcement', \n        rule: 'MANDATORY: Use TodoWrite for all multi-step tasks',\n        priority: 'high',\n        source: 'success_pattern_analysis'\n      });\n    }\n    \n    if (pattern.json.patterns.includes('read_before_edit')) {\n      evolutionData.new_rules.push({\n        type: 'file_safety',\n        rule: 'REQUIRED: Always use Read tool before Edit tool',\n        priority: 'medium',\n        source: 'success_pattern_analysis'\n      });\n    }\n  }\n});\n\n// 高頻度失敗パターンから除去ルール生成\nevolutionData.failure_patterns.forEach(pattern => {\n  if (pattern.json.frequency >= 3) {\n    \n    if (pattern.json.improvement_targets?.includes('enforce_thinking_tags')) {\n      evolutionData.deprecated_rules.push({\n        type: 'optional_thinking',\n        rule: 'thinking tags are optional',\n        reason: 'causes_frequent_failures',\n        action: 'remove_and_enforce'\n      });\n    }\n    \n    if (pattern.json.improvement_targets?.includes('improve_error_handling')) {\n      evolutionData.new_rules.push({\n        type: 'error_handling',\n        rule: 'CRITICAL: Validate all tool outputs before proceeding',\n        priority: 'high',\n        source: 'failure_pattern_analysis'\n      });\n    }\n  }\n});\n\n// 進化スコア計算\nevolutionData.evolution_score = (\n  evolutionData.new_rules.length * 10 - \n  evolutionData.deprecated_rules.length * 5\n);\n\n// 安全性チェック\nevolutionData.safety_check = {\n  rules_added: evolutionData.new_rules.length,\n  rules_removed: evolutionData.deprecated_rules.length,\n  net_change: evolutionData.evolution_score,\n  requires_review: evolutionData.evolution_score > 50 || evolutionData.deprecated_rules.length > 2\n};\n\nreturn [{ json: evolutionData }];"
+      },
+      "name": "Generate Evolution Rules",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [600, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.safety_check.requires_review}}",
+              "value2": false
+            }
+          ]
+        }
+      },
+      "name": "Safety Check",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [800, 250]
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:3001/api/claude-md/auto-update",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json}}",
+        "options": {
+          "headers": {
+            "Authorization": "Bearer ${N8N_API_KEY}",
+            "Content-Type": "application/json"
+          }
+        }
+      },
+      "name": "Auto-Update CLAUDE.md",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [1000, 200]
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:3001/api/review-queue/add",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json}}",
+        "options": {}
+      },
+      "name": "Queue for Human Review",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [1000, 350]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "table": "ai_evolution_log",
+        "columns": "timestamp, new_rules, deprecated_rules, evolution_score, auto_applied, requires_review"
+      },
+      "name": "Log Evolution Changes",
+      "type": "n8n-nodes-base.sqlite",
+      "typeVersion": 1,
+      "position": [1200, 275]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression", 
+              "expression": "0 */4 * * *"
+            }
+          ]
+        }
+      },
+      "name": "Performance Validation Trigger",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [200, 500]
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "query": "SELECT \n  AVG(CASE WHEN task_success THEN 1.0 ELSE 0.0 END) as success_rate,\n  AVG(execution_time) as avg_execution_time,\n  AVG(error_count) as avg_error_count\nFROM ai_performance_log \nWHERE timestamp > datetime('now', '-4 hour')",
+        "options": {}
+      },
+      "name": "Check Recent Performance",
+      "type": "n8n-nodes-base.sqlite",
+      "typeVersion": 1,
+      "position": [400, 500]
+    },
+    {
+      "parameters": {
+        "functionCode": "// パフォーマンス検証とロールバック判定\nconst current = items[0].json;\n\nconst validation = {\n  timestamp: new Date().toISOString(),\n  current_performance: current,\n  \n  // パフォーマンス閾値\n  thresholds: {\n    min_success_rate: 0.85,\n    max_avg_execution_time: 30,\n    max_avg_error_count: 1\n  },\n  \n  // 検証結果\n  validation_result: {\n    success_rate_ok: current.success_rate >= 0.85,\n    execution_time_ok: current.avg_execution_time <= 30,\n    error_count_ok: current.avg_error_count <= 1\n  }\n};\n\n// 総合判定\nvalidation.performance_acceptable = \n  validation.validation_result.success_rate_ok &&\n  validation.validation_result.execution_time_ok &&\n  validation.validation_result.error_count_ok;\n\n// ロールバック必要性判定\nvalidation.requires_rollback = !validation.performance_acceptable;\n\nif (validation.requires_rollback) {\n  validation.rollback_reason = [];\n  \n  if (!validation.validation_result.success_rate_ok) {\n    validation.rollback_reason.push(`Low success rate: ${current.success_rate}`);\n  }\n  if (!validation.validation_result.execution_time_ok) {\n    validation.rollback_reason.push(`High execution time: ${current.avg_execution_time}s`);\n  }\n  if (!validation.validation_result.error_count_ok) {\n    validation.rollback_reason.push(`High error count: ${current.avg_error_count}`);\n  }\n}\n\nreturn [{ json: validation }];"
+      },
+      "name": "Validate Performance Impact",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [600, 500]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.requires_rollback}}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "name": "Check if Rollback Needed",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [800, 500]
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:3001/api/claude-md/rollback",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json}}",
+        "options": {}
+      },
+      "name": "Emergency Rollback",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [1000, 550]
+    }
+  ],
+  "connections": {
+    "Daily Evolution Trigger": {
+      "main": [
+        [
+          {
+            "node": "Analyze Daily Patterns",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze Daily Patterns": {
+      "main": [
+        [
+          {
+            "node": "Generate Evolution Rules",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Evolution Rules": {
+      "main": [
+        [
+          {
+            "node": "Safety Check",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Safety Check": {
+      "main": [
+        [
+          {
+            "node": "Auto-Update CLAUDE.md",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Queue for Human Review",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Auto-Update CLAUDE.md": {
+      "main": [
+        [
+          {
+            "node": "Log Evolution Changes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Queue for Human Review": {
+      "main": [
+        [
+          {
+            "node": "Log Evolution Changes", 
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Performance Validation Trigger": {
+      "main": [
+        [
+          {
+            "node": "Check Recent Performance",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Recent Performance": {
+      "main": [
+        [
+          {
+            "node": "Validate Performance Impact",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Performance Impact": {
+      "main": [
+        [
+          {
+            "node": "Check if Rollback Needed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check if Rollback Needed": {
+      "main": [
+        [
+          {
+            "node": "Emergency Rollback",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "ai-evolution",
+      "id": "ai-evolution-001"
+    }
+  ]
+}

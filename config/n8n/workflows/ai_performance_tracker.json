@@ -1,0 +1,225 @@
+{
+  "name": "AI Performance Tracker - 自律成長システム",
+  "active": true,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "claude-performance",
+        "options": {}
+      },
+      "name": "Claude Performance Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [300, 300],
+      "webhookId": "claude-perf-001"
+    },
+    {
+      "parameters": {
+        "functionCode": "// Claude Code Hook からのパフォーマンスデータ処理\nconst hookData = items[0].json;\n\n// パフォーマンス指標計算\nconst performance = {\n  session_id: hookData.session_id || new Date().getTime(),\n  timestamp: new Date().toISOString(),\n  \n  // 基本指標\n  task_success: hookData.success || false,\n  execution_time: hookData.execution_time || 0,\n  tool_calls: hookData.tools_used || [],\n  error_count: hookData.errors?.length || 0,\n  \n  // 品質指標\n  thinking_tag_used: hookData.response?.includes('<thinking>') || false,\n  todo_tracking: hookData.tools_used?.includes('TodoWrite') || false,\n  proper_file_reading: hookData.read_before_edit || false,\n  \n  // エラー分析\n  error_types: hookData.errors?.map(e => e.type) || [],\n  retry_count: hookData.retry_count || 0,\n  \n  // コンテキスト\n  task_complexity: hookData.task_complexity || 'simple',\n  user_feedback: hookData.user_feedback || null\n};\n\n// 成功パターン分析\nif (performance.task_success) {\n  performance.success_patterns = [];\n  \n  if (performance.thinking_tag_used) \n    performance.success_patterns.push('thinking_tag_usage');\n  if (performance.todo_tracking) \n    performance.success_patterns.push('todo_tracking');\n  if (performance.proper_file_reading) \n    performance.success_patterns.push('read_before_edit');\n  if (performance.error_count === 0) \n    performance.success_patterns.push('error_free_execution');\n}\n\n// 失敗パターン分析  \nif (!performance.task_success) {\n  performance.failure_patterns = [];\n  \n  if (!performance.thinking_tag_used) \n    performance.failure_patterns.push('missing_thinking_tag');\n  if (performance.error_count > 0) \n    performance.failure_patterns.push('execution_errors');\n  if (performance.retry_count > 2) \n    performance.failure_patterns.push('excessive_retries');\n}\n\n// 学習データ準備\nperformance.learning_data = {\n  prompt_effectiveness: performance.task_success ? 1 : 0,\n  tool_efficiency: performance.tool_calls.length / Math.max(performance.execution_time, 1),\n  error_rate: performance.error_count / Math.max(performance.tool_calls.length, 1),\n  pattern_score: (performance.success_patterns?.length || 0) - (performance.failure_patterns?.length || 0)\n};\n\nreturn [{ json: performance }];"
+      },
+      "name": "Performance Analysis",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "table": "ai_performance_log",
+        "columns": "session_id, timestamp, task_success, execution_time, tool_calls, error_count, thinking_tag_used, todo_tracking, success_patterns, failure_patterns, learning_data",
+        "options": {}
+      },
+      "name": "Store Performance Data",
+      "type": "n8n-nodes-base.sqlite",
+      "typeVersion": 1,
+      "position": [700, 300],
+      "credentials": {
+        "sqlite": {
+          "id": "1",
+          "name": "AI Growth Database"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{$json.learning_data.pattern_score}}",
+              "operation": "larger",
+              "value2": 0
+            }
+          ]
+        }
+      },
+      "name": "Check if Success Pattern",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [900, 200]
+    },
+    {
+      "parameters": {
+        "functionCode": "// 成功パターンを強化学習データに追加\nconst item = items[0].json;\n\nconst reinforcement = {\n  timestamp: new Date().toISOString(),\n  pattern_type: 'success',\n  patterns: item.success_patterns,\n  effectiveness_score: item.learning_data.pattern_score,\n  context: {\n    task_complexity: item.task_complexity,\n    tool_combination: item.tool_calls\n  },\n  action: 'reinforce_patterns'\n};\n\nreturn [{ json: reinforcement }];"
+      },
+      "name": "Reinforce Success Patterns",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [1100, 150]
+    },
+    {
+      "parameters": {
+        "functionCode": "// 失敗パターンを分析して改善点を特定\nconst item = items[0].json;\n\nconst analysis = {\n  timestamp: new Date().toISOString(),\n  pattern_type: 'failure',\n  patterns: item.failure_patterns,\n  error_analysis: item.error_types,\n  improvement_targets: [],\n  action: 'identify_improvements'\n};\n\n// 改善ターゲット特定\nif (item.failure_patterns?.includes('missing_thinking_tag')) {\n  analysis.improvement_targets.push('enforce_thinking_tags');\n}\nif (item.failure_patterns?.includes('execution_errors')) {\n  analysis.improvement_targets.push('improve_error_handling');\n}\nif (item.failure_patterns?.includes('excessive_retries')) {\n  analysis.improvement_targets.push('optimize_tool_selection');\n}\n\nreturn [{ json: analysis }];"
+      },
+      "name": "Analyze Failure Patterns",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [1100, 300]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "table": "ai_learning_patterns",
+        "columns": "timestamp, pattern_type, patterns, effectiveness_score, improvement_targets, action"
+      },
+      "name": "Store Learning Data",
+      "type": "n8n-nodes-base.sqlite",
+      "typeVersion": 1,
+      "position": [1300, 250]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{$json.learning_data.error_rate}}",
+              "operation": "larger", 
+              "value2": 0.5
+            }
+          ]
+        }
+      },
+      "name": "Check if Critical Failure",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [900, 400]
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:3001/api/emergency-learning",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json}}",
+        "options": {}
+      },
+      "name": "Trigger Emergency Learning",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [1100, 450]
+    }
+  ],
+  "connections": {
+    "Claude Performance Webhook": {
+      "main": [
+        [
+          {
+            "node": "Performance Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Performance Analysis": {
+      "main": [
+        [
+          {
+            "node": "Store Performance Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Store Performance Data": {
+      "main": [
+        [
+          {
+            "node": "Check if Success Pattern",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Check if Critical Failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check if Success Pattern": {
+      "main": [
+        [
+          {
+            "node": "Reinforce Success Patterns",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Analyze Failure Patterns",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reinforce Success Patterns": {
+      "main": [
+        [
+          {
+            "node": "Store Learning Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze Failure Patterns": {
+      "main": [
+        [
+          {
+            "node": "Store Learning Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check if Critical Failure": {
+      "main": [
+        [
+          {
+            "node": "Trigger Emergency Learning",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "ai-growth",
+      "id": "ai-growth-001"
+    }
+  ],
+  "meta": {
+    "templateCredsSetupCompleted": true
+  }
+}

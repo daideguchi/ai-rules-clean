@@ -1,0 +1,22 @@
+#!/bin/bash
+set -euo pipefail
+
+# PRESIDENT AI組織システム専用起動スクリプト
+
+echo "👑 PRESIDENT AI組織システム起動中..."
+echo ""
+echo "🔥 必須事項:"
+echo "1. CLAUDE.md確認 → PRESIDENT宣言実行必須"
+echo "2. 78回ミス防止システム稼働中"
+echo "3. フック制御によりPRESIDENT宣言なしでは全ツール使用不可"
+echo ""
+echo "📋 起動後の手順:"
+echo "1. docs/enduser/instructions/claude.md を必ず確認"
+echo "2. Phase 1必須宣言を実行"
+echo "3. 全ツール使用可能になります"
+echo ""
+echo "🚀 Claude Code with PRESIDENT hooks starting..."
+
+# Claude Code起動（プロジェクトディレクトリで）
+cd /Users/dd/Desktop/1_dev/coding-rule2
+exec claude --dangerously-skip-permissions

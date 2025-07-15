@@ -1,0 +1,49 @@
+{
+  "report_id": "5000de7c-d8c0-4672-905e-5000de6d444f",
+  "timestamp": "2025-07-10T14:52:38.816607",
+  "period": "30 days",
+  "feedback_summary": {
+    "total_feedback": 25,
+    "by_category": {
+      "ImprovementCategory.BEHAVIORAL": 10,
+      "ImprovementCategory.TECHNICAL": 10,
+      "ImprovementCategory.PROCESS": 5
+    },
+    "by_type": {
+      "FeedbackType.PATTERN": 10,
+      "FeedbackType.FAILURE": 5,
+      "FeedbackType.INSIGHT": 10
+    },
+    "average_impact": 7.3,
+    "average_learning_value": 8.4
+  },
+  "improvement_actions": {
+    "total_actions": 0,
+    "completed": 0,
+    "completion_rate": 0,
+    "average_impact": 0
+  },
+  "learning_patterns": {
+    "total_patterns": 11,
+    "high_confidence_patterns": 4,
+    "most_significant_pattern": {
+      "name": "反復的ミス実行パターン",
+      "description": "同じミスを{{mistake_count}}回繰り返すパターンの分析",
+      "confidence": 0.95,
+      "occurrences": 88
+    }
+  },
+  "system_integration": {
+    "integrated_systems": 6,
+    "integration_effectiveness": 0.85
+  },
+  "recommendations": [
+    "完全情報共有の強制",
+    "自動学習システムの構築",
+    "透明性・誠実性の確保",
+    "ミス防止システムの継続的強化",
+    "予測的問題検出の実装",
+    "学習機能の根本的改善",
+    "強制実行メカニズムの実装"
+  ]
+}

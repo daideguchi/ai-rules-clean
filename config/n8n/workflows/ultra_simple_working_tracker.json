@@ -1,0 +1,169 @@
+{
+  "name": "Ultra Simple Working Tracker - 絶対動作版",
+  "active": true,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "claude-performance",
+        "options": {}
+      },
+      "name": "Claude Performance Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [300, 300],
+      "webhookId": "claude-performance"
+    },
+    {
+      "parameters": {
+        "functionCode": "// AI パフォーマンスデータ受信・処理・学習\nconst data = items[0].json;\n\n// 成功パターン分析\nconst successPatterns = [];\nif (data.success) {\n  if (data.thinking_tag_used) successPatterns.push('thinking_tag_usage');\n  if (data.todo_tracking) successPatterns.push('todo_tracking');\n  if (data.execution_time < 5) successPatterns.push('fast_execution');\n}\n\n// 失敗パターン分析\nconst failurePatterns = [];\nif (!data.success) {\n  if (!data.thinking_tag_used) failurePatterns.push('missing_thinking_tag');\n  if (data.error_count > 0) failurePatterns.push('execution_errors');\n}\n\n// 学習スコア計算\nconst learningScore = successPatterns.length - failurePatterns.length;\n\n// 詳細ログ出力（n8nコンソールに表示）\nconsole.log('🤖 === AI PERFORMANCE ANALYSIS ===');\nconsole.log('Session:', data.session_id || 'auto');\nconsole.log('Success:', data.success ? '✅' : '❌');\nconsole.log('Execution Time:', data.execution_time || 0, 'seconds');\nconsole.log('Tools Used:', (data.tools_used || []).length);\nconsole.log('Thinking Tag:', data.thinking_tag_used ? '✅' : '❌');\nconsole.log('Todo Tracking:', data.todo_tracking ? '✅' : '❌');\nconsole.log('Success Patterns:', successPatterns);\nconsole.log('Failure Patterns:', failurePatterns);\nconsole.log('Learning Score:', learningScore);\nconsole.log('=================================');\n\n// AI学習向上のための処理結果\nconst result = {\n  status: 'processed',\n  timestamp: new Date().toISOString(),\n  session_id: data.session_id,\n  learning_data: {\n    success: data.success,\n    success_patterns: successPatterns,\n    failure_patterns: failurePatterns,\n    learning_score: learningScore,\n    execution_time: data.execution_time,\n    tools_efficiency: (data.tools_used || []).length / Math.max(data.execution_time || 1, 1)\n  },\n  ai_improvement: {\n    pattern_reinforcement: successPatterns.length > 0,\n    correction_needed: failurePatterns.length > 0,\n    learning_signal: learningScore > 0 ? 'positive' : learningScore < 0 ? 'negative' : 'neutral'\n  }\n};\n\n// 学習データの詳細分析\nif (result.learning_data.learning_score > 2) {\n  console.log('🌟 EXCELLENT PERFORMANCE - Reinforcing successful patterns');\n} else if (result.learning_data.learning_score < -1) {\n  console.log('⚠️ PERFORMANCE ISSUES DETECTED - Need improvement');\n} else {\n  console.log('📊 NORMAL PERFORMANCE - Continuing learning');\n}\n\nreturn [{ json: result }];"
+      },
+      "name": "AI Learning Analysis",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{$json.learning_data.learning_score}}",
+              "operation": "larger",
+              "value2": 0
+            }
+          ]
+        }
+      },
+      "name": "Check Success",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [700, 250]
+    },
+    {
+      "parameters": {
+        "functionCode": "// 成功パターン強化処理\nconst data = items[0].json;\n\nconsole.log('🎉 SUCCESS PATTERN REINFORCEMENT:');\nconsole.log('Patterns to reinforce:', data.learning_data.success_patterns);\nconsole.log('Learning score:', data.learning_data.learning_score);\n\n// 成功パターンごとの強化メッセージ\ndata.learning_data.success_patterns.forEach(pattern => {\n  switch(pattern) {\n    case 'thinking_tag_usage':\n      console.log('✅ REINFORCE: Thinking tag usage leads to success');\n      break;\n    case 'todo_tracking':\n      console.log('✅ REINFORCE: Todo tracking improves task completion');\n      break;\n    case 'fast_execution':\n      console.log('✅ REINFORCE: Fast execution indicates efficiency');\n      break;\n  }\n});\n\nreturn [{ \n  json: {\n    ...data,\n    reinforcement_applied: true,\n    message: 'Success patterns reinforced for AI learning'\n  }\n}];"
+      },
+      "name": "Reinforce Success",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [900, 200]
+    },
+    {
+      "parameters": {
+        "functionCode": "// 失敗パターン改善処理\nconst data = items[0].json;\n\nconsole.log('⚠️ FAILURE PATTERN ANALYSIS:');\nconsole.log('Patterns to improve:', data.learning_data.failure_patterns);\nconsole.log('Learning score:', data.learning_data.learning_score);\n\n// 失敗パターンごとの改善提案\ndata.learning_data.failure_patterns.forEach(pattern => {\n  switch(pattern) {\n    case 'missing_thinking_tag':\n      console.log('🔧 IMPROVE: Enforce thinking tag usage');\n      break;\n    case 'execution_errors':\n      console.log('🔧 IMPROVE: Better error handling needed');\n      break;\n  }\n});\n\nreturn [{ \n  json: {\n    ...data,\n    improvement_analysis: true,\n    message: 'Failure patterns analyzed for AI improvement'\n  }\n}];"
+      },
+      "name": "Analyze Failures",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [900, 350]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "name": "Merge Results",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [1100, 275]
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "name": "Send Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1300, 275]
+    }
+  ],
+  "connections": {
+    "Claude Performance Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Learning Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Learning Analysis": {
+      "main": [
+        [
+          {
+            "node": "Check Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Success": {
+      "main": [
+        [
+          {
+            "node": "Reinforce Success",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Analyze Failures",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reinforce Success": {
+      "main": [
+        [
+          {
+            "node": "Merge Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze Failures": {
+      "main": [
+        [
+          {
+            "node": "Merge Results",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge Results": {
+      "main": [
+        [
+          {
+            "node": "Send Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "ai-learning",
+      "id": "ultra-simple-001"
+    }
+  ],
+  "meta": {
+    "templateCredsSetupCompleted": true
+  }
+}

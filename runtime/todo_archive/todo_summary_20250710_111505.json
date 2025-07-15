@@ -1,0 +1,11 @@
+{
+  "conversation_id": "demo_conversation_001",
+  "generated_at": "2025-07-10T11:15:05.022965",
+  "total_todos_extracted": 2,
+  "prioritized_todos": {
+    "urgent": [],
+    "high": [
+      {
+        "id": "todo_20250710_111505_6492",
+        "content": "フロントエンドのUI改修も必要です",
+        "priority": 

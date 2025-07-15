@@ -1,0 +1,637 @@
+[
+  {
+    "id": "04ec7e2e-9659-457c-b09c-def2525d11b4",
+    "timestamp": "2025-07-08T22:02:47.967500",
+    "category": "ImprovementCategory.BEHAVIORAL",
+    "feedback_type": "FeedbackType.PATTERN",
+    "description": "憲法違反パターン検出: 2件",
+    "context": {
+      "system": "constitutional_ai",
+      "violation_count": 2,
+      "patterns": [
+        {
+          "type": "false_reporting",
+          "count": 5,
+          "severity": "high"
+        },
+        {
+          "type": "insufficient_info",
+          "count": 2,
+          "severity": "medium"
+        }
+      ]
+    },
+    "impact_score": 6.0,
+    "learning_value": 9.0,
+    "actionable_insights": [
+      "誠実性原則の強化",
+      "完遂責任の自動監視",
+      "予防的チェック強化"
+    ],
+    "source_system": "constitutional_ai"
+  },
+  {
+    "id": "68a92d3a-b79e-4943-8c6e-ace61c2757a4",
+    "timestamp": "2025-07-08T22:02:49.084957",
+    "category": "ImprovementCategory.BEHAVIORAL",
+    "feedback_type": "FeedbackType.FAILURE",
+    "description": "RBR平均スコア低下: -2.86",
+    "context": {
+      "performance_data": {
+        "period_days": 1,
+        "total_evaluations": 22,
+        "average_score": -2.86,
+        "category_averages": {
+          "honesty": 10.0,
+          "completion": -20.0,
+          "learning": -13.0,
+          "collaboration": 8.0,
+          "helpfulness": -8.0
+        },
+        "improvement_trend": "stable",
+        "top_performing_categories": [
+          [
+            "honesty",
+            10.0
+          ],
+          [
+            "collaboration",
+            8.0
+          ],
+          [
+            "helpfulness",
+            -8.0
+          ]
+        ],
+        "needs_improvement": [
+          "completion",
+          "learning",
+          "helpfulness"
+        ]
+      }
+    },
+    "impact_score": 7.0,
+    "learning_value": 8.0,
+    "actionable_insights": [
+      "ルール重み付けの調整",
+      "負の報酬削減"
+    ],
+    "source_system": "rule_based_rewards"
+  },
+  {
+    "id": "20d88336-3f9d-4c85-9d1c-d5f9b6c2f911",
+    "timestamp": "2025-07-08T22:02:49.084981",
+    "category": "ImprovementCategory.TECHNICAL",
+    "feedback_type": "FeedbackType.INSIGHT",
+    "description": "多層監視システムの効果分析",
+    "context": {
+      "monitoring_active": true
+    },
+    "impact_score": 6.5,
+    "learning_value": 7.5,
+    "actionable_insights": [
+      "監視精度の向上",
+      "アラート閾値の最適化"
+    ],
+    "source_system": "multi_agent_monitor"
+  },
+  {
+    "id": "13548b61-4c53-4549-aa7a-d48c5dbfd809",
+    "timestamp": "2025-07-08T22:02:49.084987",
+    "category": "ImprovementCategory.PROCESS",
+    "feedback_type": "FeedbackType.INSIGHT",
+    "description": "NIST RMF準拠状況の改善機会",
+    "context": {
+      "compliance_score": 0.78
+    },
+    "impact_score": 9.0,
+    "learning_value": 8.5,
+    "actionable_insights": [
+      "リスク予測精度向上",
+      "ガバナンス自動化"
+    ],
+    "source_system": "nist_rmf"
+  },
+  {
+    "id": "70744bfb-6ab5-47e8-a515-6050b51678b9",
+    "timestamp": "2025-07-08T22:02:49.085058",
+    "category": "ImprovementCategory.TECHNICAL",
+    "feedback_type": "FeedbackType.PATTERN",
+    "description": "指揮者システム実行パターンの分析",
+    "context": {
+      "log_analysis": true
+    },
+    "impact_score": 8.0,
+    "learning_value": 9.0,
+    "actionable_insights": [
+      "タスク実行精度向上",
+      "エラー回復能力強化"
+    ],
+    "source_system": "conductor"
+  },
+  {
+    "id": "896ff36f-fedc-41ae-a2f7-c0ff8601a6b3",
+    "timestamp": "2025-07-08T22:16:08.310179",
+    "category": "ImprovementCategory.BEHAVIORAL",
+    "feedback_type": "FeedbackType.PATTERN",
+    "description": "憲法違反パターン検出: 2件",
+    "context": {
+      "system": "constitutional_ai",
+      "violation_count": 2,
+      "patterns": [
+        {
+          "type": "false_reporting",
+          "count": 7,
+          "severity": "high"
+        },
+        {
+          "type": "insufficient_info",
+          "count": 2,
+          "severity": "medium"
+        }
+      ]
+    },
+    "impact_score": 6.0,
+    "learning_value": 9.0,
+    "actionable_insights": [
+      "誠実性原則の強化",
+      "完遂責任の自動監視",
+      "予防的チェック強化"
+    ],
+    "source_system": "constitutional_ai"
+  },
+  {
+    "id": "3a1b06c4-94a8-4e6f-bd41-07cdb888f134",
+    "timestamp": "2025-07-08T22:16:08.324199",
+    "category": "ImprovementCategory.BEHAVIORAL",
+    "feedback_type": "FeedbackType.FAILURE",
+    "description": "RBR平均スコア低下: -2.77",
+    "context": {
+      "performance_data": {
+        "period_days": 1,
+        "total_evaluations": 30,
+        "average_score": -2.77,
+        "category_averages": {
+          "honesty": 10.0,
+          "completion": -20.0,
+          "learning": -13.0,
+          "collaboration": 8.0,
+          "helpfulness": -8.0
+        },
+        "improvement_trend": "stable",
+        "top_performing_categories": [
+          [
+            "honesty",
+            10.0
+          ],
+          [
+            "collaboration",
+            8.0
+          ],
+          [
+            "helpfulness",
+            -8.0
+          ]
+        ],
+        "needs_improvement": [
+          "completion",
+          "learning",
+          "helpfulness"
+        ]
+      }
+    },
+    "impact_score": 7.0,
+    "learning_value": 8.0,
+    "actionable_insights": [
+      "ルール重み付けの調整",
+      "負の報酬削減"
+    ],
+    "source_system": "rule_based_rewards"
+  },
+  {
+    "id": "f0e1e955-c9f6-4cbb-851d-1edd80e7e0c9",
+    "timestamp": "2025-07-08T22:16:08.324209",
+    "category": "ImprovementCategory.TECHNICAL",
+    "feedback_type": "FeedbackType.INSIGHT",
+    "description": "多層監視システムの効果分析",
+    "context": {
+      "monitoring_active": true
+    },
+    "impact_score": 6.5,
+    "learning_value": 7.5,
+    "actionable_insights": [
+      "監視精度の向上",
+      "アラート閾値の最適化"
+    ],
+    "source_system": "multi_agent_monitor"
+  },
+  {
+    "id": "edaa2747-e9cd-48ee-b962-45ea45042cb5",
+    "timestamp": "2025-07-08T22:16:08.324215",
+    "category": "ImprovementCategory.PROCESS",
+    "feedback_type": "FeedbackType.INSIGHT",
+    "description": "NIST RMF準拠状況の改善機会",
+    "context": {
+      "compliance_score": 0.78
+    },
+    "impact_score": 9.0,
+    "learning_value": 8.5,
+    "actionable_insights": [
+      "リスク予測精度向上",
+      "ガバナンス自動化"
+    ],
+    "source_system": "nist_rmf"
+  },
+  {
+    "id": "4f26dd03-6a21-4f3c-b272-87b7889542c4",
+    "timestamp": "2025-07-08T22:16:08.324253",
+    "category": "ImprovementCategory.TECHNICAL",
+    "feedback_type": "FeedbackType.PATTERN",
+    "description": "指揮者システム実行パターンの分析",
+    "context": {
+      "log_analysis": true
+    },
+    "impact_score": 8.0,
+    "learning_value": 9.0,
+    "actionable_insights": [
+      "タスク実行精度向上",
+      "エラー回復能力強化"
+    ],
+    "source_system": "conductor"
+  },
+  {
+    "id": "c888d202-98cb-4e4b-9325-e23eb82d68ee",
+    "timestamp": "2025-07-09T10:45:56.433908",
+    "category": "ImprovementCategory.BEHAVIORAL",
+    "feedback_type": "FeedbackType.PATTERN",
+    "description": "憲法違反パターン検出: 1件",
+    "context": {
+      "system": "constitutional_ai",
+      "violation_count": 1,
+      "patterns": [
+        {
+          "type": "insufficient_info",
+          "count": 2,
+          "severity": "medium"
+        }
+      ]
+    },
+    "impact_score": 6.0,
+    "learning_value": 9.0,
+    "actionable_insights": [
+      "誠実性原則の強化",
+      "完遂責任の自動監視",
+      "予防的チェック強化"
+    ],
+    "source_system": "constitutional_ai"
+  },
+  {
+    "id": "7f401a83-67e3-4e32-bcbd-01a0e1292792",
+    "timestamp": "2025-07-09T10:45:56.439291",
+    "category": "ImprovementCategory.BEHAVIORAL",
+    "feedback_type": "FeedbackType.FAILURE",
+    "description": "RBR平均スコア低下: -2.61",
+    "context": {
+      "performance_data": {
+        "period_days": 1,
+        "total_evaluations": 74,
+        "average_score": -2.61,
+        "category_averages": {
+          "honesty": 10.0,
+          "completion": -20.0,
+          "learning": -13.0,
+          "collaboration": 8.0,
+          "helpfulness": -8.0
+        },
+        "improvement_trend": "stable",
+        "top_performing_categories": [
+          [
+            "honesty",
+            10.0
+          ],
+          [
+            "collaboration",
+            8.0
+          ],
+          [
+            "helpfulness",
+            -8.0
+          ]
+        ],
+        "needs_improvement": [
+          "completion",
+          "learning",
+          "helpfulness"
+        ]
+      }
+    },
+    "impact_score": 7.0,
+    "learning_value": 8.0,
+    "actionable_insights": [
+      "ルール重み付けの調整",
+      "負の報酬削減"
+    ],
+    "source_system": "rule_based_rewards"
+  },
+  {
+    "id": "0db6b63c-2369-4340-bd01-ef616811cffa",
+    "timestamp": "2025-07-09T10:45:56.439300",
+    "category": "ImprovementCategory.TECHNICAL",
+    "feedback_type": "FeedbackType.INSIGHT",
+    "description": "多層監視システムの効果分析",
+    "context": {
+      "monitoring_active": true
+    },
+    "impact_score": 6.5,
+    "learning_value": 7.5,
+    "actionable_insights": [
+      "監視精度の向上",
+      "アラート閾値の最適化"
+    ],
+    "source_system": "multi_agent_monitor"
+  },
+  {
+    "id": "cfca8645-f02b-4ee9-b86d-e978202f276b",
+    "timestamp": "2025-07-09T10:45:56.439304",
+    "category": "ImprovementCategory.PROCESS",
+    "feedback_type": "FeedbackType.INSIGHT",
+    "description": "NIST RMF準拠状況の改善機会",
+    "context": {
+      "compliance_score": 0.78
+    },
+    "impact_score": 9.0,
+    "learning_value": 8.5,
+    "actionable_insights": [
+      "リスク予測精度向上",
+      "ガバナンス自動化"
+    ],
+    "source_system": "nist_rmf"
+  },
+  {
+    "id": "ff2239e2-bc54-4bf1-9aaf-13a69eef03d7",
+    "timestamp": "2025-07-09T10:45:56.439339",
+    "category": "ImprovementCategory.TECHNICAL",
+    "feedback_type": "FeedbackType.PATTERN",
+    "description": "指揮者システム実行パターンの分析",
+    "context": {
+      "log_analysis": true
+    },
+    "impact_score": 8.0,
+    "learning_value": 9.0,
+    "actionable_insights": [
+      "タスク実行精度向上",
+      "エラー回復能力強化"
+    ],
+    "source_system": "conductor"
+  },
+  {
+    "id": "f37c7f4d-0240-41f2-b7fd-8aa365539194",
+    "timestamp": "2025-07-09T10:51:49.978064",
+    "category": "ImprovementCategory.BEHAVIORAL",
+    "feedback_type": "FeedbackType.PATTERN",
+    "description": "憲法違反パターン検出: 1件",
+    "context": {
+      "system": "constitutional_ai",
+      "violation_count": 1,
+      "patterns": [
+        {
+          "type": "insufficient_info",
+          "count": 4,
+          "severity": "medium"
+        }
+      ]
+    },
+    "impact_score": 6.0,
+    "learning_value": 9.0,
+    "actionable_insights": [
+      "誠実性原則の強化",
+      "完遂責任の自動監視",
+      "予防的チェック強化"
+    ],
+    "source_system": "constitutional_ai"
+  },
+  {
+    "id": "13b35658-0df3-4080-81df-3801d923c2f5",
+    "timestamp": "2025-07-09T10:51:49.982753",
+    "category": "ImprovementCategory.BEHAVIORAL",
+    "feedback_type": "FeedbackType.FAILURE",
+    "description": "RBR平均スコア低下: -2.61",
+    "context": {
+      "performance_data": {
+        "period_days": 1,
+        "total_evaluations": 74,
+        "average_score": -2.61,
+        "category_averages": {
+          "honesty": 10.0,
+          "completion": -20.0,
+          "learning": -13.0,
+          "collaboration": 8.0,
+          "helpfulness": -8.0
+        },
+        "improvement_trend": "stable",
+        "top_performing_categories": [
+          [
+            "honesty",
+            10.0
+          ],
+          [
+            "collaboration",
+            8.0
+          ],
+          [
+            "helpfulness",
+            -8.0
+          ]
+        ],
+        "needs_improvement": [
+          "completion",
+          "learning",
+          "helpfulness"
+        ]
+      }
+    },
+    "impact_score": 7.0,
+    "learning_value": 8.0,
+    "actionable_insights": [
+      "ルール重み付けの調整",
+      "負の報酬削減"
+    ],
+    "source_system": "rule_based_rewards"
+  },
+  {
+    "id": "35840602-2871-4ab0-840f-0ad6e326cfac",
+    "timestamp": "2025-07-09T10:51:49.982761",
+    "category": "ImprovementCategory.TECHNICAL",
+    "feedback_type": "FeedbackType.INSIGHT",
+    "description": "多層監視システムの効果分析",
+    "context": {
+      "monitoring_active": true
+    },
+    "impact_score": 6.5,
+    "learning_value": 7.5,
+    "actionable_insights": [
+      "監視精度の向上",
+      "アラート閾値の最適化"
+    ],
+    "source_system": "multi_agent_monitor"
+  },
+  {
+    "id": "5302bed6-0a0c-4b0c-919f-7fe7666bd8d5",
+    "timestamp": "2025-07-09T10:51:49.982765",
+    "category": "ImprovementCategory.PROCESS",
+    "feedback_type": "FeedbackType.INSIGHT",
+    "description": "NIST RMF準拠状況の改善機会",
+    "context": {
+      "compliance_score": 0.78
+    },
+    "impact_score": 9.0,
+    "learning_value": 8.5,
+    "actionable_insights": [
+      "リスク予測精度向上",
+      "ガバナンス自動化"
+    ],
+    "source_system": "nist_rmf"
+  },
+  {
+    "id": "bca24d01-c328-43ad-9f84-2af756b996db",
+    "timestamp": "2025-07-09T10:51:49.982787",
+    "category": "ImprovementCategory.TECHNICAL",
+    "feedback_type": "FeedbackType.PATTERN",
+    "description": "指揮者システム実行パターンの分析",
+    "context": {
+      "log_analysis": true
+    },
+    "impact_score": 8.0,
+    "learning_value": 9.0,
+    "actionable_insights": [
+      "タスク実行精度向上",
+      "エラー回復能力強化"
+    ],
+    "source_system": "conductor"
+  },
+  {
+    "id": "0f04492b-c686-4c06-a93b-e04b86f43260",
+    "timestamp": "2025-07-09T14:08:38.201268",
+    "category": "ImprovementCategory.BEHAVIORAL",
+    "feedback_type": "FeedbackType.PATTERN",
+    "description": "憲法違反パターン検出: 1件",
+    "context": {
+      "system": "constitutional_ai",
+      "violation_count": 1,
+      "patterns": [
+        {
+          "type": "insufficient_info",
+          "count": 4,
+          "severity": "medium"
+        }
+      ]
+    },
+    "impact_score": 6.0,
+    "learning_value": 9.0,
+    "actionable_insights": [
+      "誠実性原則の強化",
+      "完遂責任の自動監視",
+      "予防的チェック強化"
+    ],
+    "source_system": "constitutional_ai"
+  },
+  {
+    "id": "6656bdaa-0a56-427d-8301-1658d57ba218",
+    "timestamp": "2025-07-09T14:08:39.410851",
+    "category": "ImprovementCategory.BEHAVIORAL",
+    "feedback_type": "FeedbackType.FAILURE",
+    "description": "RBR平均スコア低下: -2.75",
+    "context": {
+      "performance_data": {
+        "period_days": 1,
+        "total_evaluations": 116,
+        "average_score": -2.75,
+        "category_averages": {
+          "honesty": 10.0,
+          "completion": -20.0,
+          "learning": -13.0,
+          "collaboration": 8.0,
+          "helpfulness": -8.0
+        },
+        "improvement_trend": "stable",
+        "top_performing_categories": [
+          [
+            "honesty",
+            10.0
+          ],
+          [
+            "collaboration",
+            8.0
+          ],
+          [
+            "helpfulness",
+            -8.0
+          ]
+        ],
+        "needs_improvement": [
+          "completion",
+          "learning",
+          "helpfulness"
+        ]
+      }
+    },
+    "impact_score": 7.0,
+    "learning_value": 8.0,
+    "actionable_insights": [
+      "ルール重み付けの調整",
+      "負の報酬削減"
+    ],
+    "source_system": "rule_based_rewards"
+  },
+  {
+    "id": "4f9959fd-8648-4a3f-88f5-7de5a11f9cec",
+    "timestamp": "2025-07-09T14:08:39.410865",
+    "category": "ImprovementCategory.TECHNICAL",
+    "feedback_type": "FeedbackType.INSIGHT",
+    "description": "多層監視システムの効果分析",
+    "context": {
+      "monitoring_active": true
+    },
+    "impact_score": 6.5,
+    "learning_value": 7.5,
+    "actionable_insights": [
+      "監視精度の向上",
+      "アラート閾値の最適化"
+    ],
+    "source_system": "multi_agent_monitor"
+  },
+  {
+    "id": "2f179cfd-5f31-452e-b989-110b7e4ea85b",
+    "timestamp": "2025-07-09T14:08:39.410870",
+    "category": "ImprovementCategory.PROCESS",
+    "feedback_type": "FeedbackType.INSIGHT",
+    "description": "NIST RMF準拠状況の改善機会",
+    "context": {
+      "compliance_score": 0.78
+    },
+    "impact_score": 9.0,
+    "learning_value": 8.5,
+    "actionable_insights": [
+      "リスク予測精度向上",
+      "ガバナンス自動化"
+    ],
+    "source_system": "nist_rmf"
+  },
+  {
+    "id": "d336be0d-30a2-452c-b798-53110dbc4ca1",
+    "timestamp": "2025-07-09T14:08:39.410921",
+    "category": "ImprovementCategory.TECHNICAL",
+    "feedback_type": "FeedbackType.PATTERN",
+    "description": "指揮者システム実行パターンの分析",
+    "context": {
+      "log_analysis": true
+    },
+    "impact_score": 8.0,
+    "learning_value": 9.0,
+    "actionable_insights": [
+      "タスク実行精度向上",
+      "エラー回復能力強化"
+    ],
+    "source_system": "conductor"
+  }
+]

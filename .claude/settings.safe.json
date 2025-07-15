@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "/Users/dd/Desktop/1_dev/coding-rule2/scripts/hooks/post_memory_vectorize.py",
+            "type": "command"
+          }
+        ],
+        "matcher": "Write|Edit"
+      }
+    ]
+  },
+  "timeout": 30
+} 

@@ -1,0 +1,28 @@
+{
+  "mcpServers": {
+    "o3": {
+      "command": "npx",
+      "args": ["o3-search-mcp"],
+      "env": {
+        "OPENAI_API_KEY": "${OPENAI_API_KEY}",
+        "SEARCH_CONTEXT_SIZE": "medium",
+        "REASONING_EFFORT": "medium"
+      }
+    },
+    "gemini": {
+      "command": "python3", 
+      "args": ["/Users/dd/Desktop/1_dev/coding-rule2/scripts/mcp/gemini_mcp_server.py"],
+      "env": {}
+    }
+  },
+  "hooks": {
+    "start": {
+      "command": "python3",
+      "args": ["/Users/dd/Desktop/1_dev/coding-rule2/scripts/hooks/critical_failure_prevention.py"]
+    },
+    "preToolUse": {
+      "command": "echo",
+      "args": ["🔴 CRITICAL CHECK: No false tool promises - verify before claiming access"]
+    }
+  }
+}

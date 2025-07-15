@@ -1,0 +1,120 @@
+{
+  "name": "Cloud Compatible AI Tracker - 確実動作版",
+  "active": true,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "claude-performance",
+        "options": {}
+      },
+      "name": "Claude Performance Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [300, 300],
+      "webhookId": "claude-performance"
+    },
+    {
+      "parameters": {
+        "functionCode": "// Claude Code パフォーマンスデータを受信・処理\nconst hookData = items[0].json;\n\n// 基本データ準備\nconst processedData = {\n  session_id: hookData.session_id || `session_${Date.now()}`,\n  timestamp: new Date().toISOString(),\n  success: hookData.success || false,\n  execution_time: hookData.execution_time || 0,\n  tools_used: hookData.tools_used || [],\n  thinking_tag_used: hookData.thinking_tag_used || false,\n  todo_tracking: hookData.todo_tracking || false,\n  task_complexity: hookData.task_complexity || 'simple',\n  error_count: hookData.error_count || 0\n};\n\n// n8nログ出力\nconsole.log('🤖 AI Performance Data Received:', {\n  session: processedData.session_id,\n  success: processedData.success,\n  time: processedData.execution_time,\n  tools: processedData.tools_used.length,\n  thinking: processedData.thinking_tag_used,\n  todo: processedData.todo_tracking\n});\n\n// ローカル自律成長システム用にデータ形式調整\nreturn [{ json: processedData }];"
+      },
+      "name": "Process AI Data",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:3002/webhook/claude-performance",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json}}",
+        "options": {
+          "timeout": 5000
+        }
+      },
+      "name": "Send to Local Growth System",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [700, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "// ローカルシステムからのレスポンス処理\nconst localResponse = items[0].json;\n\nconst finalResponse = {\n  status: 'success',\n  message: 'AI learning data processed and forwarded to local growth system',\n  timestamp: new Date().toISOString(),\n  local_system_response: localResponse,\n  ai_learning_active: true,\n  patterns_detected: localResponse.patterns_detected || [],\n  evolution_triggered: localResponse.evolution_triggered || false\n};\n\nconsole.log('✅ Complete AI Learning Cycle:', finalResponse);\n\nreturn [{ json: finalResponse }];"
+      },
+      "name": "Final Response Processing",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "name": "Send Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1100, 300]
+    }
+  ],
+  "connections": {
+    "Claude Performance Webhook": {
+      "main": [
+        [
+          {
+            "node": "Process AI Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process AI Data": {
+      "main": [
+        [
+          {
+            "node": "Send to Local Growth System",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send to Local Growth System": {
+      "main": [
+        [
+          {
+            "node": "Final Response Processing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Final Response Processing": {
+      "main": [
+        [
+          {
+            "node": "Send Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "ai-growth-cloud",
+      "id": "ai-growth-cloud-001"
+    }
+  ],
+  "meta": {
+    "templateCredsSetupCompleted": true
+  }
+}

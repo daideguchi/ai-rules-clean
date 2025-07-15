@@ -1,0 +1,53 @@
+# AI Organization UI System Dependencies
+# ====================================
+
+# Core UI library - Professional CLI interface
+rich>=13.0.0             # Rich text and beautiful formatting
+textual>=0.41.0          # Modern TUI framework (optional advanced features)
+
+# Terminal and keyboard handling
+keyboard>=0.13.5         # Keyboard input handling
+pynput>=1.7.6           # Input monitoring (optional)
+
+# Async support for real-time updates
+asyncio-mqtt>=0.13.0     # MQTT for distributed UI updates (optional)
+
+# Data visualization in terminal
+plotext>=5.2.8          # Terminal plotting (optional)
+
+# Progress and status indicators
+tqdm>=4.66.0            # Progress bars
+alive-progress>=3.1.4   # Animated progress bars
+
+# Terminal utilities
+colorama>=0.4.6         # Cross-platform colored terminal text
+termcolor>=2.3.0        # Terminal coloring
+blessed>=1.20.0         # Terminal capabilities
+
+# Configuration and persistence
+pydantic>=2.0.0         # Data validation and settings
+python-dotenv>=1.0.0    # Environment variable management
+
+# System monitoring integration
+psutil>=5.9.0           # System resource monitoring
+watchdog>=3.0.0         # File system monitoring
+
+# Optional: Advanced terminal features
+prompt-toolkit>=3.0.39  # Advanced terminal UI toolkit
+click>=8.1.7           # Command line interface creation
+
+# Development and testing
+pytest>=7.4.0           # Testing framework
+pytest-asyncio>=0.21.0  # Async testing support
+coverage>=7.3.0         # Code coverage
+
+# Optional: Performance monitoring
+memory-profiler>=0.61.0 # Memory usage profiling
+
+# Integration with existing systems
+psycopg2-binary>=2.9.0  # PostgreSQL integration
+sqlalchemy>=2.0.0       # Database ORM (optional)
+
+# Optional: Web interface components
+flask>=2.3.0            # Web framework for optional web UI
+websockets>=11.0.0      # WebSocket support for real-time updates

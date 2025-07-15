@@ -1,0 +1,28 @@
+# testing-guidelines.mdc - テスト戦略・テストピラミッド
+
+## テスト戦略
+- Unit Tests: 個別機能の詳細テスト
+- Integration Tests: システム統合テスト  
+- E2E Tests: エンドツーエンドテスト
+- AI Memory Inheritance System テスト
+
+## テストピラミッド実装
+```
+    /\
+   /  \     E2E Tests (少数・重要機能)
+  /    \
+ /______\   Integration Tests (中程度)
+/________\   Unit Tests (多数・基盤)
+```
+
+## PRESIDENT業務でのテスト要件
+- mandatory-verification.sh連携テスト
+- cursor rules確認プロセステスト
+- 78回ミス防止システムテスト
+- セッション継承システムテスト
+
+## 自動テスト実行
+- CI/CD パイプライン統合
+- Git pre-commit hooks 連携
+- プッシュ前自動検証
+

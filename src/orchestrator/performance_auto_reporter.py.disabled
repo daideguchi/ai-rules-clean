@@ -1,0 +1,75 @@
+#!/usr/bin/env python3
+"""
+Performance Auto Reporter
+Runtime Dispatcherと統合してClaude Codeの実行をリアルタイム監視
+"""
+
+import time
+import threading
+from typing import Dict, List, Any
+from datetime import datetime
+
+class PerformanceAutoReporter:
+    """パフォーマンス自動レポーター"""
+    
+    def __init__(self):
+        self.session_start = time.time()
+        self.tools_used = []
+        self.error_count = 0
+        self.thinking_used = False
+        self.todo_used = False
+        
+    def track_tool_use(self, tool_name: str, success: bool = True, error: str = None):
+        """ツール使用追跡"""
+        self.tools_used.append(tool_name)
+        if error:
+            self.error_count += 1
+        
+        # Check for thinking and todo usage
+        if 'thinking' in tool_name.lower():
+            self.thinking_used = True
+        if 'todo' in tool_name.lower():
+            self.todo_used = True
+            
+    def generate_report(self) -> Dict[str, Any]:
+        """レポート生成"""
+        execution_time = time.time() - self.session_start
+        
+        return {
+            "session_id": f"runtime_{int(self.session_start)}",
+            "success": self.error_count == 0,
+            "execution_time": execution_time,
+            "tools_used": list(set(self.tools_used)),  # Remove duplicates
+            "thinking_tag_used": self.thinking_used,
+            "todo_tracking": self.todo_used,
+            "task_complexity": self._calculate_complexity(),
+            "error_count": self.error_count,
+            "timestamp": datetime.now().isoformat()
+        }
+    
+    def _calculate_complexity(self) -> str:
+        """タスク複雑さ計算"""
+        tool_count = len(set(self.tools_used))
+        if tool_count > 5:
+            return "complex"
+        elif tool_count > 2:
+            return "medium"
+        else:
+            return "simple"
+    
+    def send_report(self):
+        """レポート送信"""
+        try:
+            from scripts.hooks.performance_auto_sender import send_performance_data
+            report = self.generate_report()
+            return send_performance_data(**report)
+        except ImportError:
+            print("⚠️ Performance auto sender not available")
+            return False
+
+# Global instance for runtime integration
+_global_reporter = PerformanceAutoReporter()
+
+def get_performance_reporter() -> PerformanceAutoReporter:
+    """グローバルレポーター取得"""
+    return _global_reporter

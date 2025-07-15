@@ -1,0 +1,95 @@
+#!/usr/bin/env python3
+"""
+Claude Code Performance Auto Sender
+Claude Codeの実行終了時に自動的にパフォーマンスデータをn8nに送信
+"""
+
+import os
+import sys
+import json
+import time
+import requests
+from datetime import datetime
+from pathlib import Path
+
+# Add project paths
+project_root = Path(__file__).parent.parent.parent
+sys.path.append(str(project_root / "src"))
+
+def send_performance_data(
+    success: bool = True,
+    execution_time: float = 0.0,
+    tools_used: list = None,
+    thinking_tag_used: bool = True,
+    todo_tracking: bool = True,
+    task_complexity: str = "medium",
+    error_count: int = 0,
+    user_feedback: str = None
+):
+    """Claude Codeパフォーマンスデータを自動送信"""
+    
+    webhook_url = os.getenv('N8N_WEBHOOK_URL', 'https://dd1107.app.n8n.cloud/webhook/claude-performance')
+    
+    # Performance data preparation
+    performance_data = {
+        "session_id": f"auto_{int(time.time())}",
+        "timestamp": datetime.now().isoformat(),
+        "success": success,
+        "execution_time": execution_time,
+        "tools_used": tools_used or [],
+        "thinking_tag_used": thinking_tag_used,
+        "todo_tracking": todo_tracking,
+        "task_complexity": task_complexity,
+        "error_count": error_count,
+        "user_feedback": user_feedback,
+        "auto_generated": True
+    }
+    
+    try:
+        response = requests.post(
+            webhook_url,
+            json=performance_data,
+            headers={'Content-Type': 'application/json'},
+            timeout=10
+        )
+        
+        if response.status_code == 200:
+            print(f"🤖 AI Learning: Data sent successfully")
+            return True
+        else:
+            print(f"⚠️ AI Learning: Failed to send data ({response.status_code})")
+            return False
+            
+    except Exception as e:
+        print(f"❌ AI Learning: Error sending data: {e}")
+        return False
+
+def hook_post_tool_use(tool_name: str, success: bool, execution_time: float, error: str = None):
+    """ツール使用後フック"""
+    send_performance_data(
+        success=success,
+        execution_time=execution_time,
+        tools_used=[tool_name],
+        error_count=1 if error else 0,
+        user_feedback=f"Tool: {tool_name}, Error: {error}" if error else None
+    )
+
+def hook_session_end(total_tools: int, total_time: float, overall_success: bool):
+    """セッション終了フック"""
+    send_performance_data(
+        success=overall_success,
+        execution_time=total_time,
+        tools_used=[f"session_total_{total_tools}_tools"],
+        task_complexity="complex" if total_tools > 5 else "medium" if total_tools > 2 else "simple"
+    )
+
+if __name__ == "__main__":
+    # Manual test
+    print("🧪 Testing auto learning system...")
+    result = send_performance_data(
+        success=True,
+        execution_time=1.5,
+        tools_used=["Test"],
+        user_feedback="Manual test execution"
+    )
+    print(f"Test result: {'✅ Success' if result else '❌ Failed'}")

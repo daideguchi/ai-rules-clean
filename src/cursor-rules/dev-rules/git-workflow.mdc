@@ -1,0 +1,11 @@
+# git-workflow.mdc - Git ワークフロー
+
+## ブランチ戦略
+- main: プロダクション
+- develop: 開発統合
+- feature/: 機能開発
+
+## PRESIDENT業務でのGit管理
+- cursor rules変更の即座反映
+- 67回ミス防止のための慎重なコミット
+- mandatory-verification.sh連携

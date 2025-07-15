@@ -1,0 +1,344 @@
+# 📜 Project Constitution - 0-ROOT.yml
+# This is the highest-priority rule set for the entire project
+# Changes require unanimous consensus from all team members
+
+version: "1.0.0"
+last_updated: "2025-07-05"
+scope: "entire_project"
+change_policy: "unanimous_consensus"
+enforcement_level: "mandatory"
+
+# 🎯 Core Principles (Non-negotiable)
+core_principles:
+  - id: "integrity"
+    rule: "証拠なき報告は絶対禁止"
+    description: "All reports must be backed by verifiable evidence"
+    enforcement: "automatic"
+    violations_policy: "immediate_correction"
+    
+  - id: "responsibility"
+    rule: "職務放棄は重大違反"
+    description: "Abandoning declared tasks is a serious violation"
+    enforcement: "manual_review"
+    violations_policy: "trust_recovery_process"
+    
+  - id: "documentation"
+    rule: "全作業は記録必須"
+    description: "All work must be documented with proper trails"
+    enforcement: "git_hooks"
+    violations_policy: "automated_reminder"
+    
+  - id: "transparency"
+    rule: "進捗報告は透明性必須"
+    description: "Progress reporting must be transparent and honest"
+    enforcement: "external_tracking"
+    violations_policy: "escalation_to_user"
+
+# 🏗️ Project Structure (Immutable)
+directory_structure:
+  max_root_dirs: 9
+  current_root_count: 11  # Target: reduce to 9
+  
+  required_dirs:
+    - "src"          # Source code
+    - "docs"         # Documentation
+    - "tests"        # Test files
+    - "scripts"      # Utility scripts
+    - "data"         # AI/ML data assets
+    - "models"       # ML models and experiments
+    - "api"          # API specifications
+    - "compliance"   # Governance and ethics
+    - "runtime"      # Runtime data and logs
+    
+  forbidden_at_root:
+    - "logs"         # Use runtime/ instead
+    - "tmp"          # Use system tmp
+    - "temp"         # Use system tmp
+    - "cache"        # Use system cache
+    - "backup"       # Use version control
+    
+  deprecated_dirs:
+    - "bin"          # Moved to scripts/
+    - "ai-agents"    # Moved to src/ai/
+    - "archive"      # Use git history instead
+
+# 📁 File Naming Standards
+file_naming:
+  pattern: "^[a-z0-9_-]+\\.(py|md|yml|yaml|sh|js|ts|json)$"
+  max_length: 80
+  
+  forbidden_names:
+    - "tmp"
+    - "temp"
+    - "test123"
+    - "copy"
+    - "backup"
+    - "old"
+    - "new"
+    
+  required_extensions:
+    python: ".py"
+    markdown: ".md"
+    yaml: ".yml"
+    shell: ".sh"
+    javascript: ".js"
+    typescript: ".ts"
+    
+  special_files:
+    - "README.md"    # Required in major directories
+    - "CHANGELOG.md" # Required for releases
+    - ".gitignore"   # Required at root
+    - "pyproject.toml" # Python project configuration
+
+# 🔐 Security Requirements (Non-negotiable)
+security:
+  secrets_management:
+    - rule: "No secrets in version control"
+      enforcement: "pre_commit_hooks"
+      scan_patterns: ["api_key", "password", "token", "secret"]
+      
+  access_control:
+    - rule: "Principle of least privilege"
+      enforcement: "manual_review"
+      applies_to: ["file_permissions", "api_access", "data_access"]
+      
+  data_protection:
+    - rule: "PII must be encrypted at rest"
+      enforcement: "automatic_scanning"
+      applies_to: ["user_data", "logs", "backups"]
+      
+  audit_trails:
+    - rule: "All access must be logged"
+      enforcement: "system_level"
+      retention: "90_days"
+
+# 🤖 AI/ML Specific Rules
+ai_ml_governance:
+  model_management:
+    - rule: "All models must have documented lineage"
+      enforcement: "model_registry"
+      required_metadata: ["dataset_version", "training_date", "performance_metrics"]
+      
+  data_governance:
+    - rule: "Data versioning is mandatory"
+      enforcement: "dvc_integration"
+      applies_to: ["training_data", "evaluation_data", "feature_sets"]
+      
+  ethical_ai:
+    - rule: "Bias testing is required for all models"
+      enforcement: "ci_cd_pipeline"
+      frequency: "before_deployment"
+      
+  explainability:
+    - rule: "Production models must be interpretable"
+      enforcement: "manual_review"
+      exceptions: "documented_business_case"
+
+# 📊 Quality Assurance
+quality_standards:
+  code_coverage:
+    minimum: 80
+    enforcement: "ci_cd_pipeline"
+    exceptions: "experimental_code"
+    
+  documentation_coverage:
+    minimum: 90
+    enforcement: "automated_check"
+    applies_to: ["public_apis", "core_modules"]
+    
+  performance_standards:
+    response_time: "< 200ms"
+    availability: "> 99.9%"
+    enforcement: "monitoring_alerts"
+
+# 🔄 Change Management
+change_management:
+  semantic_versioning:
+    rule: "Use semantic versioning for all releases"
+    format: "MAJOR.MINOR.PATCH"
+    enforcement: "automated_tagging"
+    
+  breaking_changes:
+    rule: "Breaking changes require major version bump"
+    notification: "advance_notice_required"
+    migration_guide: "mandatory"
+    
+  backward_compatibility:
+    rule: "Maintain backward compatibility for 2 versions"
+    enforcement: "compatibility_tests"
+    exceptions: "security_vulnerabilities"
+
+# 🚨 Incident Response
+incident_response:
+  severity_levels:
+    - "critical"     # System down, data loss
+    - "high"         # Major functionality affected
+    - "medium"       # Minor functionality affected
+    - "low"          # Cosmetic issues
+    
+  response_times:
+    critical: "15_minutes"
+    high: "2_hours"
+    medium: "1_day"
+    low: "1_week"
+    
+  escalation_path:
+    - "team_lead"
+    - "project_manager"
+    - "stakeholders"
+    - "executive_team"
+
+# 📈 Metrics and Monitoring
+monitoring:
+  required_metrics:
+    - "system_performance"
+    - "user_satisfaction"
+    - "security_incidents"
+    - "compliance_violations"
+    - "technical_debt"
+    
+  alerting_thresholds:
+    error_rate: "> 1%"
+    response_time: "> 500ms"
+    disk_usage: "> 80%"
+    memory_usage: "> 90%"
+    
+  reporting_frequency:
+    daily: "operational_metrics"
+    weekly: "quality_metrics"
+    monthly: "business_metrics"
+    quarterly: "strategic_metrics"
+
+# 🎓 Training and Onboarding
+onboarding:
+  mandatory_training:
+    - "security_awareness"
+    - "data_privacy"
+    - "ethical_ai"
+    - "project_standards"
+    
+  certification_requirements:
+    - "security_clearance"
+    - "ai_ethics_training"
+    - "data_handling_procedures"
+    
+  knowledge_validation:
+    method: "practical_assessment"
+    frequency: "annual"
+    pass_criteria: "80%"
+
+# 📋 Governance Structure
+governance:
+  decision_making:
+    architecture: "technical_committee"
+    security: "security_officer"
+    compliance: "compliance_officer"
+    business: "product_owner"
+    
+  review_processes:
+    code_review: "mandatory"
+    design_review: "major_changes"
+    security_review: "quarterly"
+    compliance_review: "monthly"
+    
+  escalation_procedures:
+    technical: "architecture_committee"
+    business: "steering_committee"
+    legal: "legal_counsel"
+    ethical: "ethics_committee"
+
+# 🔍 Audit and Compliance
+audit_requirements:
+  internal_audits:
+    frequency: "quarterly"
+    scope: "full_system"
+    documentation: "mandatory"
+    
+  external_audits:
+    frequency: "annual"
+    certifications: ["SOC2", "ISO27001"]
+    remediation: "30_days"
+    
+  compliance_frameworks:
+    - "GDPR"        # Data privacy
+    - "CCPA"        # California privacy
+    - "HIPAA"       # Healthcare (if applicable)
+    - "SOX"         # Financial (if applicable)
+    
+  audit_trails:
+    retention: "7_years"
+    integrity: "cryptographic_signatures"
+    access: "restricted_authorized_only"
+
+# 🚫 Enforcement and Violations
+enforcement:
+  automated_checks:
+    pre_commit: "style_security_basic"
+    ci_cd: "comprehensive_validation"
+    production: "runtime_monitoring"
+    
+  violation_handling:
+    level_1: "automated_correction"
+    level_2: "team_notification"
+    level_3: "management_escalation"
+    level_4: "formal_review_process"
+    
+  appeals_process:
+    timeline: "5_business_days"
+    reviewer: "independent_committee"
+    documentation: "mandatory"
+
+# 📅 Review Schedule
+review_schedule:
+  monthly: "operational_metrics"
+  quarterly: "strategic_alignment"
+  semi_annual: "full_governance_review"
+  annual: "complete_framework_update"
+  
+  trigger_reviews:
+    - "security_incident"
+    - "compliance_violation"
+    - "major_system_change"
+    - "regulatory_update"
+
+# 🎯 Success Metrics
+success_metrics:
+  technical:
+    - "system_reliability > 99.9%"
+    - "security_incidents < 1/month"
+    - "compliance_violations = 0"
+    
+  operational:
+    - "deployment_frequency > 1/week"
+    - "lead_time < 2 days"
+    - "mttr < 1 hour"
+    
+  business:
+    - "user_satisfaction > 4.5/5"
+    - "feature_adoption > 80%"
+    - "business_value_delivered"
+
+# 📝 Documentation Requirements
+documentation:
+  architecture_decisions:
+    format: "ADR"
+    location: "docs/architecture/"
+    review: "mandatory"
+    
+  operational_procedures:
+    format: "runbook"
+    location: "docs/operations/"
+    testing: "mandatory"
+    
+  user_documentation:
+    format: "markdown"
+    location: "docs/user/"
+    feedback: "collected"
+
+# 🔚 Footer
+footer:
+  note: "This document serves as the constitutional foundation of the project"
+  authority: "All other rules must align with these core principles"
+  update_process: "Requires unanimous team consent and formal review"
+  effective_date: "2025-07-05"
+  next_review: "2025-10-05"

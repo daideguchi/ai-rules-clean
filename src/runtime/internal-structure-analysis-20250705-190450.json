@@ -1,0 +1,31 @@
+{
+  "timestamp": "2025-07-05T19:04:50.735462",
+  "summary": {
+    "scattered_scripts": 0,
+    "scattered_documents": 0,
+    "naming_violations": 1,
+    "structure_violations": 1,
+    "duplicate_groups": 0
+  },
+  "problems": {
+    "scattered_scripts": [],
+    "scattered_documents": [],
+    "naming_violations": [
+      {
+        "path": ".archive/duplicates/20250705",
+        "type": "directory",
+        "violation": "not_kebab_case",
+        "suggested": "20250705"
+      }
+    ],
+    "structure_violations": [
+      {
+        "path": "runtime/logs/agents/system/ai-agents/president",
+        "type": "excessive_depth",
+        "depth": 6,
+        "max_allowed": 5
+      }
+    ],
+    "duplicates": []
+  }
+}

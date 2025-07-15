@@ -1,0 +1,40 @@
+FROM python:3.13-slim
+
+# システム依存関係
+RUN apt-get update && apt-get install -y \
+    postgresql-client \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# 作業ディレクトリ
+WORKDIR /app
+
+# Python依存関係（レイヤーキャッシュ最適化）
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# アプリケーションコード
+COPY src/ ./src/
+COPY scripts/ ./scripts/
+COPY tests/ ./tests/
+COPY CLAUDE.md ./
+COPY Makefile ./
+
+# 実行時ユーザー（セキュリティ）
+RUN useradd -m -u 1000 misaip && \
+    chown -R misaip:misaip /app
+USER misaip
+
+# ヘルスチェック
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+    CMD python3 -c "import src.memory.unified_memory_manager; print('OK')" || exit 1
+
+# デフォルトコマンド
+CMD ["python3", "src/ai/constitutional_ai.py"]
+
+# ラベル（メタデータ）
+LABEL org.opencontainers.image.title="88回ミス防止AI安全ガバナンスシステム"
+LABEL org.opencontainers.image.description="他プロダクトとの競合を回避する完全分離AI"
+LABEL org.opencontainers.image.version="1.0.0"
+LABEL misaip.isolation="complete"
+LABEL misaip.database="separate"

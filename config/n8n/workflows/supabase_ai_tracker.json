@@ -1,0 +1,216 @@
+{
+  "name": "Supabase AI Tracker - クラウド完全対応版",
+  "active": true,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "claude-performance",
+        "options": {}
+      },
+      "name": "Claude Performance Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [300, 300],
+      "webhookId": "claude-performance"
+    },
+    {
+      "parameters": {
+        "functionCode": "// AI パフォーマンスデータ処理・Supabase用データ整形\nconst hookData = items[0].json;\n\n// Supabase用データ構造\nconst performanceData = {\n  session_id: hookData.session_id || `session_${Date.now()}`,\n  timestamp: new Date().toISOString(),\n  task_success: hookData.success || false,\n  execution_time: hookData.execution_time || 0,\n  tool_calls_count: (hookData.tools_used || []).length,\n  tool_calls: JSON.stringify(hookData.tools_used || []),\n  error_count: hookData.error_count || 0,\n  thinking_tag_used: hookData.thinking_tag_used || false,\n  todo_tracking: hookData.todo_tracking || false,\n  task_complexity: hookData.task_complexity || 'simple',\n  user_feedback: hookData.user_feedback || null\n};\n\n// 成功パターン分析\nconst successPatterns = [];\nif (performanceData.task_success) {\n  if (performanceData.thinking_tag_used) successPatterns.push('thinking_tag_usage');\n  if (performanceData.todo_tracking) successPatterns.push('todo_tracking');\n  if (performanceData.execution_time < 5) successPatterns.push('fast_execution');\n  if (performanceData.tool_calls_count <= 3) successPatterns.push('efficient_tool_usage');\n  if (performanceData.error_count === 0) successPatterns.push('error_free_execution');\n}\n\n// 失敗パターン分析\nconst failurePatterns = [];\nif (!performanceData.task_success) {\n  if (!performanceData.thinking_tag_used) failurePatterns.push('missing_thinking_tag');\n  if (performanceData.error_count > 0) failurePatterns.push('execution_errors');\n  if (performanceData.execution_time > 30) failurePatterns.push('slow_execution');\n  if (performanceData.tool_calls_count > 10) failurePatterns.push('excessive_tool_usage');\n}\n\n// 学習スコア計算\nperformanceData.learning_score = successPatterns.length - failurePatterns.length;\nperformanceData.success_patterns = JSON.stringify(successPatterns);\nperformanceData.failure_patterns = JSON.stringify(failurePatterns);\n\nconsole.log('🤖 AI Performance Data for Supabase:', {\n  session: performanceData.session_id,\n  success: performanceData.task_success,\n  patterns: [...successPatterns, ...failurePatterns],\n  score: performanceData.learning_score\n});\n\nreturn [{ json: performanceData }];"
+      },
+      "name": "Process for Supabase",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "table": "ai_performance_log",
+        "columns": "session_id,timestamp,task_success,execution_time,tool_calls_count,tool_calls,error_count,thinking_tag_used,todo_tracking,task_complexity,learning_score,success_patterns,failure_patterns,user_feedback",
+        "options": {}
+      },
+      "name": "Store in Supabase",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [700, 300],
+      "credentials": {
+        "postgres": {
+          "id": "supabase-connection",
+          "name": "Supabase AI Growth DB"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{$json.learning_score}}",
+              "operation": "larger",
+              "value2": 1
+            }
+          ]
+        }
+      },
+      "name": "Check Success Pattern",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [900, 250]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "table": "ai_learning_patterns",
+        "columns": "timestamp,pattern_type,patterns,effectiveness_score,session_id",
+        "options": {}
+      },
+      "name": "Store Success Pattern",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [1100, 200],
+      "credentials": {
+        "postgres": {
+          "id": "supabase-connection",
+          "name": "Supabase AI Growth DB"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "table": "ai_learning_patterns",
+        "columns": "timestamp,pattern_type,patterns,effectiveness_score,session_id",
+        "options": {}
+      },
+      "name": "Store Failure Pattern",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [1100, 350],
+      "credentials": {
+        "postgres": {
+          "id": "supabase-connection",
+          "name": "Supabase AI Growth DB"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "name": "Merge Patterns",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [1300, 275]
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "name": "Send Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1500, 275]
+    }
+  ],
+  "connections": {
+    "Claude Performance Webhook": {
+      "main": [
+        [
+          {
+            "node": "Process for Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process for Supabase": {
+      "main": [
+        [
+          {
+            "node": "Store in Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Store in Supabase": {
+      "main": [
+        [
+          {
+            "node": "Check Success Pattern",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Success Pattern": {
+      "main": [
+        [
+          {
+            "node": "Store Success Pattern",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Store Failure Pattern",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Store Success Pattern": {
+      "main": [
+        [
+          {
+            "node": "Merge Patterns",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Store Failure Pattern": {
+      "main": [
+        [
+          {
+            "node": "Merge Patterns",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge Patterns": {
+      "main": [
+        [
+          {
+            "node": "Send Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "ai-growth-supabase",
+      "id": "ai-growth-supabase-001"
+    }
+  ],
+  "meta": {
+    "templateCredsSetupCompleted": false
+  }
+}

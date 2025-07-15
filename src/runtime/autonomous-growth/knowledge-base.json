@@ -1,0 +1,25 @@
+{
+  "core_principles": {
+    "bypassing_permissions_is_default": "Bypassing Permissions画面は正常状態・デフォルト",
+    "declaration_mandatory": "全作業開始時に宣言必須",
+    "organization_first": "AI組織システム活用が最優先・単独作業禁止",
+    "continuous_improvement": "Phase 1→2→3の継続的改善サイクル",
+    "autonomous_operation": "PRESIDENT停止後も自律稼働継続"
+  },
+  "learned_mistakes": {
+    "count": 1,
+    "critical_patterns": [
+      "宣言忘れ（45+回）",
+      "組織システム無視",
+      "重要知識忘却",
+      "完了責任放棄"
+    ]
+  },
+  "growth_metrics": {
+    "cycles_completed": 0,
+    "knowledge_updates": 0,
+    "autonomous_decisions": 0,
+    "system_improvements": 0
+  },
+  "last_updated": "$(date)"
+}

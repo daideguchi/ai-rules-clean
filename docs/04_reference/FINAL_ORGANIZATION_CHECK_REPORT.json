@@ -1,0 +1,12 @@
+{
+  "timestamp": "2025-07-06T12:55:00Z",
+  "status": "NEEDS_IMPROVEMENT",
+  "score": "50.0%",
+  "checks": {
+    "directory_structure": true,
+    "duplicate_files": false,
+    "absolute_paths": false,
+    "file_placement": true
+  },
+  "summary": "組織化評価: 2/4項目合格"
+}
