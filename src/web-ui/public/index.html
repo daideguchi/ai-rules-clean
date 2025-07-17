@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code Web UI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0d1117;
+            color: #e6edf3;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: #161b22;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #30363d;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: #f0f6fc;
+            font-size: 1.5rem;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #238636;
+        }
+
+        .main-container {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            width: 300px;
+            background: #0d1117;
+            border-right: 1px solid #30363d;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        .project-info {
+            background: #161b22;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            border: 1px solid #30363d;
+        }
+
+        .project-info h3 {
+            color: #f0f6fc;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-info p {
+            color: #8b949e;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-output {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .chat-input-container {
+            padding: 1rem;
+            background: #161b22;
+            border-top: 1px solid #30363d;
+        }
+
+        .chat-input {
+            width: 100%;
+            padding: 0.75rem;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            color: #e6edf3;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: #1f6feb;
+        }
+
+        .send-button {
+            margin-top: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: #238636;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .send-button:hover {
+            background: #2ea043;
+        }
+
+        .send-button:disabled {
+            background: #30363d;
+            cursor: not-allowed;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border-radius: 6px;
+            white-space: pre-wrap;
+        }
+
+        .message.user {
+            background: #1f6feb;
+            color: white;
+            margin-left: 2rem;
+        }
+
+        .message.system {
+            background: #161b22;
+            border: 1px solid #30363d;
+            color: #8b949e;
+        }
+
+        .message.stdout {
+            background: #0d1117;
+            border-left: 3px solid #238636;
+            color: #e6edf3;
+        }
+
+        .message.stderr {
+            background: #0d1117;
+            border-left: 3px solid #da3633;
+            color: #f85149;
+        }
+
+        .message.error {
+            background: #0d1117;
+            border-left: 3px solid #da3633;
+            color: #f85149;
+        }
+
+        .timestamp {
+            font-size: 0.8rem;
+            color: #8b949e;
+            margin-bottom: 0.3rem;
+        }
+
+        .quick-commands {
+            margin-top: 1rem;
+        }
+
+        .quick-commands h4 {
+            color: #f0f6fc;
+            margin-bottom: 0.5rem;
+        }
+
+        .quick-command {
+            display: block;
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 0.3rem;
+            background: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 4px;
+            color: #e6edf3;
+            text-decoration: none;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .quick-command:hover {
+            background: #30363d;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: absolute;
+                top: 0;
+                left: -100%;
+                height: 100%;
+                z-index: 100;
+                transition: left 0.3s ease;
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .main-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Claude Code Web UI</h1>
+        <div class="status">
+            <div class="status-indicator" id="statusIndicator"></div>
+            <span id="statusText">Connected</span>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="sidebar">
+            <div class="project-info" id="projectInfo">
+                <h3>Project Information</h3>
+                <p>Loading...</p>
+            </div>
+
+            <div class="quick-commands">
+                <h4>Quick Commands</h4>
+                <button class="quick-command" onclick="sendQuickCommand('help')">Help</button>
+                <button class="quick-command" onclick="sendQuickCommand('status')">Status</button>
+                <button class="quick-command" onclick="sendQuickCommand('ls')">List Files</button>
+                <button class="quick-command" onclick="sendQuickCommand('git status')">Git Status</button>
+                <button class="quick-command" onclick="sendQuickCommand('make')">Make</button>
+            </div>
+        </div>
+
+        <div class="chat-container">
+            <div class="chat-output" id="chatOutput"></div>
+            <div class="chat-input-container">
+                <textarea 
+                    class="chat-input" 
+                    id="chatInput" 
+                    placeholder="Enter your Claude Code command..."
+                    rows="3"
+                ></textarea>
+                <button class="send-button" id="sendButton" onclick="sendCommand()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        const chatOutput = document.getElementById('chatOutput');
+        const chatInput = document.getElementById('chatInput');
+        const sendButton = document.getElementById('sendButton');
+        const statusIndicator = document.getElementById('statusIndicator');
+        const statusText = document.getElementById('statusText');
+        const projectInfo = document.getElementById('projectInfo');
+
+        // Connection status
+        socket.on('connect', () => {
+            statusIndicator.style.background = '#238636';
+            statusText.textContent = 'Connected';
+            loadProjectInfo();
+        });
+
+        socket.on('disconnect', () => {
+            statusIndicator.style.background = '#da3633';
+            statusText.textContent = 'Disconnected';
+        });
+
+        // Load project information
+        async function loadProjectInfo() {
+            try {
+                const response = await fetch('/api/project-info');
+                const info = await response.json();
+                
+                projectInfo.innerHTML = `
+                    <h3>Project Information</h3>
+                    <p><strong>Name:</strong> ${info.name}</p>
+                    <p><strong>Path:</strong> ${info.path}</p>
+                    <p><strong>CLAUDE.md:</strong> ${info.hasClaude ? '✅' : '❌'}</p>
+                    <p><strong>README.md:</strong> ${info.hasReadme ? '✅' : '❌'}</p>
+                `;
+            } catch (error) {
+                console.error('Failed to load project info:', error);
+            }
+        }
+
+        // Send command
+        function sendCommand() {
+            const command = chatInput.value.trim();
+            if (!command) return;
+
+            // Add user message
+            addMessage('user', command);
+            
+            // Send to server
+            socket.emit('claude-command', { command: command });
+            
+            // Clear input
+            chatInput.value = '';
+            sendButton.disabled = true;
+        }
+
+        // Send quick command
+        function sendQuickCommand(command) {
+            addMessage('user', command);
+            socket.emit('claude-command', { command: command });
+        }
+
+        // Handle Claude output
+        socket.on('claude-output', (data) => {
+            const { type, data: output, code, timestamp } = data;
+            
+            switch (type) {
+                case 'stdout':
+                    addMessage('stdout', output, timestamp);
+                    break;
+                case 'stderr':
+                    addMessage('stderr', output, timestamp);
+                    break;
+                case 'error':
+                    addMessage('error', output, timestamp);
+                    break;
+                case 'exit':
+                    addMessage('system', `Process exited with code: ${code}`, timestamp);
+                    sendButton.disabled = false;
+                    break;
+            }
+        });
+
+        // Add message to chat
+        function addMessage(type, content, timestamp) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            
+            if (timestamp) {
+                const timestampDiv = document.createElement('div');
+                timestampDiv.className = 'timestamp';
+                timestampDiv.textContent = new Date(timestamp).toLocaleTimeString();
+                messageDiv.appendChild(timestampDiv);
+            }
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.textContent = content;
+            messageDiv.appendChild(contentDiv);
+            
+            chatOutput.appendChild(messageDiv);
+            chatOutput.scrollTop = chatOutput.scrollHeight;
+        }
+
+        // Enter key to send
+        chatInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendCommand();
+            }
+        });
+
+        // Initial welcome message
+        addMessage('system', 'Welcome to Claude Code Web UI! Enter commands to interact with Claude Code.');
+    </script>
+</body>
+</html>

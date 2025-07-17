@@ -10,7 +10,7 @@ help:
 	@echo ""
 	@echo "🎯 Main Operations:"
 	@echo "  session-safety-check - セッション安全確認（必須最優先）"
-	@echo "  declare-president - PRESIDENT宣言必須実行"
+	@echo "  declare-president - ルール確認必須実行"
 	@echo "  run-president     - Start PRESIDENT AI system (要宣言)"
 	@echo "  startup-check     - スタートアップチェックリスト実行"
 	@echo "  status           - Check system status"
@@ -85,13 +85,13 @@ install:
 	pip install -r requirements.txt
 	@echo "✅ Dependencies installed"
 
-declare-president: ## セキュアPRESIDENT宣言必須実行
-	@echo "🔴 セキュアPRESIDENT宣言開始..."
+declare-president: ## ルール確認必須実行
+	@echo "✅ ルール確認開始..."
 	@python3 scripts/tools/unified-president-tool.py declare --secure
 
 run-president: ## PRESIDENT AIシステム起動（自動プロジェクト分析+AI組織配置）
 	@echo "🎯 Starting PRESIDENT AI System with Intelligent Organization..."
-	@python3 scripts/tools/unified-president-tool.py status || (echo "❌ セキュアPRESIDENT宣言が必要です" && exit 1)
+	@python3 scripts/tools/unified-president-tool.py status || (echo "❌ ルール確認が必要です" && exit 1)
 	@echo "📊 Analyzing project requirements..."
 	@python3 src/orchestrator/intelligent_project_analyzer.py analyze > /dev/null
 	@echo "🚀 Launching optimal AI organization..."
@@ -245,7 +245,7 @@ startup-check: ## スタートアップチェックリスト実行
 	@echo "インデックスファイル: Index.md"
 	@echo ""
 	@echo "✅ 必須チェック項目:"
-	@echo "  1. PRESIDENT宣言: make declare-president"
+	@echo "  1. ルール確認: make declare-president"
 	@echo "  2. 統合テスト: make integration-test"
 	@echo "  3. AI組織起動: make ai-org-start"
 	@echo "  4. DB接続確認: make db-connect"
