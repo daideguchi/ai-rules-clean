@@ -5,8 +5,9 @@ o3ベストプラクティス準拠の3DB統一アーキテクチャ動作確認
 """
 
 import sqlite3
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
+
 
 def test_unified_architecture():
     """統合DBアーキテクチャテスト"""
@@ -39,7 +40,7 @@ def test_unified_architecture():
             print(f"  ❌ {db_name}: {e}")
 
     # 2. ATTACH DATABASE テスト
-    print(f"\n2️⃣ ATTACH DATABASE テスト:")
+    print("\n2️⃣ ATTACH DATABASE テスト:")
 
     try:
         main_conn = connections["core.db"]
@@ -61,7 +62,7 @@ def test_unified_architecture():
         print(f"  ❌ ATTACH エラー: {e}")
 
     # 3. トランザクションテスト
-    print(f"\n3️⃣ アトミックトランザクションテスト:")
+    print("\n3️⃣ アトミックトランザクションテスト:")
 
     try:
         main_conn.execute("BEGIN")
@@ -109,7 +110,7 @@ def test_unified_architecture():
             pass
 
     # 4. パフォーマンステスト
-    print(f"\n4️⃣ パフォーマンステスト:")
+    print("\n4️⃣ パフォーマンステスト:")
 
     try:
         # WALモード確認
@@ -139,7 +140,7 @@ def test_unified_architecture():
         print(f"  ❌ パフォーマンステストエラー: {e}")
 
     # 5. データ整合性確認
-    print(f"\n5️⃣ データ整合性確認:")
+    print("\n5️⃣ データ整合性確認:")
 
     try:
         # 各DBのデータ確認
@@ -165,8 +166,8 @@ def test_unified_architecture():
     for conn in connections.values():
         conn.close()
 
-    print(f"\n🎯 統合DBアーキテクチャテスト完了")
-    print(f"o3ベストプラクティス準拠の3DB統一システムが正常動作中")
+    print("\n🎯 統合DBアーキテクチャテスト完了")
+    print("o3ベストプラクティス準拠の3DB統一システムが正常動作中")
 
 def generate_final_report():
     """最終レポート生成"""

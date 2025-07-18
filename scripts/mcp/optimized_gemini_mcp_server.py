@@ -154,7 +154,7 @@ class OptimizedGeminiMCPServer(OptimizedMCPBase):
             raise ValueError("Code is required for analysis")
 
         prompt = f"""You are a code analysis expert. Analyze the following {language} code.
-        
+
 Analysis type: {analysis_type}
 
 Code:
@@ -191,7 +191,7 @@ Format your response as structured analysis."""
 
     def _build_prompt(self, prompt: str, context: str = "") -> str:
         """Build a comprehensive prompt"""
-        system_prompt = """You are Gemini AI, a helpful and knowledgeable assistant. 
+        system_prompt = """You are Gemini AI, a helpful and knowledgeable assistant.
 Provide accurate, detailed, and helpful responses. Focus on being informative and constructive."""
 
         if context:
@@ -204,7 +204,7 @@ Provide accurate, detailed, and helpful responses. Focus on being informative an
         prompt = "You are Gemini AI in a conversation. Maintain context and provide helpful responses.\n\n"
 
         # Add conversation history
-        for i, turn in enumerate(history[-10:]):  # Last 10 turns
+        for _i, turn in enumerate(history[-10:]):  # Last 10 turns
             user_msg = turn.get("user", "")
             assistant_msg = turn.get("assistant", "")
 

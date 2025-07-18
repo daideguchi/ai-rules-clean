@@ -3,10 +3,10 @@
 完全準拠ワークフローテスト
 """
 
-import requests
-import json
 import os
 import time
+
+import requests
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -17,7 +17,7 @@ def test_perfect_integration():
     webhook_url = "https://dd1107.app.n8n.cloud/webhook/perfect-ai-1752535562"
     timestamp = int(time.time())
 
-    print(f"🧪 完全準拠統合テスト")
+    print("🧪 完全準拠統合テスト")
     print("="*30)
     print(f"📡 URL: {webhook_url}")
 
@@ -60,19 +60,19 @@ def test_perfect_integration():
             print(f"   Supabase確認 Status: {check_response.status_code}")
 
             if check_response.status_code == 200 and check_response.json():
-                print(f"   🎉 **Supabaseデータ確認成功**")
-                print(f"\n🎊 **完全準拠統合成功** 🎊")
+                print("   🎉 **Supabaseデータ確認成功**")
+                print("\n🎊 **完全準拠統合成功** 🎊")
                 print(f"📡 本番URL: {webhook_url}")
-                print(f"🔄 Claude→n8n→Supabase自動化達成")
-                print(f"🧠 自律AI成長システム稼働開始")
-                print(f"✅ AIパフォーマンスデータ自動蓄積開始")
+                print("🔄 Claude→n8n→Supabase自動化達成")
+                print("🧠 自律AI成長システム稼働開始")
+                print("✅ AIパフォーマンスデータ自動蓄積開始")
                 return True
             else:
-                print(f"   ⚠️ Supabaseデータ確認失敗")
+                print("   ⚠️ Supabaseデータ確認失敗")
                 print(f"   Response: {check_response.text}")
                 return False
         else:
-            print(f"   ❌ Webhook送信失敗")
+            print("   ❌ Webhook送信失敗")
             return False
     except Exception as e:
         print(f"   ❌ テスト実行エラー: {e}")
@@ -87,8 +87,8 @@ if __name__ == "__main__":
     success = test_perfect_integration()
 
     if success:
-        print(f"\n🎊 **完全統合達成** 🎊")
+        print("\n🎊 **完全統合達成** 🎊")
         print("🚀 自律AI成長システム稼働開始")
     else:
-        print(f"\n⚠️ **統合テスト要再確認**")
+        print("\n⚠️ **統合テスト要再確認**")
         print("🔧 n8n UIでワークフローのアクティブ化状態を確認してください")

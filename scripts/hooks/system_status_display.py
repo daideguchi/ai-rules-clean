@@ -73,7 +73,7 @@ class SystemStatusDisplay:
         else:
             status["OpenAI"] = "❌ 未設定"
 
-        # Gemini API Key check  
+        # Gemini API Key check
         gemini_key = os.getenv('GEMINI_API_KEY') or os.getenv('GOOGLE_API_KEY')
         if gemini_key:
             status["Gemini"] = f"✅ 設定済み (...{gemini_key[-4:]})"
@@ -84,21 +84,21 @@ class SystemStatusDisplay:
         try:
             claude_settings = Path.home() / ".claude" / "settings.json"
             project_mcp = self.project_root / ".mcp.json"
-            
+
             mcp_servers = []
-            
+
             if claude_settings.exists():
                 with open(claude_settings) as f:
                     settings_data = json.load(f)
                     if "mcpServers" in settings_data:
                         mcp_servers.extend(settings_data["mcpServers"].keys())
-                        
+
             if project_mcp.exists():
                 with open(project_mcp) as f:
                     mcp_data = json.load(f)
                     if "mcpServers" in mcp_data:
                         mcp_servers.extend(mcp_data["mcpServers"].keys())
-                        
+
             if mcp_servers:
                 unique_servers = list(set(mcp_servers))
                 status["MCP"] = f"✅ {len(unique_servers)}サーバー ({', '.join(unique_servers)})"

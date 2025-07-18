@@ -3,30 +3,31 @@ ErrorHandlingSystem Unit Tests
 包括的エラーハンドリング・回復システムのテスト
 """
 
-import pytest
-from datetime import datetime, timedelta
-from unittest.mock import Mock, patch, call
-from pathlib import Path
-import tempfile
 import json
 import logging
-
 import sys
+import tempfile
+from datetime import datetime, timedelta
+from pathlib import Path
+from unittest.mock import Mock
+
+import pytest
+
 sys.path.append(str(Path(__file__).parent.parent.parent.parent.parent / "src"))
 
 from session_management.domain.services.error_handling_system import (
+    ErrorCategory,
+    ErrorContext,
     ErrorHandlingSystem,
     ErrorInfo,
-    ErrorContext,
     ErrorSeverity,
-    ErrorCategory,
-    RecoveryStrategy,
-    RecoveryAction,
-    ValidationErrorHandler,
+    ErrorStatistics,
     IntegrationErrorHandler,
     NetworkErrorHandler,
+    RecoveryAction,
+    RecoveryStrategy,
     SystemErrorHandler,
-    ErrorStatistics
+    ValidationErrorHandler,
 )
 
 
@@ -415,7 +416,7 @@ class TestErrorHandlingSystem:
         exception = ValueError("Test error")
         context = ErrorContext("test_component", "test_operation")
 
-        result = self.error_system.handle_error(
+        self.error_system.handle_error(
             exception=exception,
             context=context,
             severity=ErrorSeverity.MEDIUM,
@@ -575,7 +576,7 @@ class TestErrorHandlingSystem:
         assert len(error_files) == 1
 
         # ファイル内容を確認
-        with open(error_files[0], 'r', encoding='utf-8') as f:
+        with open(error_files[0], encoding='utf-8') as f:
             saved_error = json.load(f)
 
         assert saved_error["error_type"] == "ValueError"

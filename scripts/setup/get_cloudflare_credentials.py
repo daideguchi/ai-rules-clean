@@ -4,8 +4,9 @@ Cloudflare認証情報取得ガイド
 Zero Trust setup用のAPI Token・Account ID取得
 """
 
-import webbrowser
 import time
+import webbrowser
+
 
 def main():
     """Cloudflare認証情報取得ガイド"""

@@ -5,14 +5,15 @@ n8nワークフローと連携してAIエージェントの自動進化を実現
 """
 
 import json
-import sqlite3
-import requests
-import numpy as np
-from datetime import datetime, timedelta
-from pathlib import Path
-from typing import Dict, List, Optional, Tuple
-from dataclasses import dataclass, asdict
 import logging
+import sqlite3
+from dataclasses import dataclass
+from datetime import datetime
+from pathlib import Path
+from typing import Dict, List, Optional
+
+import requests
+
 
 @dataclass
 class PerformanceMetrics:
@@ -238,7 +239,7 @@ class AutonomousGrowthEngine:
             'tools_used': metrics.tool_calls,
             'errors': [{'type': 'execution_error'}] * metrics.error_count,
             'task_complexity': metrics.task_complexity,
-            'response': f'<thinking>' if metrics.thinking_tag_used else '',
+            'response': '<thinking>' if metrics.thinking_tag_used else '',
             'retry_count': 0,
             'user_feedback': metrics.user_feedback,
             'read_before_edit': metrics.proper_file_reading
@@ -318,15 +319,15 @@ class AutonomousGrowthEngine:
     def get_performance_insights(self, days: int = 7) -> Dict:
         """パフォーマンス洞察取得"""
         with sqlite3.connect(self.db_path) as conn:
-            cursor = conn.execute("""
+            cursor = conn.execute(f"""
                 SELECT
                     AVG(CASE WHEN task_success THEN 1.0 ELSE 0.0 END) as success_rate,
                     AVG(execution_time) as avg_execution_time,
                     AVG(error_count) as avg_error_count,
                     COUNT(*) as total_tasks
                 FROM ai_performance_log
-                WHERE timestamp > datetime('now', '-{} day')
-            """.format(days))
+                WHERE timestamp > datetime('now', '-{days} day')
+            """)
 
             result = cursor.fetchone()
 
@@ -443,7 +444,7 @@ class ClaudeCodeHookIntegration:
 def main():
     """メイン実行関数"""
     engine = AutonomousGrowthEngine()
-    
+
     # 現在のセッション失敗を記録
     current_failure = PerformanceMetrics(
         session_id="slack_auth_failure_2025_07_16",
@@ -458,7 +459,7 @@ def main():
         task_complexity="complex",
         user_feedback="claude.mdがなぜ参照されないのか、しっかりと考えろ。自律成長しなさい。super claudeですよね。"
     )
-    
+
     print("🔴 Recording current session failure for learning...")
     engine.capture_performance(current_failure)
 
@@ -472,17 +473,17 @@ def main():
 
     # 学習進歩表示
     progress = engine.get_learning_progress()
-    print(f"\n🧠 Learning Progress:")
+    print("\n🧠 Learning Progress:")
     print(f"   Learning Velocity: {progress['learning_velocity']:.2f}% per week")
     print(f"   Top Success Patterns: {len(progress['top_success_patterns'])}")
     print(f"   Active Improvement Targets: {len(progress['improvement_targets'])}")
-    
+
     print("\n🎯 Key Failure Patterns Identified:")
     print("   - File creation rule violations")
-    print("   - CLAUDE.md rule non-compliance") 
+    print("   - CLAUDE.md rule non-compliance")
     print("   - Bot token authentication failures")
     print("   - Shell environment integration issues")
-    
+
     # Record improvement made this session
     improvement_metrics = PerformanceMetrics(
         session_id="slack_debug_improvement_2025_07_16",
@@ -497,14 +498,14 @@ def main():
         task_complexity="medium",
         user_feedback="素晴らしい。ここを特定したのであればさらに頑張れます"
     )
-    
+
     print("\n✅ Recording current session improvements...")
     engine.capture_performance(improvement_metrics)
     print("   - Added detailed Slack debugging")
     print("   - Enhanced error diagnostics")
     print("   - Followed CLAUDE.md rules properly")
     print("   - Used existing files only")
-    
+
     # Record new token type detection improvement
     token_improvement = PerformanceMetrics(
         session_id="slack_token_type_detection_2025_07_16",
@@ -519,14 +520,14 @@ def main():
         task_complexity="medium",
         user_feedback="新しいUser Tokenを提供、Bot Token vs User Token違いを検証"
     )
-    
+
     engine.capture_performance(token_improvement)
     print("\n🎯 New Token Analysis Features Added:")
     print("   - Bot Token vs User Token detection")
     print("   - Token capability analysis")
     print("   - Enhanced authentication debugging")
     print("   - Detailed token type reporting")
-    
+
     # Record critical bug fix
     bugfix_metrics = PerformanceMetrics(
         session_id="slack_token_timing_bugfix_2025_07_16",
@@ -541,14 +542,14 @@ def main():
         task_complexity="complex",
         user_feedback="Token設定バグ修正: 新User Tokenが古いBot Token使用継続"
     )
-    
+
     engine.capture_performance(bugfix_metrics)
     print("\n🐛 Critical Bug Fix Applied:")
     print("   - Token initialization timing issue resolved")
     print("   - Dynamic config reloading implemented")
     print("   - Environment variable propagation fixed")
     print("   - Fresh token loading on every test")
-    
+
     # Record MAJOR SUCCESS - Slack integration working
     success_metrics = PerformanceMetrics(
         session_id="slack_integration_success_2025_07_16",
@@ -563,7 +564,7 @@ def main():
         task_complexity="critical",
         user_feedback="✅ SUCCESS: Slack integration is working! Token Type: User Token (OAuth), Team: AI駆動開発"
     )
-    
+
     engine.capture_performance(success_metrics)
     print("\n🎉 MAJOR SUCCESS RECORDED:")
     print("   - Slack API authentication: WORKING")
@@ -573,7 +574,7 @@ def main():
     print("   - Token Type: User Token (OAuth)")
     print("   - Capabilities: user_functions")
     print("   - Token expires in: 41932 seconds (~11.6 hours)")
-    
+
     print("\n📈 Learning Success Patterns:")
     print("   ✅ Detailed debugging leads to problem identification")
     print("   ✅ Token type analysis reveals authentication issues")

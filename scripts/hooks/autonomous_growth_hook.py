@@ -4,15 +4,16 @@
 Claude Code Hooks と統合して最小負荷で最大効果を実現
 """
 
-import os
-import sys
 import json
-import time
+import os
 import sqlite3
-import requests
+import sys
+import time
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, Optional, Any
+from typing import Any, Dict, Optional
+
+import requests
 
 # プロジェクトルートをパスに追加
 project_root = Path(__file__).parent.parent.parent
@@ -326,7 +327,7 @@ def claude_code_hook_handler(hook_type: str, **kwargs):
         elif hook_type == 'session_stop':
             hook.on_session_stop(kwargs.get('session_id', 'unknown'))
 
-    except Exception as e:
+    except Exception:
         # フック失敗は Claude Code の動作を妨げない
         pass
 

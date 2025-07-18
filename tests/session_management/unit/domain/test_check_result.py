@@ -3,18 +3,18 @@ CheckResult Entity Unit Tests
 テストファーストアプローチによるCheckResultエンティティテスト
 """
 
-import pytest
-from datetime import datetime
-from typing import Optional, Dict, Any
-
 import sys
+from datetime import datetime
 from pathlib import Path
+
+import pytest
+
 sys.path.append(str(Path(__file__).parent.parent.parent.parent.parent / "src"))
 
 from session_management.domain.entities.check_result import (
     CheckResult,
+    CheckSeverity,
     CheckStatus,
-    CheckSeverity
 )
 
 

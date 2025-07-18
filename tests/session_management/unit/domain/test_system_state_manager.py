@@ -3,24 +3,29 @@ SystemStateManager Unit Tests
 状態同期・管理システムのテスト
 """
 
-import pytest
-from datetime import datetime
-from unittest.mock import Mock, patch, call
-from pathlib import Path
-
 import sys
+from datetime import datetime
+from pathlib import Path
+from unittest.mock import Mock, patch
+
+import pytest
+
 sys.path.append(str(Path(__file__).parent.parent.parent.parent.parent / "src"))
 
+from session_management.domain.entities.check_result import CheckResult
+from session_management.domain.entities.session_state import (
+    ComponentState,
+)
 from session_management.domain.services.system_state_manager import (
-    SystemStateManager,
+    DependencyTracker,
     StateChangeEvent,
     StateChangeType,
-    DependencyTracker,
-    StateHashCalculator
+    StateHashCalculator,
+    SystemStateManager,
 )
-from session_management.domain.entities.session_state import SessionState, ComponentState
-from session_management.domain.entities.check_result import CheckResult
-from session_management.infrastructure.cache.event_driven_cache import StateAwareCacheKey
+from session_management.infrastructure.cache.event_driven_cache import (
+    StateAwareCacheKey,
+)
 
 
 class TestSystemStateManager:

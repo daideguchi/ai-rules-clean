@@ -3,19 +3,19 @@ SystemStatus Entity Unit Tests
 システム状態エンティティのテスト
 """
 
-import pytest
-from datetime import datetime
-from typing import Dict, List
-
 import sys
+from datetime import datetime
 from pathlib import Path
+
+import pytest
+
 sys.path.append(str(Path(__file__).parent.parent.parent.parent.parent / "src"))
 
 from session_management.domain.entities.system_status import (
-    SystemStatus,
-    HealthStatus,
     ComponentHealth,
-    SystemMetrics
+    HealthStatus,
+    SystemMetrics,
+    SystemStatus,
 )
 
 

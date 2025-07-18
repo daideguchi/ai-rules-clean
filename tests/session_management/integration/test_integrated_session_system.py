@@ -3,24 +3,24 @@ IntegratedSessionSystem Integration Tests
 統合セッション管理システムの統合テスト
 """
 
-import pytest
-from datetime import datetime, timedelta
-from unittest.mock import Mock, patch
-from pathlib import Path
-import tempfile
-import time
-
 import sys
+import tempfile
+from datetime import datetime
+from pathlib import Path
+
+import pytest
+
 sys.path.append(str(Path(__file__).parent.parent.parent.parent / "src"))
 
 from session_management.application.integrated_session_system import (
+    IntegratedEventPublisher,
     IntegratedSessionSystem,
     SessionConfiguration,
-    IntegratedEventPublisher
 )
-from session_management.domain.entities.check_result import CheckResult
-from session_management.domain.services.system_state_manager import StateChangeEvent, StateChangeType
-from session_management.domain.services.error_handling_system import ErrorSeverity, ErrorCategory
+from session_management.domain.services.system_state_manager import (
+    StateChangeEvent,
+    StateChangeType,
+)
 
 
 class TestIntegratedEventPublisher:
@@ -311,7 +311,9 @@ class TestIntegratedSessionSystem:
         try:
             raise ValueError("Test error")
         except ValueError as e:
-            from session_management.domain.services.error_handling_system import ErrorContext
+            from session_management.domain.services.error_handling_system import (
+                ErrorContext,
+            )
             context = ErrorContext("test_component", "test_operation")
             self.system.error_system.handle_error(e, context)
 
@@ -426,7 +428,7 @@ class TestIntegratedSessionSystem:
         # キャッシュ統計確認
         cache_stats = self.system.cache.get_statistics()
         initial_hits = cache_stats["total_hits"]
-        initial_misses = cache_stats["total_misses"]
+        cache_stats["total_misses"]
 
         # 2回目（キャッシュヒット予期）
         result2 = self.system.perform_check(

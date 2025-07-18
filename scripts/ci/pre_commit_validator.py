@@ -263,7 +263,7 @@ class PreCommitValidator:
                 if len(import_lines) > 1:
                     # 標準ライブラリ → サードパーティ → ローカル の順序かチェック
                     prev_type = 0
-                    for line_num, import_line in import_lines:
+                    for _line_num, import_line in import_lines:
                         current_type = self._classify_import(import_line)
                         if current_type < prev_type:
                             disorganized_files.append(str(py_file))

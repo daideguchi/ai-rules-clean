@@ -4,13 +4,12 @@
 重い監視システムなし・Claude Code終了時のみ自動実行
 """
 
-import os
-import sys
 import atexit
-import requests
+import os
 import time
-from datetime import datetime
-from pathlib import Path
+
+import requests
+
 
 class LightweightAutoTrigger:
     """超軽量自動トリガー"""

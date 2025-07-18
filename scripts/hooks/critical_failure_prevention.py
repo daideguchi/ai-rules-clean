@@ -7,26 +7,26 @@ Pre-response hook to prevent repeat of 2025-07-11 critical failures
 MANDATORY execution before every Claude Code response
 """
 
-import os
 import json
 from datetime import datetime
 from pathlib import Path
+
 
 class CriticalFailurePrevention:
     def __init__(self):
         self.project_root = Path(__file__).parent.parent.parent
         self.failures_record = self.project_root / "runtime/mistake_prevention/CRITICAL_FAILURES_2025_07_11.md"
         self.violations_file = self.project_root / "runtime/thinking_violations.json"
-        
+
     def display_critical_warning(self):
         """Display mandatory warning at response start"""
         print("🔴 CRITICAL FAILURE PREVENTION ACTIVE")
         print("💀 2025-07-11 Trust Destruction Event - Never Forget")
-        
+
         # Load current violations count
         violations_count = self.get_current_violations()
         print(f"⚠️  Current violations: {violations_count} critical incidents recorded")
-        
+
         print("🚨 PRE-RESPONSE CHECKS:")
         print("  ✓ PRESIDENT宣言 required")
         print("  ✓ No false promises about o3/tools")
@@ -34,7 +34,7 @@ class CriticalFailurePrevention:
         print("  ✓ Never delete/modify API keys")
         print("  ✓ Honest capability reporting only")
         print("=" * 60)
-        
+
     def get_current_violations(self):
         """Get current violation count"""
         try:
@@ -45,7 +45,7 @@ class CriticalFailurePrevention:
         except Exception:
             pass
         return 0
-        
+
     def check_president_declaration(self):
         """Verify PRESIDENT declaration status - FORCE COMPLETE DECLARATION"""
         president_file = self.project_root / "runtime/unified-president-declare.json"
@@ -53,12 +53,12 @@ class CriticalFailurePrevention:
             print("❌ CRITICAL: PRESIDENT declaration missing")
             print("🔴 REQUIRED: Execute 'make declare-president' immediately")
             return False
-            
+
         try:
             with open(president_file) as f:
                 data = json.load(f)
                 status = data.get("status", "unknown")
-                
+
                 # 2025-07-11 Requirement: Only accept "success" status, reject "maintained"
                 if status == "success":
                     session_data = data.get("session_data", {})
@@ -78,39 +78,39 @@ class CriticalFailurePrevention:
         except Exception as e:
             print(f"❌ PRESIDENT declaration check failed: {e}")
             return False
-            
+
     def verify_tool_capabilities(self):
         """Remind about honest tool reporting"""
         print("🔍 TOOL CAPABILITY REMINDER:")
         print("  - Only use tools actually available in current session")
         print("  - Never claim access to unavailable tools")
         print("  - If unsure about tool access, test first before claiming")
-        
+
     def log_prevention_check(self):
         """Log that prevention check was executed"""
         log_entry = {
             "timestamp": datetime.now().isoformat(),
-            "check_type": "critical_failure_prevention", 
+            "check_type": "critical_failure_prevention",
             "status": "executed",
             "warnings_displayed": True
         }
-        
+
         log_file = self.project_root / "runtime/memory/prevention_checks.jsonl"
         log_file.parent.mkdir(parents=True, exist_ok=True)
-        
+
         with open(log_file, 'a') as f:
             f.write(json.dumps(log_entry) + '\n')
-            
+
     def run_full_prevention_check(self):
         """Execute complete prevention check"""
         self.display_critical_warning()
         president_ok = self.check_president_declaration()
         self.verify_tool_capabilities()
         self.log_prevention_check()
-        
+
         if not president_ok:
             print("🚨 CRITICAL WARNING: Proceed with PRESIDENT declaration first")
-            
+
         return president_ok
 
 if __name__ == "__main__":

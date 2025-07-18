@@ -249,8 +249,8 @@ class EnhancedMemoryInheritance:
 
             # Store in database
             self.db.execute("""
-                INSERT OR REPLACE INTO memory_entries 
-                (key, content, timestamp, importance, category, tags, context_hash, 
+                INSERT OR REPLACE INTO memory_entries
+                (key, content, timestamp, importance, category, tags, context_hash,
                  violation_count, last_accessed, access_count, created_at, updated_at)
                 VALUES (?, ?, ?, ?, ?, ?, ?, 0, ?, 0, ?, ?)
             """, (key, content, now, importance, category, json.dumps(tags),
@@ -278,7 +278,7 @@ class EnhancedMemoryInheritance:
             if increment_access:
                 now = datetime.now(timezone.utc).isoformat()
                 self.db.execute("""
-                    UPDATE memory_entries 
+                    UPDATE memory_entries
                     SET last_accessed = ?, access_count = access_count + 1
                     WHERE key = ?
                 """, (now, key))
@@ -310,7 +310,7 @@ class EnhancedMemoryInheritance:
         try:
             # Text-based search
             cursor = self.db.execute("""
-                SELECT * FROM memory_entries 
+                SELECT * FROM memory_entries
                 WHERE content LIKE ? OR key LIKE ?
                 ORDER BY importance DESC, access_count DESC
                 LIMIT ?
@@ -347,7 +347,7 @@ class EnhancedMemoryInheritance:
 
                     # Sort by similarity and add top results
                     similarities.sort(key=lambda x: x[1], reverse=True)
-                    for key, score in similarities[:5]:  # Top 5 vector matches
+                    for key, _score in similarities[:5]:  # Top 5 vector matches
                         memory = self.retrieve_memory(key, increment_access=False)
                         if memory and memory not in results:
                             results.append(memory)
@@ -367,7 +367,7 @@ class EnhancedMemoryInheritance:
 
         try:
             cursor = self.db.execute("""
-                SELECT content FROM memory_entries 
+                SELECT content FROM memory_entries
                 WHERE importance >= 9 AND category = 'critical_rule'
                 ORDER BY importance DESC
             """)
@@ -387,14 +387,14 @@ class EnhancedMemoryInheritance:
 
             # Store violation
             self.db.execute("""
-                INSERT INTO violations 
+                INSERT INTO violations
                 (violation_type, description, timestamp, session_id)
                 VALUES (?, ?, ?, ?)
             """, (violation_type, description, now, self.session_id))
 
             # Update memory entry violation count
             self.db.execute("""
-                UPDATE memory_entries 
+                UPDATE memory_entries
                 SET violation_count = violation_count + 1
                 WHERE key = ?
             """, (violation_type,))
@@ -447,11 +447,11 @@ class EnhancedMemoryInheritance:
 
             violation_summary = self.get_violation_summary()
 
-            now = datetime.now(timezone.utc).isoformat()
+            datetime.now(timezone.utc).isoformat()
 
             self.db.execute("""
-                INSERT OR REPLACE INTO session_continuity 
-                (session_id, start_time, memory_snapshot, critical_reminders, 
+                INSERT OR REPLACE INTO session_continuity
+                (session_id, start_time, memory_snapshot, critical_reminders,
                  violation_summary, status)
                 VALUES (?, ?, ?, ?, ?, ?)
             """, (self.session_id, self.session_start.isoformat(),
@@ -469,7 +469,7 @@ class EnhancedMemoryInheritance:
         """Load previous session for continuity"""
         try:
             cursor = self.db.execute("""
-                SELECT * FROM session_continuity 
+                SELECT * FROM session_continuity
                 WHERE status = 'active'
                 ORDER BY start_time DESC
                 LIMIT 1
@@ -559,7 +559,7 @@ class EnhancedMemoryInheritance:
             cutoff_date = datetime.now(timezone.utc) - timedelta(days=days_old)
 
             self.db.execute("""
-                DELETE FROM session_continuity 
+                DELETE FROM session_continuity
                 WHERE start_time < ? AND status != 'active'
             """, (cutoff_date.isoformat(),))
 

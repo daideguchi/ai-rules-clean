@@ -3,20 +3,20 @@ SessionState Entity Unit Tests
 セッション状態エンティティのテスト
 """
 
-import pytest
-from datetime import datetime
-from typing import Dict, List
-
 import sys
+from datetime import datetime
 from pathlib import Path
+
+import pytest
+
 sys.path.append(str(Path(__file__).parent.parent.parent.parent.parent / "src"))
 
-from session_management.domain.entities.session_state import (
-    SessionState,
-    ComponentState,
-    StateVersion
-)
 from session_management.domain.entities.check_result import CheckResult
+from session_management.domain.entities.session_state import (
+    ComponentState,
+    SessionState,
+    StateVersion,
+)
 
 
 class TestSessionState:

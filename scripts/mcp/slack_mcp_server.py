@@ -40,20 +40,20 @@ CLAUDE_CODE_WEB_UI_TEMPLATE = """
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             color: #333;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
-        
+
         .header {
             background: rgba(255, 255, 255, 0.95);
             padding: 20px;
@@ -61,27 +61,27 @@ CLAUDE_CODE_WEB_UI_TEMPLATE = """
             margin-bottom: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        
+
         .header h1 {
             color: #5a67d8;
             font-size: 2.5em;
             text-align: center;
             margin-bottom: 10px;
         }
-        
+
         .header p {
             text-align: center;
             color: #666;
             font-size: 1.1em;
         }
-        
+
         .dashboard {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
             margin-bottom: 20px;
         }
-        
+
         .card {
             background: rgba(255, 255, 255, 0.95);
             padding: 20px;
@@ -89,11 +89,11 @@ CLAUDE_CODE_WEB_UI_TEMPLATE = """
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
         }
-        
+
         .card:hover {
             transform: translateY(-5px);
         }
-        
+
         .card h3 {
             color: #5a67d8;
             margin-bottom: 15px;
@@ -101,14 +101,14 @@ CLAUDE_CODE_WEB_UI_TEMPLATE = """
             border-bottom: 2px solid #e2e8f0;
             padding-bottom: 10px;
         }
-        
+
         .task-list {
             background: rgba(255, 255, 255, 0.95);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        
+
         .task-item {
             background: #f7fafc;
             padding: 15px;
@@ -116,17 +116,17 @@ CLAUDE_CODE_WEB_UI_TEMPLATE = """
             border-radius: 5px;
             border-left: 4px solid #5a67d8;
         }
-        
+
         .task-completed {
             border-left-color: #48bb78;
             background: #f0fff4;
         }
-        
+
         .task-pending {
             border-left-color: #ed8936;
             background: #fffaf0;
         }
-        
+
         .status-badge {
             display: inline-block;
             padding: 4px 8px;
@@ -135,22 +135,22 @@ CLAUDE_CODE_WEB_UI_TEMPLATE = """
             font-weight: bold;
             margin-right: 10px;
         }
-        
+
         .status-completed {
             background: #c6f6d5;
             color: #22543d;
         }
-        
+
         .status-pending {
             background: #fed7aa;
             color: #7c2d12;
         }
-        
+
         .status-in-progress {
             background: #bee3f8;
             color: #2a4365;
         }
-        
+
         .btn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -163,12 +163,12 @@ CLAUDE_CODE_WEB_UI_TEMPLATE = """
             text-decoration: none;
             display: inline-block;
         }
-        
+
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-        
+
         .slack-notification {
             background: #f0f9ff;
             border: 1px solid #0ea5e9;
@@ -176,7 +176,7 @@ CLAUDE_CODE_WEB_UI_TEMPLATE = """
             border-radius: 5px;
             margin-top: 15px;
         }
-        
+
         .progress-bar {
             width: 100%;
             height: 20px;
@@ -185,20 +185,20 @@ CLAUDE_CODE_WEB_UI_TEMPLATE = """
             overflow: hidden;
             margin: 10px 0;
         }
-        
+
         .progress-fill {
             height: 100%;
             background: linear-gradient(90deg, #48bb78 0%, #38a169 100%);
             transition: width 0.3s ease;
         }
-        
+
         .metrics {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
             margin-bottom: 20px;
         }
-        
+
         .metric-card {
             background: rgba(255, 255, 255, 0.95);
             padding: 20px;
@@ -206,19 +206,19 @@ CLAUDE_CODE_WEB_UI_TEMPLATE = """
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        
+
         .metric-number {
             font-size: 2.5em;
             font-weight: bold;
             color: #5a67d8;
             margin-bottom: 10px;
         }
-        
+
         .metric-label {
             color: #666;
             font-size: 0.9em;
         }
-        
+
         .refresh-btn {
             position: fixed;
             bottom: 20px;
@@ -233,17 +233,17 @@ CLAUDE_CODE_WEB_UI_TEMPLATE = """
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
         }
-        
+
         .refresh-btn:hover {
             background: #4c51bf;
             transform: scale(1.1);
         }
-        
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
+
         .fade-in {
             animation: fadeIn 0.6s ease-out;
         }
@@ -255,7 +255,7 @@ CLAUDE_CODE_WEB_UI_TEMPLATE = """
             <h1>🤖 Claude Code Web UI</h1>
             <p>AI-Powered Development Dashboard with Slack Integration</p>
         </div>
-        
+
         <div class="metrics fade-in">
             <div class="metric-card">
                 <div class="metric-number">{{ completed_tasks }}</div>
@@ -274,7 +274,7 @@ CLAUDE_CODE_WEB_UI_TEMPLATE = """
                 <div class="metric-label">アクティブプロジェクト</div>
             </div>
         </div>
-        
+
         <div class="dashboard fade-in">
             <div class="card">
                 <h3>🎯 プロジェクト概要</h3>
@@ -286,7 +286,7 @@ CLAUDE_CODE_WEB_UI_TEMPLATE = """
                 </div>
                 <p>{{ completion_rate }}% 完了</p>
             </div>
-            
+
             <div class="card">
                 <h3>🔗 Slack MCP 統合</h3>
                 <p><strong>ステータス:</strong> <span class="status-badge status-completed">接続済み</span></p>
@@ -297,7 +297,7 @@ CLAUDE_CODE_WEB_UI_TEMPLATE = """
                 </div>
                 <button class="btn" onclick="sendTestNotification()">テスト通知送信</button>
             </div>
-            
+
             <div class="card">
                 <h3>🚀 Super Claude 機能</h3>
                 <p><strong>AI統合:</strong> 完全実装済み</p>
@@ -306,7 +306,7 @@ CLAUDE_CODE_WEB_UI_TEMPLATE = """
                 <p><strong>自動化:</strong> 実装済み</p>
                 <button class="btn" onclick="launchSuperClaude()">Super Claude 起動</button>
             </div>
-            
+
             <div class="card">
                 <h3>📊 システム監視</h3>
                 <p><strong>メモリ使用量:</strong> {{ memory_usage }}%</p>
@@ -316,7 +316,7 @@ CLAUDE_CODE_WEB_UI_TEMPLATE = """
                 <button class="btn" onclick="showSystemMetrics()">詳細メトリクス</button>
             </div>
         </div>
-        
+
         <div class="task-list fade-in">
             <h3>📋 現在のタスク一覧</h3>
             {% for task in tasks %}
@@ -330,9 +330,9 @@ CLAUDE_CODE_WEB_UI_TEMPLATE = """
             {% endfor %}
         </div>
     </div>
-    
+
     <button class="refresh-btn" onclick="refreshDashboard()">🔄</button>
-    
+
     <script>
         function sendTestNotification() {
             fetch('/api/test-notification', {
@@ -357,25 +357,25 @@ CLAUDE_CODE_WEB_UI_TEMPLATE = """
                 alert('❌ エラーが発生しました: ' + error);
             });
         }
-        
+
         function launchSuperClaude() {
             alert('🚀 Super Claude機能は別画面で起動します');
             // 実際の実装では、Super Claudeシステムを起動する処理を追加
         }
-        
+
         function showSystemMetrics() {
             window.open('/api/system-metrics', '_blank');
         }
-        
+
         function refreshDashboard() {
             location.reload();
         }
-        
+
         // Auto-refresh every 30 seconds
         setInterval(function() {
             refreshDashboard();
         }, 30000);
-        
+
         // Add fade-in animation on load
         document.addEventListener('DOMContentLoaded', function() {
             const elements = document.querySelectorAll('.fade-in');
