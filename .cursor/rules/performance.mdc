@@ -1,0 +1,186 @@
+
+---
+description: "パフォーマンス最適化ルール - Core Web Vitals、フロントエンド・バックエンド最適化、監視"
+globs:
+  - "**/*.{js,jsx,ts,tsx,vue,html,css,scss,sass,less}"
+  - "**/*.{py,java,go,rb,php}"
+  - "**/package.json"
+  - "**/webpack.config.*"
+  - "**/next.config.*"
+  - "**/vite.config.*"
+alwaysApply: true
+---
+
+# performance.mdc - パフォーマンス最適化ルール
+
+## 🚀 Core Web Vitals
+
+### 目標値
+- **LCP (Largest Contentful Paint)**: < 2.5秒
+- **FID (First Input Delay)**: < 100ms
+- **CLS (Cumulative Layout Shift)**: < 0.1
+- **TTFB (Time to First Byte)**: < 800ms
+
+### 測定・監視
+```javascript
+// Web Vitals測定
+import { getCLS, getFID, getFCP, getLCP, getTTFB } from 'web-vitals';
+
+getCLS(console.log);
+getFID(console.log);
+getFCP(console.log);
+getLCP(console.log);
+getTTFB(console.log);
+```
+
+## ⚡ フロントエンド最適化
+
+### JavaScript最適化
+- **コード分割**: ルート別・機能別にバンドル分割
+- **遅延読み込み**: 非重要コンポーネントの lazy loading
+- **Tree Shaking**: 未使用コードの削除
+- **バンドル分析**: webpack-bundle-analyzer の活用
+
+```javascript
+// 動的インポート例
+const LazyComponent = lazy(() => import('./LazyComponent'));
+
+// 遅延読み込み
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      // 要素が表示されたときに読み込み
+    }
+  });
+});
+```
+
+### CSS最適化
+- **Critical CSS**: 初期表示に必要なCSS のインライン化
+- **CSS圧縮**: 本番環境での圧縮・最小化
+- **未使用CSS削除**: PurgeCSS の活用
+- **CSS-in-JS最適化**: 適切なスタイル管理
+
+### 画像・メディア最適化
+- **次世代フォーマット**: WebP/AVIF の使用
+- **レスポンシブ画像**: srcset による解像度対応
+- **画像圧縮**: 80-85% 品質での圧縮
+- **遅延読み込み**: loading="lazy" 属性の活用
+
+```html
+<!-- レスポンシブ画像例 -->
+<picture>
+  <source srcset="image.avif" type="image/avif">
+  <source srcset="image.webp" type="image/webp">
+  <img src="image.jpg" alt="説明" loading="lazy">
+</picture>
+```
+
+## ⚙️ バックエンド最適化
+
+### データベース最適化
+- **インデックス**: クエリに適したインデックス設計
+- **クエリ最適化**: N+1問題の回避
+- **コネクションプール**: 効率的なDB接続管理
+- **ページネーション**: 大量データの分割取得
+
+```sql
+-- インデックス例
+CREATE INDEX idx_user_email ON users(email);
+CREATE INDEX idx_post_created_at ON posts(created_at DESC);
+```
+
+### キャッシュ戦略
+- **ブラウザキャッシュ**: 適切なキャッシュヘッダー設定
+- **CDN**: 静的コンテンツの配信最適化
+- **Redis**: サーバーサイドキャッシュ
+- **メモリキャッシュ**: アプリケーションレベルキャッシュ
+
+### API最適化
+- **レスポンス圧縮**: gzip/brotli 圧縮の有効化
+- **バッチ処理**: 複数リクエストの集約
+- **非同期処理**: 重い処理のバックグラウンド実行
+- **レート制限**: 適切なリクエスト制限
+
+## 📊 パフォーマンス監視
+
+### 監視ツール
+- **Google PageSpeed Insights**: 定期的なパフォーマンス測定
+- **Lighthouse CI**: CI/CDでの自動測定
+- **WebPageTest**: 詳細なパフォーマンス分析
+- **Real User Monitoring (RUM)**: 実際のユーザー体験測定
+
+### アラート設定
+```javascript
+// パフォーマンス閾値例
+const performanceThresholds = {
+  LCP: 2500,    // 2.5秒
+  FID: 100,     // 100ms
+  CLS: 0.1,     // 0.1
+  errorRate: 0.01  // 1%
+};
+```
+
+### 改善アクション
+- **月次レビュー**: パフォーマンス指標の定期確認
+- **ボトルネック特定**: プロファイリングツールの活用
+- **A/Bテスト**: 最適化効果の検証
+- **継続的改善**: 小さな改善の積み重ね
+
+## 🛠️ 開発・ビルド最適化
+
+### ビルド最適化
+```javascript
+// webpack.config.js 例
+module.exports = {
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
+};
+```
+
+### 開発環境
+- **ホットリロード**: 効率的な開発サイクル
+- **ソースマップ**: デバッグの効率化
+- **ESLint/Prettier**: コード品質とパフォーマンスの維持
+- **TypeScript**: 型安全性によるランタイムエラー削減
+
+## 🚨 パフォーマンス・アンチパターン
+
+### 避けるべきパターン
+- **メインスレッドブロック**: 重い同期処理
+- **メモリリーク**: 適切でないイベントリスナー管理
+- **過度なDOM操作**: 仮想DOM を活用した効率的な更新
+- **未最適化画像**: 大きすぎる画像ファイル
+
+### ベストプラクティス
+- **プロファイリング**: 実測に基づく最適化
+- **段階的改善**: 影響の大きい部分から優先的に対応
+- **ユーザー体験重視**: 指標よりも実際のUX を優先
+- **継続的測定**: 定期的なパフォーマンス確認
+
+## 📈 成果測定
+
+### KPI設定
+- **ページ読み込み速度**: 3秒以内
+- **操作レスポンス**: 100ms以内
+- **バウンス率**: 30%以下
+- **コンバージョン率**: パフォーマンス改善による向上
+
+---
+
+**パフォーマンス最適化は継続的なプロセスです。ユーザー体験の向上を常に意識し、データに基づいた改善を続けることが重要です。**

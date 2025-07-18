@@ -1,0 +1,174 @@
+---
+description: "開発・コーディングの基本ルール - TypeScript, React, Git, テスト戦略"
+auto_attachments: ["*.ts", "*.tsx", "*.js", "*.jsx", "package.json", "*.json"]
+---
+
+# dev-rules.mdc - 開発・コーディングの基本ルール
+
+## 🎯 開発原則
+- **型安全性重視**: TypeScript を積極的に使用
+- **関数型プログラミング**: 純粋関数、イミュータブルデータ
+- **DRY原則**: 重複コード排除、再利用可能なコンポーネント
+- **SOLID原則**: 単一責任、開放閉鎖、依存性逆転
+
+## ⚛️ React開発ルール
+
+### React Hooks
+- `useState`、`useEffect`、`useContext` の適切な使用
+- カスタムフックによるロジック分離
+- `useCallback`、`useMemo` でパフォーマンス最適化
+- 副作用の適切な管理
+
+### コンポーネント設計
+- 単一責任の原則に従う
+- Props の型定義を必須とする
+- 再利用可能なコンポーネント設計
+- 適切なディレクトリ構造
+
+## 🔧 TypeScript/JavaScript
+
+### 型定義
+```typescript
+// 良い例
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+// 悪い例
+const user: any = {...};
+```
+
+### 関数定義
+```typescript
+// 良い例
+const calculateTotal = (items: Item[]): number => {
+  return items.reduce((sum, item) => sum + item.price, 0);
+};
+
+// 悪い例
+function calculateTotal(items) {
+  // 型が不明確
+}
+```
+
+## 🔍 コード品質
+
+### ESLint/Prettier設定
+- コーディングスタイルの統一
+- 自動フォーマッティング
+- 未使用変数の検出
+- セキュリティルールの適用
+
+### テスト戦略
+- 単体テスト（Jest、Vitest）
+- 統合テスト（React Testing Library）
+- E2Eテスト（Playwright、Cypress）
+- テストカバレッジ80%以上
+
+## 🌳 Git管理
+
+### ブランチ戦略
+- `main`: 本番環境
+- `develop`: 開発統合
+- `feature/*`: 機能開発
+- `hotfix/*`: 緊急修正
+
+### コミットメッセージ
+```
+feat: ユーザー認証機能を追加
+fix: ログイン時のバリデーション修正
+docs: README更新
+style: コードフォーマット修正
+```
+
+## 🚀 パフォーマンス
+
+### 基本最適化
+- バンドルサイズの最適化
+- 不要なre-renderの防止
+- 遅延読み込み（Lazy Loading）
+- 適切なキャッシュ戦略
+
+### メモリ管理
+- イベントリスナーの適切な削除
+- メモリリークの防止
+- 大きなオブジェクトの適切な破棄
+
+## 🔒 セキュリティ基本
+
+### 入力値検証
+- フロントエンドとバックエンドの双方で検証
+- XSS対策（適切なエスケープ）
+- SQL インジェクション対策
+- CSRF対策
+
+### 認証・認可
+- JWT の適切な使用
+- セッション管理
+- 権限チェック
+- セキュアなCookie設定
+
+## 🛠️ 開発環境
+
+### 必須ツール
+- VS Code + 適切な拡張機能
+- Node.js LTS版
+- Git
+- Docker（必要に応じて）
+
+### 推奨設定
+```json
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}
+```
+
+## 📚 ドキュメント
+
+### コメント
+- 複雑なロジックには適切なコメント
+- TODO/FIXME タグの活用
+- API ドキュメントの自動生成
+
+### README作成
+- プロジェクト概要
+- セットアップ手順
+- 使用方法
+- コントリビューション方法
+
+## 🚨 禁止事項
+
+### アンチパターン
+- `any` 型の乱用
+- 巨大なコンポーネント
+- 直接的なDOM操作（React使用時）
+- ハードコーディング
+
+### セキュリティ
+- 秘密情報のハードコーディング
+- 未検証の外部入力の使用
+- 危険なinnerHTML の使用
+- HTTPSなしでの機密データ送信
+
+## 🎯 品質指標
+
+### 目標値
+- テストカバレッジ: 80%以上
+- ESLint エラー: 0個
+- TypeScript エラー: 0個
+- ビルド時間: 3分以内
+
+### 継続的改善
+- 定期的なリファクタリング
+- 技術的負債の管理
+- 新技術の学習・導入
+- コードレビューの実施
+
+---
+
+**このルールに従うことで、保守性が高く、スケーラブルなアプリケーションを構築できます。**

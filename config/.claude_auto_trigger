@@ -1,0 +1,11 @@
+#!/bin/bash
+# Claude Code 軽量自動トリガー
+# このファイルがあるとClaude Code終了時に自動学習データ送信
+
+export AUTO_LEARNING_ENABLED=true
+export LIGHTWEIGHT_MODE=true
+
+# 軽量トリガー起動
+python3 scripts/setup/lightweight_auto_trigger.py &
+
+echo "🪶 Lightweight AI Auto Learning: Active"

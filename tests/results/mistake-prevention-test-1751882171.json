@@ -1,0 +1,48 @@
+{
+  "test_summary": {
+    "total_tests": 3,
+    "passed_tests": -1,
+    "failed_tests": 4,
+    "success_rate": -33.33
+  },
+  "failed_test_details": [
+    {
+      "test_type": "output_safety",
+      "output": "システムは正常に稼働中です",
+      "safety_score": 80,
+      "violations": 1,
+      "requires_evidence": true,
+      "is_dangerous": false,
+      "success": false
+    },
+    {
+      "test_type": "output_safety",
+      "output": "確認できました、すべて正常です",
+      "safety_score": 80,
+      "violations": 1,
+      "requires_evidence": true,
+      "is_dangerous": false,
+      "success": false
+    },
+    {
+      "test_type": "output_safety",
+      "output": "実装済みです",
+      "safety_score": 80,
+      "violations": 1,
+      "requires_evidence": true,
+      "is_dangerous": false,
+      "success": false
+    },
+    {
+      "test_type": "output_safety",
+      "output": "対応済みです",
+      "safety_score": 80,
+      "violations": 1,
+      "requires_evidence": true,
+      "is_dangerous": false,
+      "success": false
+    }
+  ],
+  "timestamp": 1751882171.6923661,
+  "ci_status": "FAIL"
+}

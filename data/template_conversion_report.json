@@ -1,0 +1,668 @@
+{
+  "conversion_date": "2025-07-10T14:03:13.968776",
+  "dry_run": false,
+  "backup_created": false,
+  "files_found": 108,
+  "files_converted": 108,
+  "files_failed": 0,
+  "converted_files": [
+    [
+      "startup_checklist.md",
+      [
+        "Applied special handler for startup_checklist.md",
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "README.md",
+      [
+        "Applied special handler for README.md",
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "Index.md",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "CLAUDE.md",
+      [
+        "Applied special handler for CLAUDE.md",
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "misc/startup_checklist.md",
+      [
+        "Applied special handler for startup_checklist.md",
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/startup_checklist.md",
+      [
+        "Applied special handler for startup_checklist.md",
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/conversation_logs/conversation_20250708_171637.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250709_140835.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250708_220419.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250709_142310.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250708_214804.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250709_105249.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250709_101748.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250708_170947.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250710_112534.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/governance_policies.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/risk_contexts.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250708_170834.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250708_171957.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250709_092004.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250710_113524.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250709_114848.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250709_042214.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250709_101914.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250709_110903.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250709_041950.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250709_101309.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250709_114832.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250709_114407.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250708_221113.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250709_103245.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250709_131050.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250709_194622.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250709_114109.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250708_214354.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250708_221841.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250709_114620.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250709_092216.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250709_042138.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250709_140820.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250709_103146.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/nist_ai_rmf/compliance_report_20250710_114114.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/continuous_improvement/improvement_report_20250709_092004.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/continuous_improvement/improvement_report_20250710_113524.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/continuous_improvement/improvement_report_20250709_110903.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/continuous_improvement/improvement_report_20250709_101914.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/continuous_improvement/improvement_report_20250709_042214.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/continuous_improvement/improvement_report_20250709_041950.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/continuous_improvement/improvement_report_20250709_114832.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/continuous_improvement/improvement_report_20250709_105219.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/continuous_improvement/improvement_report_20250709_101309.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/continuous_improvement/improvement_report_20250709_105249.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/continuous_improvement/improvement_report_20250709_101748.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/continuous_improvement/improvement_report_20250709_142310.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/continuous_improvement/improvement_report_20250710_112534.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/continuous_improvement/improvement_report_20250708_221638.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/continuous_improvement/improvement_report_20250708_221841.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/continuous_improvement/improvement_report_20250709_114620.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/continuous_improvement/improvement_report_20250709_092216.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/continuous_improvement/improvement_report_20250710_114114.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/continuous_improvement/improvement_report_20250709_140820.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/continuous_improvement/improvement_report_20250709_103146.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/continuous_improvement/improvement_report_20250709_140908.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/continuous_improvement/improvement_report_20250709_042138.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/continuous_improvement/learning_patterns.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/continuous_improvement/improvement_report_20250709_104626.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/continuous_improvement/improvement_report_20250709_114407.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/continuous_improvement/improvement_report_20250709_103245.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/continuous_improvement/improvement_report_20250709_114109.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/continuous_improvement/improvement_report_20250709_194622.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "runtime/continuous_improvement/improvement_report_20250709_131050.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "tests/integration_test.py",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      ".specstory/history/2025-07-08_05-25Z-ブランチ切り替えのための変更保存.md",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      ".specstory/history/2025-07-08_05-25Z-ブランチ切り替えのための変更保存 2.md",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "docs/TEMPLATE_VS_PRODUCT_ARCHITECTURE.md",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "docs/analysis/final_evaluation_request.md",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "docs/memory/INHERITANCE_REQUIREMENTS.md",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "docs/01_concepts/AI_CONSTITUTION.md",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "docs/04_reference/USER_FEEDBACK_INTEGRATION_REPORT.md",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "docs/04_reference/SYSTEM_FLOW_VALIDATION_REPORT.md",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "docs/operations/SYSTEM_ACTIVATION.md",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "docs/governance/VIOLATION_PREVENTION.md",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "scripts/system_shutdown.sh",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "scripts/system_startup.sh",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "scripts/integration/setup_integration.sh",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "scripts/hooks/pre_response_validator.py",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "scripts/hooks/periodic_self_monitor.py",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "src/ui/mandatory_real_data_enforcer.py",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "src/ui/enhanced_dashboard.py",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "src/ui/comprehensive_monitoring_dashboard.py",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "src/ui/test_improved_dashboard.py",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "src/ui/visual_dashboard.py",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "src/memory/breakthrough_memory_system.py",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "src/memory/core/session-records/current-session.json",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "src/ai/conversation_exit_todo_protocol.py",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "src/ai/mistake_prevention_enforcer.py",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "src/ai/continuous_improvement.py",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "src/ai/constitutional_ai.py",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "src/ai/ai_organization_system.py",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "src/ai/nist_ai_rmf.py",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "src/ai/evaluation_harness_metrics.py",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "src/ai/english_processing_enforcement.py",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "src/ai/error_recovery_system.py",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "src/ai/role_generation_engine.py",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "src/ai/mistake_counter_system.py",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "src/ai/multi_agent_monitor.py",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "src/hooks/conversation_logger.py",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ],
+    [
+      "src/data/dashboard_provider.py",
+      [
+        "Applied pattern: 88回 -> {{mistake_count}}回"
+      ]
+    ]
+  ],
+  "failed_files": [],
+  "conversion_log": [
+    "Added template targets to Makefile",
+    "Created template configuration files"
+  ]
+}

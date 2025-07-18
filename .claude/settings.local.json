@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(make:*)",
+      "Bash(/doctor)",
+      "Bash(claude /doctor)"
+    ],
+    "deny": []
+  }
+}

@@ -1,0 +1,44 @@
+{
+    "folders": [
+        {
+            "name": "Coding Rule 2 - Root",
+            "path": "."
+        },
+        {
+            "name": "Scripts",
+            "path": "./scripts"
+        },
+        {
+            "name": "Source Code",
+            "path": "./src"
+        },
+        {
+            "name": "Tests",
+            "path": "./tests"
+        },
+        {
+            "name": "Documentation",
+            "path": "./docs"
+        },
+        {
+            "name": "Configuration",
+            "path": "./config"
+        }
+    ],
+    "settings": {
+        "python.defaultInterpreterPath": "./gemini_env/bin/python",
+        "terminal.integrated.defaultProfile.osx": "zsh",
+        "terminal.integrated.env.osx": {
+            "PROJECT_ROOT": "${workspaceFolder}"
+        }
+    },
+    "extensions": {
+        "recommendations": [
+            "ms-python.python",
+            "ms-python.flake8",
+            "ms-python.black-formatter",
+            "davidanson.vscode-markdownlint",
+            "yzhang.markdown-all-in-one"
+        ]
+    }
+}

@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "postgres": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-postgres",
+        "--connection-string", 
+        "postgresql://dd@localhost:5432/president_ai"
+      ],
+      "env": {
+        "POSTGRES_CONNECTION_STRING": "postgresql://dd@localhost:5432/president_ai"
+      }
+    }
+  }
+}

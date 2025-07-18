@@ -1,0 +1,258 @@
+#!/usr/bin/env python3
+"""
+スマートセッション確認システム - ベストプラクティス統合版
+段階的確認 + キャッシュ + 自動化 + 軽量テンプレート
+"""
+
+import json
+import os
+import subprocess
+import time
+from datetime import datetime, timedelta
+from pathlib import Path
+
+class SmartSessionChecker:
+    def __init__(self):
+        self.project_root = Path.cwd()
+        self.cache_file = self.project_root / "runtime" / "session_check_cache.json"
+        self.cache_validity = timedelta(minutes=30)  # 30分間有効
+        
+        # 確認レベル定義
+        self.check_levels = {
+            "SIMPLE": {
+                "checks": ["cursor_rules", "president_status"],
+                "cache_duration": 30,  # 30分
+                "template": "quick"
+            },
+            "MEDIUM": {
+                "checks": ["cursor_rules", "president_status", "system_status", "recent_violations"],
+                "cache_duration": 15,  # 15分
+                "template": "standard" 
+            },
+            "COMPLEX": {
+                "checks": ["cursor_rules", "president_status", "system_status", "violations", "memory_state"],
+                "cache_duration": 5,   # 5分
+                "template": "detailed"
+            },
+            "CRITICAL": {
+                "checks": ["full_audit"],
+                "cache_duration": 0,   # キャッシュなし
+                "template": "complete"
+            }
+        }
+    
+    def load_cache(self):
+        """キャッシュ読み込み"""
+        if self.cache_file.exists():
+            try:
+                with open(self.cache_file, 'r') as f:
+                    cache = json.load(f)
+                    
+                # 有効期限チェック
+                cache_time = datetime.fromisoformat(cache.get('timestamp', '2000-01-01'))
+                if datetime.now() - cache_time < self.cache_validity:
+                    return cache
+            except:
+                pass
+        return {}
+    
+    def save_cache(self, results):
+        """キャッシュ保存"""
+        cache_data = {
+            "timestamp": datetime.now().isoformat(),
+            "results": results
+        }
+        
+        self.cache_file.parent.mkdir(parents=True, exist_ok=True)
+        with open(self.cache_file, 'w') as f:
+            json.dump(cache_data, f, indent=2)
+    
+    def check_cursor_rules(self, force=False):
+        """Cursor Rules確認"""
+        cache_key = "cursor_rules"
+        cached = self.load_cache()
+        
+        if not force and cache_key in cached.get('results', {}):
+            return cached['results'][cache_key]
+        
+        try:
+            globals_path = self.project_root / "src" / "cursor-rules" / "globals.mdc"
+            if globals_path.exists():
+                content = globals_path.read_text()
+                if "絶対禁止ルール" in content and "Function-Based Grouping" in content:
+                    return {"status": "✅", "details": "180行ルール確認済み", "violations": 0}
+            
+            return {"status": "❌", "details": "cursor-rules未確認", "violations": 1}
+        except Exception as e:
+            return {"status": "⚠️", "details": f"確認エラー: {e}", "violations": 1}
+    
+    def check_president_status(self, force=False):
+        """PRESIDENT状態確認"""
+        cache_key = "president_status"
+        cached = self.load_cache()
+        
+        if not force and cache_key in cached.get('results', {}):
+            return cached['results'][cache_key]
+        
+        try:
+            session_file = self.project_root / "runtime" / "secure_state" / "president_session.json"
+            if session_file.exists():
+                session_data = json.loads(session_file.read_text())
+                if session_data.get('president_declared') == True:
+                    return {"status": "✅", "details": "PRESIDENT宣言済み", "violations": 0}
+            
+            return {"status": "❌", "details": "PRESIDENT宣言必要", "violations": 1}
+        except Exception as e:
+            return {"status": "⚠️", "details": f"確認エラー: {e}", "violations": 1}
+    
+    def check_system_status(self, force=False):
+        """システム状況確認"""
+        cache_key = "system_status"
+        cached = self.load_cache()
+        
+        if not force and cache_key in cached.get('results', {}):
+            return cached['results'][cache_key]
+        
+        try:
+            result = subprocess.run(
+                ["python3", "scripts/hooks/system_status_display.py"],
+                capture_output=True, text=True, timeout=10
+            )
+            
+            if result.returncode == 0:
+                output = result.stdout
+                if "✅" in output and "❌" not in output:
+                    return {"status": "✅", "details": "システム正常", "violations": 0}
+                else:
+                    return {"status": "⚠️", "details": "システム警告あり", "violations": 1}
+            
+            return {"status": "❌", "details": "システム確認失敗", "violations": 1}
+        except Exception as e:
+            return {"status": "⚠️", "details": f"確認エラー: {e}", "violations": 1}
+    
+    def check_recent_violations(self, force=False):
+        """最近の違反確認"""
+        cache_key = "recent_violations"
+        cached = self.load_cache()
+        
+        if not force and cache_key in cached.get('results', {}):
+            return cached['results'][cache_key]
+        
+        try:
+            violations_file = self.project_root / "runtime" / "thinking_violations.json"
+            if violations_file.exists():
+                violations = json.loads(violations_file.read_text())
+                total = violations.get('total_violations', 0)
+                
+                if total == 0:
+                    return {"status": "✅", "details": "違反記録なし", "violations": 0}
+                elif total <= 5:
+                    return {"status": "⚠️", "details": f"違反{total}件", "violations": total}
+                else:
+                    return {"status": "❌", "details": f"重大違反{total}件", "violations": total}
+            
+            return {"status": "✅", "details": "違反記録ファイルなし", "violations": 0}
+        except Exception as e:
+            return {"status": "⚠️", "details": f"確認エラー: {e}", "violations": 1}
+    
+    def generate_template(self, level, results):
+        """応答テンプレート生成"""
+        total_violations = sum(r.get('violations', 0) for r in results.values())
+        
+        if level == "SIMPLE":
+            return f"""🔍 **Quick Check** 
+✅ Rules: cursor{results.get('cursor_rules', {}).get('status', '❓')} president{results.get('president_status', {}).get('status', '❓')}
+✅ Status: violations:{total_violations} mode:{level}"""
+        
+        elif level == "MEDIUM":
+            return f"""🔍 **Standard Check**
+✅ Rules: cursor{results.get('cursor_rules', {}).get('status', '❓')} president{results.get('president_status', {}).get('status', '❓')}
+✅ System: {results.get('system_status', {}).get('status', '❓')} violations:{total_violations}
+✅ Mode: {level} → proceed"""
+        
+        elif level == "COMPLEX":
+            status_summary = " ".join([f"{k}:{v.get('status', '❓')}" for k, v in results.items()])
+            return f"""📊 **Detailed Check**
+{status_summary}
+Total violations: {total_violations}
+Mode: {level} → detailed analysis"""
+        
+        else:  # CRITICAL
+            return f"""🔴 **Complete Audit**
+PRESIDENT確認: {results.get('president_status', {}).get('details', 'Unknown')}
+システム状況: {results.get('system_status', {}).get('details', 'Unknown')}
+記録ログ確認: 違反{total_violations}件
+Mode: {level} → full compliance"""
+    
+    def smart_check(self, task_level="SIMPLE", force_refresh=False):
+        """スマート確認実行"""
+        if task_level not in self.check_levels:
+            task_level = "SIMPLE"
+        
+        config = self.check_levels[task_level]
+        results = {}
+        
+        # 各確認項目実行
+        for check_name in config["checks"]:
+            if check_name == "cursor_rules":
+                results[check_name] = self.check_cursor_rules(force_refresh)
+            elif check_name == "president_status":
+                results[check_name] = self.check_president_status(force_refresh)
+            elif check_name == "system_status":
+                results[check_name] = self.check_system_status(force_refresh)
+            elif check_name == "recent_violations":
+                results[check_name] = self.check_recent_violations(force_refresh)
+            elif check_name == "full_audit":
+                # CRITICAL時は全項目強制実行
+                results.update({
+                    "cursor_rules": self.check_cursor_rules(True),
+                    "president_status": self.check_president_status(True),
+                    "system_status": self.check_system_status(True),
+                    "violations": self.check_recent_violations(True)
+                })
+        
+        # キャッシュ保存（CRITICAL以外）
+        if task_level != "CRITICAL":
+            self.save_cache(results)
+        
+        # テンプレート生成
+        template = self.generate_template(task_level, results)
+        
+        return {
+            "level": task_level,
+            "results": results,
+            "template": template,
+            "violations": sum(r.get('violations', 0) for r in results.values()),
+            "success": all(r.get('status') in ['✅', '⚠️'] for r in results.values())
+        }
+
+def main():
+    """メイン処理"""
+    import argparse
+    
+    parser = argparse.ArgumentParser(description="スマートセッション確認")
+    parser.add_argument("--level", choices=["SIMPLE", "MEDIUM", "COMPLEX", "CRITICAL"], 
+                       default="SIMPLE", help="確認レベル")
+    parser.add_argument("--force", action="store_true", help="キャッシュ無視")
+    parser.add_argument("--template-only", action="store_true", help="テンプレートのみ出力")
+    args = parser.parse_args()
+    
+    checker = SmartSessionChecker()
+    result = checker.smart_check(args.level, args.force)
+    
+    if args.template_only:
+        print(result["template"])
+    else:
+        print("🧠 Smart Session Check")
+        print("=" * 30)
+        print(f"Level: {result['level']}")
+        print(f"Violations: {result['violations']}")
+        print(f"Success: {result['success']}")
+        print("\nTemplate:")
+        print(result["template"])
+        
+        if result['violations'] > 0:
+            print("\n⚠️ 違反検出 - 詳細確認推奨")
+
+if __name__ == "__main__":
+    main()

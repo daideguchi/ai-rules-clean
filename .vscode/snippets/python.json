@@ -1,0 +1,48 @@
+{
+    "Python Script Header": {
+        "prefix": "pyheader",
+        "body": [
+            "#!/usr/bin/env python3",
+            "\"\"\"",
+            "$1",
+            "\"\"\"",
+            "",
+            "import os",
+            "import sys",
+            "from pathlib import Path",
+            "",
+            "# プロジェクトルート設定",
+            "PROJECT_ROOT = Path(__file__).resolve().parents[1]",
+            "sys.path.insert(0, str(PROJECT_ROOT))",
+            "",
+            "def main():",
+            "    \"\"\"メイン関数\"\"\"",
+            "    $0",
+            "",
+            "if __name__ == \"__main__\":",
+            "    main()"
+        ],
+        "description": "Python script header with project setup"
+    },
+    "AI Organization Logger": {
+        "prefix": "ailog",
+        "body": [
+            "import logging",
+            "from src.memory.unified_log_system import get_logger",
+            "",
+            "logger = get_logger(__name__)"
+        ],
+        "description": "AI Organization logging setup"
+    },
+    "President State Manager": {
+        "prefix": "president",
+        "body": [
+            "from src.memory.president_state_system import PresidentStateManager",
+            "",
+            "state_manager = PresidentStateManager()",
+            "current_state = state_manager.get_current_state()",
+            "$0"
+        ],
+        "description": "President state management setup"
+    }
+}

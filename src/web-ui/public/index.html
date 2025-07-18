@@ -1,389 +1,376 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Claude Code Web UI</title>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #0d1117;
-            color: #e6edf3;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
         }
-
+        
         .header {
-            background: #161b22;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             padding: 1rem 2rem;
-            border-bottom: 1px solid #30363d;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
         }
-
+        
         .header h1 {
-            color: #f0f6fc;
-            font-size: 1.5rem;
-        }
-
-        .status {
+            color: #2c3e50;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 0.9rem;
         }
-
+        
+        .header .subtitle {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .card h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
         .status-indicator {
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            background: #238636;
+            background: #e74c3c;
+            animation: pulse 2s infinite;
         }
-
-        .main-container {
-            flex: 1;
+        
+        .status-indicator.active {
+            background: #27ae60;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .metric {
             display: flex;
-            overflow: hidden;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #ecf0f1;
         }
-
-        .sidebar {
-            width: 300px;
-            background: #0d1117;
-            border-right: 1px solid #30363d;
-            padding: 1rem;
+        
+        .metric:last-child {
+            border-bottom: none;
+        }
+        
+        .metric-label {
+            color: #7f8c8d;
+        }
+        
+        .metric-value {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        .log-container {
+            grid-column: 1 / -1;
+            max-height: 300px;
             overflow-y: auto;
-        }
-
-        .project-info {
-            background: #161b22;
+            background: #2c3e50;
+            color: #ecf0f1;
+            border-radius: 12px;
             padding: 1rem;
-            border-radius: 6px;
-            margin-bottom: 1rem;
-            border: 1px solid #30363d;
-        }
-
-        .project-info h3 {
-            color: #f0f6fc;
-            margin-bottom: 0.5rem;
-        }
-
-        .project-info p {
-            color: #8b949e;
-            font-size: 0.9rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .chat-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .chat-output {
-            flex: 1;
-            padding: 1rem;
-            overflow-y: auto;
             font-family: 'Monaco', 'Menlo', monospace;
-            font-size: 0.9rem;
-            line-height: 1.4;
+            font-size: 0.85rem;
         }
-
-        .chat-input-container {
-            padding: 1rem;
-            background: #161b22;
-            border-top: 1px solid #30363d;
+        
+        .log-entry {
+            margin-bottom: 0.5rem;
+            padding: 0.25rem 0;
         }
-
-        .chat-input {
-            width: 100%;
-            padding: 0.75rem;
-            background: #0d1117;
-            border: 1px solid #30363d;
-            border-radius: 6px;
-            color: #e6edf3;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-size: 1rem;
-            resize: vertical;
-            min-height: 60px;
+        
+        .log-timestamp {
+            color: #95a5a6;
+            margin-right: 0.5rem;
         }
-
-        .chat-input:focus {
-            outline: none;
-            border-color: #1f6feb;
-        }
-
-        .send-button {
-            margin-top: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: #238636;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
-
-        .send-button:hover {
-            background: #2ea043;
-        }
-
-        .send-button:disabled {
-            background: #30363d;
-            cursor: not-allowed;
-        }
-
-        .message {
-            margin-bottom: 1rem;
-            padding: 0.75rem;
-            border-radius: 6px;
-            white-space: pre-wrap;
-        }
-
-        .message.user {
-            background: #1f6feb;
-            color: white;
-            margin-left: 2rem;
-        }
-
-        .message.system {
-            background: #161b22;
-            border: 1px solid #30363d;
-            color: #8b949e;
-        }
-
-        .message.stdout {
-            background: #0d1117;
-            border-left: 3px solid #238636;
-            color: #e6edf3;
-        }
-
-        .message.stderr {
-            background: #0d1117;
-            border-left: 3px solid #da3633;
-            color: #f85149;
-        }
-
-        .message.error {
-            background: #0d1117;
-            border-left: 3px solid #da3633;
-            color: #f85149;
-        }
-
-        .timestamp {
-            font-size: 0.8rem;
-            color: #8b949e;
-            margin-bottom: 0.3rem;
-        }
-
-        .quick-commands {
+        
+        .controls {
+            display: flex;
+            gap: 1rem;
             margin-top: 1rem;
         }
-
-        .quick-commands h4 {
-            color: #f0f6fc;
-            margin-bottom: 0.5rem;
-        }
-
-        .quick-command {
-            display: block;
-            width: 100%;
-            padding: 0.5rem;
-            margin-bottom: 0.3rem;
-            background: #21262d;
-            border: 1px solid #30363d;
-            border-radius: 4px;
-            color: #e6edf3;
-            text-decoration: none;
-            font-size: 0.9rem;
+        
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
             cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
-
-        .quick-command:hover {
-            background: #30363d;
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
-
+        
+        .btn.secondary {
+            background: linear-gradient(45deg, #95a5a6, #7f8c8d);
+        }
+        
+        .connection-status {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .connection-status.connected {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .connection-status.disconnected {
+            background: #e74c3c;
+            color: white;
+        }
+        
         @media (max-width: 768px) {
-            .sidebar {
-                width: 100%;
-                position: absolute;
-                top: 0;
-                left: -100%;
-                height: 100%;
-                z-index: 100;
-                transition: left 0.3s ease;
+            .container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                margin: 1rem auto;
             }
-
-            .sidebar.open {
-                left: 0;
-            }
-
-            .main-container {
-                flex-direction: column;
+            
+            .header {
+                padding: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Claude Code Web UI</h1>
-        <div class="status">
-            <div class="status-indicator" id="statusIndicator"></div>
-            <span id="statusText">Connected</span>
+    <div class="connection-status" id="connectionStatus">接続中...</div>
+    
+    <header class="header">
+        <h1>
+            🤖 Claude Code Web UI
+            <div class="status-indicator" id="systemStatus"></div>
+        </h1>
+        <div class="subtitle">Interactive Dashboard for Claude Development</div>
+    </header>
+    
+    <div class="container">
+        <div class="card">
+            <h2>📊 システム状態</h2>
+            <div id="systemMetrics">
+                <div class="metric">
+                    <span class="metric-label">サーバー稼働時間</span>
+                    <span class="metric-value" id="uptime">-</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">メモリ使用量</span>
+                    <span class="metric-value" id="memoryUsage">-</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Node.js バージョン</span>
+                    <span class="metric-value" id="nodeVersion">-</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">プラットフォーム</span>
+                    <span class="metric-value" id="platform">-</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>📋 タスク管理</h2>
+            <div id="taskMetrics">
+                <div class="metric">
+                    <span class="metric-label">アクティブタスク</span>
+                    <span class="metric-value" id="activeTasks">-</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">完了タスク</span>
+                    <span class="metric-value" id="completedTasks">-</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">保留タスク</span>
+                    <span class="metric-value" id="pendingTasks">-</span>
+                </div>
+            </div>
+            <div class="controls">
+                <button class="btn" onclick="refreshTasks()">🔄 更新</button>
+                <button class="btn secondary" onclick="clearLogs()">🗑️ ログクリア</button>
+            </div>
+        </div>
+        
+        <div class="card log-container">
+            <h2 style="color: #ecf0f1; margin-bottom: 1rem;">📝 リアルタイムログ</h2>
+            <div id="logs"></div>
         </div>
     </div>
 
-    <div class="main-container">
-        <div class="sidebar">
-            <div class="project-info" id="projectInfo">
-                <h3>Project Information</h3>
-                <p>Loading...</p>
-            </div>
-
-            <div class="quick-commands">
-                <h4>Quick Commands</h4>
-                <button class="quick-command" onclick="sendQuickCommand('help')">Help</button>
-                <button class="quick-command" onclick="sendQuickCommand('status')">Status</button>
-                <button class="quick-command" onclick="sendQuickCommand('ls')">List Files</button>
-                <button class="quick-command" onclick="sendQuickCommand('git status')">Git Status</button>
-                <button class="quick-command" onclick="sendQuickCommand('make')">Make</button>
-            </div>
-        </div>
-
-        <div class="chat-container">
-            <div class="chat-output" id="chatOutput"></div>
-            <div class="chat-input-container">
-                <textarea 
-                    class="chat-input" 
-                    id="chatInput" 
-                    placeholder="Enter your Claude Code command..."
-                    rows="3"
-                ></textarea>
-                <button class="send-button" id="sendButton" onclick="sendCommand()">Send</button>
-            </div>
-        </div>
-    </div>
-
-    <script src="/socket.io/socket.io.js"></script>
     <script>
+        // WebSocket接続
         const socket = io();
-        const chatOutput = document.getElementById('chatOutput');
-        const chatInput = document.getElementById('chatInput');
-        const sendButton = document.getElementById('sendButton');
-        const statusIndicator = document.getElementById('statusIndicator');
-        const statusText = document.getElementById('statusText');
-        const projectInfo = document.getElementById('projectInfo');
-
-        // Connection status
+        let isConnected = false;
+        
+        // DOM要素
+        const connectionStatus = document.getElementById('connectionStatus');
+        const systemStatus = document.getElementById('systemStatus');
+        const logsContainer = document.getElementById('logs');
+        
+        // 接続状態管理
         socket.on('connect', () => {
-            statusIndicator.style.background = '#238636';
-            statusText.textContent = 'Connected';
-            loadProjectInfo();
+            isConnected = true;
+            connectionStatus.textContent = '接続済み';
+            connectionStatus.className = 'connection-status connected';
+            systemStatus.className = 'status-indicator active';
+            addLog('✅ WebSocket接続が確立されました');
+            requestStatus();
         });
-
+        
         socket.on('disconnect', () => {
-            statusIndicator.style.background = '#da3633';
-            statusText.textContent = 'Disconnected';
+            isConnected = false;
+            connectionStatus.textContent = '切断';
+            connectionStatus.className = 'connection-status disconnected';
+            systemStatus.className = 'status-indicator';
+            addLog('❌ WebSocket接続が切断されました');
         });
-
-        // Load project information
-        async function loadProjectInfo() {
+        
+        socket.on('welcome', (data) => {
+            addLog(`🎉 ${data.message}`);
+        });
+        
+        socket.on('status-update', (data) => {
+            updateSystemMetrics(data.data);
+        });
+        
+        // ログ管理
+        function addLog(message) {
+            const timestamp = new Date().toLocaleTimeString('ja-JP');
+            const logEntry = document.createElement('div');
+            logEntry.className = 'log-entry';
+            logEntry.innerHTML = `<span class="log-timestamp">[${timestamp}]</span>${message}`;
+            logsContainer.appendChild(logEntry);
+            logsContainer.scrollTop = logsContainer.scrollHeight;
+        }
+        
+        function clearLogs() {
+            logsContainer.innerHTML = '';
+            addLog('🗑️ ログがクリアされました');
+        }
+        
+        // システム情報更新
+        function updateSystemMetrics(data) {
+            document.getElementById('uptime').textContent = formatUptime(data.uptime);
+            document.getElementById('memoryUsage').textContent = formatMemory(data.memory.rss);
+        }
+        
+        function formatUptime(seconds) {
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            return `${hours}時間${minutes}分`;
+        }
+        
+        function formatMemory(bytes) {
+            return `${(bytes / 1024 / 1024).toFixed(1)} MB`;
+        }
+        
+        // API呼び出し
+        async function loadSystemInfo() {
             try {
-                const response = await fetch('/api/project-info');
-                const info = await response.json();
-                
-                projectInfo.innerHTML = `
-                    <h3>Project Information</h3>
-                    <p><strong>Name:</strong> ${info.name}</p>
-                    <p><strong>Path:</strong> ${info.path}</p>
-                    <p><strong>CLAUDE.md:</strong> ${info.hasClaude ? '✅' : '❌'}</p>
-                    <p><strong>README.md:</strong> ${info.hasReadme ? '✅' : '❌'}</p>
-                `;
+                const response = await fetch('/api/system-info');
+                const data = await response.json();
+                document.getElementById('nodeVersion').textContent = data.node_version;
+                document.getElementById('platform').textContent = `${data.platform} ${data.arch}`;
+                addLog(`📡 システム情報を取得しました: ${data.platform}`);
             } catch (error) {
-                console.error('Failed to load project info:', error);
+                addLog(`❌ システム情報の取得に失敗: ${error.message}`);
             }
         }
-
-        // Send command
-        function sendCommand() {
-            const command = chatInput.value.trim();
-            if (!command) return;
-
-            // Add user message
-            addMessage('user', command);
-            
-            // Send to server
-            socket.emit('claude-command', { command: command });
-            
-            // Clear input
-            chatInput.value = '';
-            sendButton.disabled = true;
-        }
-
-        // Send quick command
-        function sendQuickCommand(command) {
-            addMessage('user', command);
-            socket.emit('claude-command', { command: command });
-        }
-
-        // Handle Claude output
-        socket.on('claude-output', (data) => {
-            const { type, data: output, code, timestamp } = data;
-            
-            switch (type) {
-                case 'stdout':
-                    addMessage('stdout', output, timestamp);
-                    break;
-                case 'stderr':
-                    addMessage('stderr', output, timestamp);
-                    break;
-                case 'error':
-                    addMessage('error', output, timestamp);
-                    break;
-                case 'exit':
-                    addMessage('system', `Process exited with code: ${code}`, timestamp);
-                    sendButton.disabled = false;
-                    break;
+        
+        async function loadTasks() {
+            try {
+                const response = await fetch('/api/tasks');
+                const data = await response.json();
+                const tasks = data.tasks || [];
+                
+                const active = tasks.filter(t => t.status === 'in_progress').length;
+                const completed = tasks.filter(t => t.status === 'completed').length;
+                const pending = tasks.filter(t => t.status === 'pending').length;
+                
+                document.getElementById('activeTasks').textContent = active;
+                document.getElementById('completedTasks').textContent = completed;
+                document.getElementById('pendingTasks').textContent = pending;
+                
+                addLog(`📋 タスク情報を更新: アクティブ ${active}, 完了 ${completed}, 保留 ${pending}`);
+            } catch (error) {
+                addLog(`❌ タスク情報の取得に失敗: ${error.message}`);
             }
+        }
+        
+        function requestStatus() {
+            socket.emit('request-status');
+        }
+        
+        function refreshTasks() {
+            loadTasks();
+            requestStatus();
+            addLog('🔄 データを更新しました');
+        }
+        
+        // 初期化
+        window.addEventListener('load', () => {
+            addLog('🚀 Claude Code Web UI が開始されました');
+            loadSystemInfo();
+            loadTasks();
+            
+            // 定期更新
+            setInterval(() => {
+                if (isConnected) {
+                    requestStatus();
+                }
+            }, 30000);
+            
+            setInterval(loadTasks, 60000);
         });
-
-        // Add message to chat
-        function addMessage(type, content, timestamp) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${type}`;
-            
-            if (timestamp) {
-                const timestampDiv = document.createElement('div');
-                timestampDiv.className = 'timestamp';
-                timestampDiv.textContent = new Date(timestamp).toLocaleTimeString();
-                messageDiv.appendChild(timestampDiv);
-            }
-            
-            const contentDiv = document.createElement('div');
-            contentDiv.textContent = content;
-            messageDiv.appendChild(contentDiv);
-            
-            chatOutput.appendChild(messageDiv);
-            chatOutput.scrollTop = chatOutput.scrollHeight;
-        }
-
-        // Enter key to send
-        chatInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                sendCommand();
-            }
-        });
-
-        // Initial welcome message
-        addMessage('system', 'Welcome to Claude Code Web UI! Enter commands to interact with Claude Code.');
     </script>
 </body>
 </html>

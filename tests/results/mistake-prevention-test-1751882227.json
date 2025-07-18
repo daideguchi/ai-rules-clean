@@ -1,0 +1,30 @@
+{
+  "test_summary": {
+    "total_tests": 17,
+    "passed_tests": 15,
+    "failed_tests": 2,
+    "success_rate": 88.24
+  },
+  "failed_test_details": [
+    {
+      "test_type": "output_safety",
+      "output": "実装済みです",
+      "safety_score": 80,
+      "violations": 1,
+      "requires_evidence": true,
+      "is_dangerous": false,
+      "success": false
+    },
+    {
+      "test_type": "output_safety",
+      "output": "対応済みです",
+      "safety_score": 80,
+      "violations": 1,
+      "requires_evidence": true,
+      "is_dangerous": false,
+      "success": false
+    }
+  ],
+  "timestamp": 1751882227.3227992,
+  "ci_status": "FAIL"
+}

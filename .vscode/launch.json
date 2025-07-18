@@ -1,0 +1,63 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PROJECT_ROOT": "${workspaceFolder}"
+            }
+        },
+        {
+            "name": "Python: Tests",
+            "type": "python",
+            "request": "launch",
+            "module": "pytest",
+            "args": [
+                "tests/",
+                "-v"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "env": {
+                "PROJECT_ROOT": "${workspaceFolder}"
+            }
+        },
+        {
+            "name": "Python: Gemini Integration",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/integrations/gemini/claude_gemini_mcp_bridge.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PROJECT_ROOT": "${workspaceFolder}"
+            }
+        },
+        {
+            "name": "Python: AI Organization System",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/memory/president_ai_organization.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PROJECT_ROOT": "${workspaceFolder}"
+            }
+        },
+        {
+            "name": "Node.js: Current File",
+            "type": "node",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "env": {
+                "PROJECT_ROOT": "${workspaceFolder}"
+            }
+        }
+    ]
+}

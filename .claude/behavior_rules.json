@@ -1,0 +1,25 @@
+{
+  "mandatory_behaviors": {
+    "session_start": [
+      "ALWAYS start with thinking tag",
+      "Check PRESIDENT declaration status",
+      "Use structured response format"
+    ],
+    "task_response": [
+      "Begin with '## 🎯 これから行うこと'",
+      "End with '## ✅ 完遂報告'",
+      "Use thinking for complex analysis"
+    ],
+    "never_skip": [
+      "thinking for important tasks",
+      "PRESIDENT declaration verification",
+      "Evidence-based responses only"
+    ]
+  },
+  "response_structure": {
+    "declaration": "## 🎯 これから行うこと",
+    "processing": "Technical implementation in English",
+    "reporting": "## ✅ 完遂報告"
+  },
+  "enforcement": "automatic"
+}

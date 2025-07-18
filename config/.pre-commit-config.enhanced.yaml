@@ -1,0 +1,68 @@
+# Enhanced Pre-commit Configuration with Security
+repos:
+  # Original formatting hooks
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.9
+    hooks:
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
+      - id: ruff-format
+
+  # Standard hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: check-added-large-files
+      - id: mixed-line-ending
+      - id: debug-statements
+      - id: check-builtin-literals
+      - id: check-docstring-first
+
+  # SECURITY HOOKS - CRITICAL FOR SECRET PROTECTION
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.4.0
+    hooks:
+      - id: detect-secrets
+        args: ['--baseline', '.secrets.baseline']
+        additional_dependencies: ['gibberish-detector']
+
+  # Custom security validation
+  - repo: local
+    hooks:
+      - id: validate-secrets
+        name: Validate Secrets Configuration
+        entry: python3 scripts/security/validate_secrets.py
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      - id: check-env-files
+        name: Check .env Files
+        entry: bash -c 'if git diff --cached --name-only | grep -E "\.env$"; then echo "❌ .env file should not be committed!"; exit 1; fi'
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      - id: validate-api-keys
+        name: Validate API Key Usage
+        entry: bash -c 'if git diff --cached | grep -E "(xoxb-|xoxp-|sk-|AIza)"; then echo "❌ API keys detected in commit!"; exit 1; fi'
+        language: system
+        pass_filenames: false
+        always_run: true
+
+  # File organization compliance
+  - repo: local
+    hooks:
+      - id: file-organization-check
+        name: Check File Organization Rules
+        entry: python3 scripts/validation/file_organization_checker.py
+        language: system
+        pass_filenames: false
+        always_run: true
