@@ -19,7 +19,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 load_dotenv()
 
 # Import and run Flask app
-from scripts.mcp.slack_mcp_server import app
+from scripts.mcp.slack_mcp_server import app  # noqa: E402
 
 if __name__ == "__main__":
     # Get configuration from environment

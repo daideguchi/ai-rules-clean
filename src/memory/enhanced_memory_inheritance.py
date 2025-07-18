@@ -17,7 +17,6 @@ from typing import Any, Dict, List, Optional, Tuple
 
 # For vector similarity if available
 try:
-    import numpy as np
     from sentence_transformers import SentenceTransformer
     from sklearn.metrics.pairwise import cosine_similarity
     VECTOR_AVAILABLE = True
@@ -26,8 +25,8 @@ except ImportError:
 
 # For PostgreSQL if available
 try:
-    import psycopg2
-    from psycopg2.extras import RealDictCursor
+    import psycopg2  # noqa: F401
+    from psycopg2.extras import RealDictCursor  # noqa: F401
     POSTGRES_AVAILABLE = True
 except ImportError:
     POSTGRES_AVAILABLE = False

@@ -20,7 +20,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 # Load environment variables from .env file
 load_dotenv()
 
-from scripts.mcp.slack_mcp_server import SlackMCPServer
+from scripts.mcp.slack_mcp_server import SlackMCPServer  # noqa: E402
 
 
 def setup_slack_integration():

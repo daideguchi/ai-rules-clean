@@ -92,7 +92,7 @@ class SessionErrorPrevention:
                     import re
                     if re.search(pattern, content):
                         print(f"🚨 SECURITY VIOLATION: Hardcoded API key detected in {config_file}")
-                        print(f"🔧 REQUIRED: Use environment variable reference like ${OPENAI_API_KEY}")
+                        print("🔧 REQUIRED: Use environment variable reference like ${OPENAI_API_KEY}")
                         return False
 
         print("✅ No hardcoded API keys detected in config files")

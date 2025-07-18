@@ -98,7 +98,7 @@ class StrictFileOrganizer:
                     # Look for coding-rule2 specific markers
                     if 'coding-rule2' in content.lower() or 'AI Safety Governance' in content:
                         return True
-            except:
+            except Exception:
                 pass
 
         return False

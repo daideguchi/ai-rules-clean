@@ -237,7 +237,7 @@ class CommandValidator:
             if history_file.exists():
                 with open(history_file) as f:
                     return json.load(f)
-        except:
+        except Exception:
             pass
         return []
 
@@ -287,7 +287,7 @@ class CommandValidator:
                 text=True
             )
             return result.returncode == 0 and result.stdout.strip()
-        except:
+        except Exception:
             return False
 
     def validate_command(self, command: str) -> Tuple[bool, List[str]]:

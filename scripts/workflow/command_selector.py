@@ -88,7 +88,7 @@ class CommandSelector:
             if favorites_file.exists():
                 with open(favorites_file) as f:
                     return json.load(f)
-        except:
+        except Exception:
             pass
         return []
 
@@ -108,7 +108,7 @@ class CommandSelector:
             if history_file.exists():
                 with open(history_file) as f:
                     return json.load(f)
-        except:
+        except Exception:
             pass
         return []
 

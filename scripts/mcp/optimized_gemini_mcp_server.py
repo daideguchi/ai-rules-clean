@@ -18,7 +18,7 @@ import google.generativeai as genai
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-from scripts.mcp.optimized_mcp_base import MCPRequest, OptimizedMCPBase
+from scripts.mcp.optimized_mcp_base import MCPRequest, OptimizedMCPBase  # noqa: E402
 
 
 class OptimizedGeminiMCPServer(OptimizedMCPBase):

@@ -32,11 +32,11 @@ else:
 
 os.execv(sys.executable, [sys.executable, str(unified_tool)] + args)
 
-import json
-import os
-import sys
-from datetime import datetime
-from pathlib import Path
+import json  # noqa: E402
+import os  # noqa: E402
+import sys  # noqa: E402
+from datetime import datetime  # noqa: E402
+from pathlib import Path  # noqa: E402
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 VERIFICATION_LOG = PROJECT_ROOT / "runtime" / "ai_api_logs" / "task_verification.log"

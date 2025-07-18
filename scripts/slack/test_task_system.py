@@ -11,7 +11,7 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from scripts.mcp.slack_mcp_server import SlackMCPServer
+from scripts.mcp.slack_mcp_server import SlackMCPServer  # noqa: E402
 
 
 def test_task_collection():

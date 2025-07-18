@@ -22,7 +22,7 @@ import psutil
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-from scripts.mcp.optimized_mcp_base import MCPServerStatus
+from scripts.mcp.optimized_mcp_base import MCPServerStatus  # noqa: E402
 
 
 class MCPServerManager:

@@ -341,6 +341,7 @@ class OptimizedMCPBase(ABC):
 
         self.logger.info(f"✅ {self.server_name} MCP Server shut down successfully")
 
+    @abstractmethod
     async def _server_shutdown(self):
         """Server-specific shutdown logic"""
         pass

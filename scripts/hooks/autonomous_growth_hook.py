@@ -20,7 +20,7 @@ project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root / "src"))
 
 try:
-    from ai.autonomous_growth_engine import AutonomousGrowthEngine, PerformanceMetrics
+    from ai.autonomous_growth_engine import AutonomousGrowthEngine
 except ImportError:
     # フォールバック: 軽量版実装
     class LightweightGrowthEngine:
